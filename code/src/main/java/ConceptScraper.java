@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 public abstract class ConceptScraper {
-    private Scraper scraper;
+    private final Scraper scraper;
 
     public ConceptScraper(String URL) throws IOException {
         scraper = new Scraper(URL);

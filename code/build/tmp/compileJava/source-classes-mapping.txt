@@ -1,0 +1,8 @@
+ConceptScraper.java
+ test.ConceptScraper
+Scraper.java
+ test.Scraper
+StockScraper.java
+ test.StockScraper
+ShopScraper.java
+ test.ShopScraper

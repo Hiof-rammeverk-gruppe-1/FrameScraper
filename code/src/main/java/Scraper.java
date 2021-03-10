@@ -3,8 +3,8 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class Scraper {
-    private String URL;
-    private String websiteContent;
+    private final String URL;
+    private final String websiteContent;
 
     public Scraper(String URL) throws IOException {
         this.URL = URL;
