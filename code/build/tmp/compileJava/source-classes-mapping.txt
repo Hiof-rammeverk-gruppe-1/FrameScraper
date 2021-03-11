@@ -1,8 +1,8 @@
 ConceptScraper.java
- test.ConceptScraper
+ ConceptScraper
 Scraper.java
- test.Scraper
+ Scraper
 StockScraper.java
- test.StockScraper
+ StockScraper
 ShopScraper.java
- test.ShopScraper
+ ShopScraper
