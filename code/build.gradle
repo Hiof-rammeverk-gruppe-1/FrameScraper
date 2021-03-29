@@ -3,7 +3,8 @@ plugins {
     id 'maven' //added for jitpack
 }
 
-group 'hiof.framescraper'
+group 'com.github.Hiof-rammeverk-gruppe-1'
+//group 'hiof.framescraper'
 //group 'com.github.YourUsername' //orginal jitpack setting
 version '1.0-SNAPSHOT'
 
