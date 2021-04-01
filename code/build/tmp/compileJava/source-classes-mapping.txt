@@ -1,0 +1,14 @@
+soup/Soup.java
+ soup.Soup
+soup/SoupNode.java
+ soup.SoupNode
+Main.java
+ Main
+ConceptScraper.java
+ ConceptScraper
+Scraper.java
+ Scraper
+StockScraper.java
+ StockScraper
+ShopScraper.java
+ ShopScraper

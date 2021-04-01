@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Framescraper">
+    <output-path>$PROJECT_DIR$/out/artifacts/Framescraper</output-path>
+    <root id="archive" name="code.main.jar">
+      <element id="module-output" name="code.main" />
+    </root>
+  </artifact>
+</component>

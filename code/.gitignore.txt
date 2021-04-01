@@ -12,6 +12,16 @@
 build
 
 
+# Thomas jitpack add in
+*.class
+build/
+
+*.jar
+*.aar
+*.war
+!gradle-wrapper.jar
+
+
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml
