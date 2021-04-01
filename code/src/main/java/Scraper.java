@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
@@ -14,6 +15,7 @@ import java.util.Scanner;
 public class Scraper {
     private String URL;
     private String websiteContent;
+    private SoupNode root;
 
 
     /**
@@ -24,20 +26,69 @@ public class Scraper {
     public Scraper(String URL) throws IOException {
         this.URL = URL;
 
+        System.out.println(request(URL));
+    }
+
+    private SoupNode createTree(String html){
+        boolean startRead = false;
+        String rootName = "";
+
+        for(int i = 0; i < html.length(); i++){
+            if (html.charAt(i) == '<'){
+                startRead = true;
+            }
+
+//            if(startRead){
+//
+//            }
+
+
+            while(startRead){
+                if(html.charAt(i) == ' ' || html.charAt(i) != '>'){
+                    startRead = false;
+                    i++;
+                    break;
+                }
+
+                i++;
+                rootName += html.charAt(i);
+            }
+
+            this.root = new SoupNode(rootName);
+
+
+
+
+
+        }
+    }
+
+    private String request(String URL){
+
         //Instantiating the URL class
-        URL url = new URL(URL);
+        URL url = null;
+        try {
+            url = new URL(URL);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         //Retrieving the contents of the specified page
-        Scanner sc = new Scanner(url.openStream());
+        Scanner sc = null;
+        try {
+            sc = new Scanner(url.openStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //Instantiating the StringBuffer class to hold the result
         StringBuffer sb = new StringBuffer();
 
         while(sc.hasNext()) {
-            sb.append(sc.next());
+            sb.append(sc.next() + " ");
             //System.out.println(sc.next());
         }
 
         //Retrieving the String from the String Buffer object
-        this.websiteContent = sb.toString();
+        return sb.toString();
     }
 
     /**
