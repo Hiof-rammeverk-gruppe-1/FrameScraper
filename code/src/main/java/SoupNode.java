@@ -6,7 +6,9 @@ public class SoupNode {
     private String tag;
     private String full_tag;
 
-    private Dictionary<String, Object> attributes = new Hashtable();
+    private Dictionary<String, String> attributes = new Hashtable();
+
+    private ArrayList<String> attributeNames = new ArrayList<>();
 
     private SoupNode parent;
     private ArrayList<SoupNode> nodeChildren = new ArrayList<>();
@@ -32,11 +34,11 @@ public class SoupNode {
         this.full_tag = full_tag;
     }
 
-    public Dictionary<String, Object> getAttributes() {
+    public Dictionary<String, String> getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(Dictionary<String, Object> attributes) {
+    public void setAttributes(Dictionary<String, String> attributes) {
         this.attributes = attributes;
     }
 
@@ -62,5 +64,18 @@ public class SoupNode {
 
     public void setStringChildren(ArrayList<String> stringChildren) {
         this.stringChildren = stringChildren;
+    }
+
+    public ArrayList<String> getAttributeNames() {
+        return attributeNames;
+    }
+
+    @Override
+    public String toString() {
+        return "SoupNode{" +
+                "tag='" + tag + '\'' +
+                ", attributes=" + attributeNames.toString() +
+                ", attributteValues=" + getAttributes().keys() +
+                '}';
     }
 }

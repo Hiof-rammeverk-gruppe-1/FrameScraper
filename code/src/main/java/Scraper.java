@@ -26,35 +26,123 @@ public class Scraper {
     public Scraper(String URL) throws IOException {
         this.URL = URL;
 
-        System.out.println(request(URL));
+        createTree(request(URL));
+
     }
 
-    private SoupNode createTree(String html){
-        boolean startRead = false;
+    private void createTree(String html){
         String rootName = "";
+        String attKey = "";
+        String attValue = "";
+
+        boolean readName = false;
+        boolean readAttKey = false;
+        boolean readAttValue = false;
+        boolean lookForLastQuote = false;
 
         for(int i = 0; i < html.length(); i++){
-            if (html.charAt(i) == '<'){
-                startRead = true;
+            char ch = html.charAt(i);
+
+            if (ch == '<'){
+                readName = true;
+                continue;
+            }
+            else{
+                if (!(readName || readAttKey || readAttValue))
+                    continue;
             }
 
-//            if(startRead){
-//
-//            }
+            boolean isEndChar = ch == '/' || ch == '>';
+
+            if (readName) {
+                if (Character.isLetter(ch)) {
+                    rootName += ch;
+                }
+                else {
+                    if (!rootName.equals("html")) {
+                        readName = false;
+                        rootName = "";
+                        continue;
+                    }
+                    else{
+                        readName = false;
+                        readAttKey = true;
+                        this.root = new SoupNode(rootName);
+                        rootName = "";
+                        continue;
+                    }
 
 
-            while(startRead){
-                if(html.charAt(i) == ' ' || html.charAt(i) != '>'){
-                    startRead = false;
-                    i++;
+                    //                if(isEndChar){
+                    //                    this.root = new SoupNode(rootName);
+                    //                    continue;
+                    //                }
+
+
+                }
+            }
+//            read key
+            else if (readAttKey){
+                if (Character.isLetter(ch))
+                    attKey += ch;
+                else if(ch == '='){
+                    if(!attKey.isEmpty()){
+                        readAttKey = false;
+                        readAttValue = true;
+                        this.root.getAttributeNames().add(attKey);
+                    }
+                }
+                else if(isEndChar){
+                    if (!attKey.isEmpty()){
+                        this.root.getAttributeNames().add(attKey);
+
+                        this.root.getAttributes().put(attKey, "");
+
+                        attKey = "";
+                    }
+
                     break;
                 }
+            }
+//            read key value
+            else if(readAttValue){
+                if(ch == '\"' && !lookForLastQuote){
+                    lookForLastQuote = true;
+                    continue;
+                }
+                if(lookForLastQuote){
+                    if (ch == '\"'){
+                        
+                        this.root.getAttributes().put(attKey, attValue);
+                        readAttValue = false;
+                        readAttKey = true;
+                        lookForLastQuote = false;
+                        attKey = "";
+                        attValue = "";
+                        System.out.println("Key put in dict");
+                        continue;
+                    }
+                    attValue += ch;
+                }
 
-                i++;
-                rootName += html.charAt(i);
             }
 
-            this.root = new SoupNode(rootName);
+
+
+
+
+//            while(startRead){
+//                if(html.charAt(i) == ' ' || html.charAt(i) != '>'){
+//                    startRead = false;
+//                    i++;
+//                    break;
+//                }
+//
+//                i++;
+//                rootName += html.charAt(i);
+//            }
+//
+//            this.root = new SoupNode(rootName);
 
 
 
@@ -165,5 +253,9 @@ public class Scraper {
      */
     public String[] getIdsInPage(){
         return null;
+    }
+
+    public SoupNode getRoot() {
+        return root;
     }
 }
