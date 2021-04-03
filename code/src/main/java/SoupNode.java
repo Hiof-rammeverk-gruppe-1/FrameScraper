@@ -14,6 +14,9 @@ public class SoupNode {
     private ArrayList<SoupNode> nodeChildren = new ArrayList<>();
     private ArrayList<String> stringChildren = new ArrayList<>();
 
+    public SoupNode() {
+    }
+
     public SoupNode(String tag) {
         this.tag = tag;
     }
@@ -75,7 +78,6 @@ public class SoupNode {
         return "SoupNode{" +
                 "tag='" + tag + '\'' +
                 ", attributes=" + attributeNames.toString() +
-                ", attributteValues=" + getAttributes().keys() +
                 '}';
     }
 }

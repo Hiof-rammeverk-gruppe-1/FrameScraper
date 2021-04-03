@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -15,7 +16,9 @@ import java.util.Scanner;
 public class Scraper {
     private String URL;
     private String websiteContent;
-    private SoupNode root;
+    private SoupNode root = null;
+
+    private ArrayList<SoupNode> nodes = new ArrayList<>();
 
 
     /**
@@ -25,60 +28,104 @@ public class Scraper {
      */
     public Scraper(String URL) throws IOException {
         this.URL = URL;
+//        System.out.println(request(URL));
+//        createTree(request(URL));
 
-        createTree(request(URL));
+//        System.out.println("<body id=\"hi\" class=\"class1\"><p lang=\"no\" id=\"para\">asdqwe</p></body>");
+//        createTree("<body id=\"hi\" class=\"class1\"><p lang=\"no\" id=\"para\">asdqwe</p></body>");
+
+        System.out.println("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
+        createTree("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
 
     }
 
+
+
     private void createTree(String html){
-        String rootName = "";
+
+        String tag = "";
         String attKey = "";
         String attValue = "";
 
-        boolean readName = false;
+        boolean readTag = false;
         boolean readAttKey = false;
         boolean readAttValue = false;
         boolean lookForLastQuote = false;
+        boolean isComment = false;
+
+        SoupNode buildingNode = new SoupNode();
 
         for(int i = 0; i < html.length(); i++){
             char ch = html.charAt(i);
 
-            if (ch == '<'){
-                readName = true;
+            //ignore mode
+            if (isComment){
+                if (ch == '>' && html.charAt(i-1) == '-' && html.charAt(i-2) == '-'){
+                    isComment = false;
+                }
                 continue;
             }
-            else{
-                if (!(readName || readAttKey || readAttValue))
-                    continue;
+
+            // to go into ignore/comment mode
+            if (ch == '<'){
+                if (html.charAt(i+1) == '!')
+                    isComment = true;
+                else
+                    readTag = true;
+                continue;
             }
 
-            boolean isEndChar = ch == '/' || ch == '>';
+            // to jump over stuff which is not integrated yet
+            if (!(readTag || readAttKey || readAttValue))
+                    continue;
 
-            if (readName) {
-                if (Character.isLetter(ch)) {
-                    rootName += ch;
+//            when tag is to be ended
+            if (ch == '>'){
+                if (readTag && tag.isEmpty());
+//                        throw new Exception("There exist and empty tag in this html");
+                else if (readTag)
+                    buildingNode.setTag(tag);
+                else if (readAttKey && !(attKey.isEmpty())){
+                    buildingNode.getAttributeNames().add(attKey);
+
+                    buildingNode.getAttributes().put(attKey, "");
                 }
+
+                //add nodes
+                if (this.root == null)
+                    this.root = buildingNode;
+
+                this.nodes.add(buildingNode);
+
+                // reset locals
+                tag = "";
+                attKey = "";
+                attValue = "";
+
+                readTag = false;
+                readAttKey = false;
+                readAttValue = false;
+                lookForLastQuote = false;
+                isComment = false;
+
+                buildingNode = new SoupNode();
+
+                continue;
+            }
+            //read tag
+            if (readTag) {
+                if (Character.isLetter(ch) || Character.isDigit(ch))
+                    tag += ch;
                 else {
-                    if (!rootName.equals("html")) {
-                        readName = false;
-                        rootName = "";
+                    //TODO: her skal det være logikk om når vi stopper og legge til barn hos en spesiel node
+                    if (tag.isEmpty() && ch == '/')
                         continue;
-                    }
-                    else{
-                        readName = false;
-                        readAttKey = true;
-                        this.root = new SoupNode(rootName);
-                        rootName = "";
-                        continue;
-                    }
 
-
-                    //                if(isEndChar){
-                    //                    this.root = new SoupNode(rootName);
-                    //                    continue;
-                    //                }
-
-
+                    readTag = false;
+                    readAttKey = true;
+                    buildingNode.setTag(tag);
+                    tag = "";
+                    continue;
                 }
             }
 //            read key
@@ -89,65 +136,40 @@ public class Scraper {
                     if(!attKey.isEmpty()){
                         readAttKey = false;
                         readAttValue = true;
-                        this.root.getAttributeNames().add(attKey);
                     }
-                }
-                else if(isEndChar){
-                    if (!attKey.isEmpty()){
-                        this.root.getAttributeNames().add(attKey);
-
-                        this.root.getAttributes().put(attKey, "");
-
-                        attKey = "";
-                    }
-
-                    break;
                 }
             }
 //            read key value
             else if(readAttValue){
+                //see first quotes "
                 if(ch == '\"' && !lookForLastQuote){
                     lookForLastQuote = true;
                     continue;
                 }
+                else{
+//                    throw new Exception("Missing quotes after attributtes");
+                }
+                //build value string untill we see see last quotes "
                 if(lookForLastQuote){
                     if (ch == '\"'){
-                        
-                        this.root.getAttributes().put(attKey, attValue);
+
+                        buildingNode.getAttributeNames().add(attKey);
+
+                        buildingNode.getAttributes().put(attKey, attValue);
+
                         readAttValue = false;
                         readAttKey = true;
                         lookForLastQuote = false;
+
                         attKey = "";
                         attValue = "";
-                        System.out.println("Key put in dict");
+
                         continue;
                     }
                     attValue += ch;
                 }
 
             }
-
-
-
-
-
-//            while(startRead){
-//                if(html.charAt(i) == ' ' || html.charAt(i) != '>'){
-//                    startRead = false;
-//                    i++;
-//                    break;
-//                }
-//
-//                i++;
-//                rootName += html.charAt(i);
-//            }
-//
-//            this.root = new SoupNode(rootName);
-
-
-
-
-
         }
     }
 
