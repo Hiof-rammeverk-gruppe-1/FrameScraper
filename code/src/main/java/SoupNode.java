@@ -21,6 +21,18 @@ public class SoupNode {
         this.tag = tag;
     }
 
+    public void addNodeChild(SoupNode child){
+        this.nodeChildren.add(child);
+    }
+
+    public void addStringChild(String text){
+        this.getStringChildren().add(text);
+    }
+
+
+
+
+
     public String getTag() {
         return tag;
     }
@@ -78,6 +90,8 @@ public class SoupNode {
         return "SoupNode{" +
                 "tag='" + tag + '\'' +
                 ", attributes=" + attributeNames.toString() +
+                ", textChildren=" + getStringChildren().toString() +
+                ", nodeChildren= \n\t" + getNodeChildren().toString() +
                 '}';
     }
 }

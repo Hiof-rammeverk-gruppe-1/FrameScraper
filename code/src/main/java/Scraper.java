@@ -3,6 +3,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * Shopscraper class representing a specific instantiation of a ConceptScraper
@@ -31,11 +32,11 @@ public class Scraper {
 //        System.out.println(request(URL));
 //        createTree(request(URL));
 
-//        System.out.println("<body id=\"hi\" class=\"class1\"><p lang=\"no\" id=\"para\">asdqwe</p></body>");
-//        createTree("<body id=\"hi\" class=\"class1\"><p lang=\"no\" id=\"para\">asdqwe</p></body>");
+        System.out.println("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
 
-        System.out.println("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
-        createTree("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
+//        System.out.println("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
+//        createTree("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
 
     }
 
@@ -46,6 +47,7 @@ public class Scraper {
         String tag = "";
         String attKey = "";
         String attValue = "";
+        String stringContent = "";
 
         boolean readTag = false;
         boolean readAttKey = false;
@@ -54,11 +56,13 @@ public class Scraper {
         boolean isComment = false;
 
         SoupNode buildingNode = new SoupNode();
+        Stack<SoupNode> parentStack = new Stack<>();
 
         for(int i = 0; i < html.length(); i++){
             char ch = html.charAt(i);
 
             //ignore mode
+            //TODO: DOCTYPE problem
             if (isComment){
                 if (ch == '>' && html.charAt(i-1) == '-' && html.charAt(i-2) == '-'){
                     isComment = false;
@@ -70,16 +74,20 @@ public class Scraper {
             if (ch == '<'){
                 if (html.charAt(i+1) == '!')
                     isComment = true;
-                else
+                else{
                     readTag = true;
+
+                    if (!parentStack.isEmpty() && !stringContent.isEmpty()){
+                        parentStack.peek().addStringChild(stringContent);
+                        stringContent = "";
+                    }
+
+                }
+
                 continue;
             }
 
-            // to jump over stuff which is not integrated yet
-            if (!(readTag || readAttKey || readAttValue))
-                    continue;
-
-//            when tag is to be ended
+            //  when tag is to be ended
             if (ch == '>'){
                 if (readTag && tag.isEmpty());
 //                        throw new Exception("There exist and empty tag in this html");
@@ -95,7 +103,14 @@ public class Scraper {
                 if (this.root == null)
                     this.root = buildingNode;
 
-                this.nodes.add(buildingNode);
+                if (!parentStack.isEmpty())
+                    parentStack.peek().addNodeChild(buildingNode);
+
+                if (!isSingletonTag(buildingNode.getTag())){
+                    parentStack.push(buildingNode);
+                }
+
+//                this.nodes.add(buildingNode);
 
                 // reset locals
                 tag = "";
@@ -112,14 +127,37 @@ public class Scraper {
 
                 continue;
             }
+
+            // read String content
+            //TODO: read text children here?
+            if (!(readTag || readAttKey || readAttValue) && !parentStack.isEmpty()){
+                if (isIgnoreContentTag(parentStack.peek().getTag()))
+                    continue;
+                else{
+                    stringContent += ch;
+                }
+            }
+
             //read tag
             if (readTag) {
                 if (Character.isLetter(ch) || Character.isDigit(ch))
                     tag += ch;
                 else {
                     //TODO: her skal det være logikk om når vi stopper og legge til barn hos en spesiel node
-                    if (tag.isEmpty() && ch == '/')
-                        continue;
+                    if (tag.isEmpty() && ch == '/'){
+                        String tagEnded = parentStack.pop().getTag();
+                        if (html.substring(i + 1, i + 1 + tagEnded.length()).equals(tagEnded)){
+                            i = i + 1 + tagEnded.length();
+
+                            readTag = false;
+                            continue;
+                        }
+
+                        //TODO: EXCEPTION class
+//                        else
+//                            throw new Exception("Ended tag doesn't fit current parent");
+                    }
+
 
                     readTag = false;
                     readAttKey = true;
@@ -171,6 +209,15 @@ public class Scraper {
 
             }
         }
+    }
+
+    //TODO: implement this function
+    private boolean isSingletonTag(String tag){
+        return false;
+    }
+
+    private boolean isIgnoreContentTag(String tag){
+        return false;
     }
 
     private String request(String URL){
