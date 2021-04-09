@@ -146,9 +146,7 @@ public class Scraper {
 
             // read String content
             if (!(readTag || readAttKey || readAttValue) && !parentStack.isEmpty()){
-
                 stringContent += ch;
-
             }
 
             //read tag
@@ -223,7 +221,6 @@ public class Scraper {
         }
     }
 
-    //TODO: implement this function
     private boolean isSingletonTag(String tag){
         String[] singletons = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr", "command", "keygen", "menuitem"};
 
@@ -233,7 +230,6 @@ public class Scraper {
         return false;
     }
 
-    //TODO: implement
     private boolean isIgnoreableContentTag(String tag){
         String[] ignoreableTags = {"script"};
 

@@ -4,13 +4,12 @@ import java.util.Hashtable;
 
 public class SoupNode {
     private String tag;
-    private String full_tag;
+//    private String full_tag;
 
     private Dictionary<String, String> attributes = new Hashtable();
 
     private ArrayList<String> attributeNames = new ArrayList<>();
 
-    private SoupNode parent;
     private ArrayList<SoupNode> nodeChildren = new ArrayList<>();
     private ArrayList<String> stringChildren = new ArrayList<>();
 
@@ -37,13 +36,13 @@ public class SoupNode {
         this.tag = tag;
     }
 
-    public String getFull_tag() {
-        return full_tag;
-    }
-
-    public void setFull_tag(String full_tag) {
-        this.full_tag = full_tag;
-    }
+//    public String getFull_tag() {
+//        return full_tag;
+//    }
+//
+//    public void setFull_tag(String full_tag) {
+//        this.full_tag = full_tag;
+//    }
 
     public Dictionary<String, String> getAttributes() {
         return attributes;
@@ -53,13 +52,6 @@ public class SoupNode {
         this.attributes = attributes;
     }
 
-    public SoupNode getParent() {
-        return parent;
-    }
-
-    public void setParent(SoupNode parent) {
-        this.parent = parent;
-    }
 
     public ArrayList<SoupNode> getNodeChildren() {
         return nodeChildren;
@@ -86,10 +78,8 @@ public class SoupNode {
     public String toString() {
         return "SoupNode{" +
                 "tag='" + tag + '\'' +
-                ", full_tag='" + full_tag + '\'' +
                 ", attributes=" + attributes +
                 ", attributeNames=" + attributeNames +
-                ", parent=" + parent +
                 ", nodeChildren=" + nodeChildren +
                 ", stringChildren=" + stringChildren +
                 '}';
