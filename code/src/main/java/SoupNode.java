@@ -90,7 +90,7 @@ public class SoupNode {
         return "SoupNode{" +
                 "tag='" + tag + '\'' +
                 ", attributes=" + attributeNames.toString() +
-                ", textChildren=" + getStringChildren().toString() +
+                ", stringChildren=" + getStringChildren().toString() +
                 ", nodeChildren= \n\t" + getNodeChildren().toString() +
                 '}';
     }
