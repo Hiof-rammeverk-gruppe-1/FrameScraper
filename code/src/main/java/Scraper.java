@@ -33,7 +33,7 @@ public class Scraper {
 //        createTree(request(URL));
 
         System.out.println("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
-        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p class=\"class2\">yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
 
 //        System.out.println("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
 //        createTree("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
@@ -269,16 +269,24 @@ public class Scraper {
      * @return The content is returned as Strings in String[]
      */
     public String[] getContentFromTag(String tag){
-        return null;
+
+        TreeTraverser.traversingGetContentFromTag(root, tag);
+
+        return TreeTraverser.getTagArray();
     }
+
+
 
     /**
      *
      * @param id The id of an element which we want to get the content from
      * @return returns the content as String in String[]
      */
-    public String[] getContentFromId(String id){
-        return null;
+    public ArrayList<String> getContentFromId(String id){
+
+        TreeTraverser.traversingGetContentFromId(root,id);
+
+        return TreeTraverser.getIdArray();
     }
 
     /**
@@ -286,8 +294,11 @@ public class Scraper {
      * @param className The class name of the element which we want to get the content of
      * @return returns the content of the given class as strings in String[]
      */
-    public String[] getContentFromClass(String className){
-        return null;
+    public ArrayList<String> getContentFromClass(String className){
+
+        TreeTraverser.traversingGetContentFromClass(root,className);
+
+        return TreeTraverser.getClassArray();
     }
 
     /**
