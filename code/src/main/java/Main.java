@@ -6,7 +6,9 @@ import java.util.Hashtable;
 public class Main {
     public static void main(String[] args) throws IOException {
         Scraper sr = new Scraper("https://www.multicom.no/");
-        System.out.println(sr.getRoot());
+
+        System.out.println(sr.getRoot().getNodeChildren().size());
+        sr.printBeautyfull();
 
 
 

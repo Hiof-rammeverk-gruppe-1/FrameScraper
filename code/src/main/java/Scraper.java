@@ -32,8 +32,12 @@ public class Scraper {
 //        System.out.println(request(URL));
 //        createTree(request(URL));
 
-        System.out.println("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
-        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+//        System.out.println("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+//        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+
+        System.out.println("<body id=\"hi\" class=\"class1\"><img src=\"bodiethesefools.png\" >Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+        createTree("<body id=\"hi\" class=\"class1\"><script>if(<p> >= 12){hello there}</script><img src=\"bodiethesefools.png\" >Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+
 
 //        System.out.println("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
 //        createTree("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
@@ -54,6 +58,7 @@ public class Scraper {
         boolean readAttValue = false;
         boolean lookForLastQuote = false;
         boolean isComment = false;
+        boolean isIgnoreable = false;
 
         SoupNode buildingNode = new SoupNode();
         Stack<SoupNode> parentStack = new Stack<>();
@@ -61,7 +66,14 @@ public class Scraper {
         for(int i = 0; i < html.length(); i++){
             char ch = html.charAt(i);
 
-            //ignore mode
+            // ignore content of tag mode
+            if (isIgnoreable)
+                if (!(ch == '<' && html.charAt(i+1) == '/'))
+                    continue;
+                else
+                    isIgnoreable = false;
+
+            //comment mode
             //TODO: DOCTYPE problem
             if (isComment){
                 if (ch == '>' && html.charAt(i-1) == '-' && html.charAt(i-2) == '-'){
@@ -69,6 +81,7 @@ public class Scraper {
                 }
                 continue;
             }
+
 
             // to go into ignore/comment mode
             if (ch == '<'){
@@ -110,6 +123,9 @@ public class Scraper {
                     parentStack.push(buildingNode);
                 }
 
+                if (isIgnoreableContentTag(buildingNode.getTag()))
+                    isIgnoreable = true;
+
 //                this.nodes.add(buildingNode);
 
                 // reset locals
@@ -130,11 +146,9 @@ public class Scraper {
 
             // read String content
             if (!(readTag || readAttKey || readAttValue) && !parentStack.isEmpty()){
-                if (isIgnoreContentTag(parentStack.peek().getTag()))
-                    continue;
-                else{
-                    stringContent += ch;
-                }
+
+                stringContent += ch;
+
             }
 
             //read tag
@@ -211,11 +225,22 @@ public class Scraper {
 
     //TODO: implement this function
     private boolean isSingletonTag(String tag){
+        String[] singletons = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr", "command", "keygen", "menuitem"};
+
+        for (int i = 0; i < singletons.length; i++)
+            if (tag.equals(singletons[i]))
+                return true;
         return false;
     }
 
     //TODO: implement
-    private boolean isIgnoreContentTag(String tag){
+    private boolean isIgnoreableContentTag(String tag){
+        String[] ignoreableTags = {"script"};
+
+        for (int i = 0; i < ignoreableTags.length; i++){
+            if (tag.equals(ignoreableTags[i]))
+                return true;
+        }
         return false;
     }
 
@@ -325,5 +350,32 @@ public class Scraper {
 
     public SoupNode getRoot() {
         return root;
+    }
+
+    public void printBeautyfull(){
+        printBeautyfull(root, 0);
+    }
+
+    private void printBeautyfull(SoupNode node, int nTabs){
+
+        if (node != null){
+            String tabs = "";
+
+            for (int i = 0; i < nTabs; i++){
+                tabs += '\t';
+            }
+
+            String str = tabs +
+                    "SoupNode{" +
+                    "tag=\'" + node.getTag() + '\'' +
+                    ", attributes=" + node.getAttributeNames().toString() +
+                    ", textChildren=" + node.getStringChildren().toString() + '}';
+
+            System.out.println(str);
+
+            for (int i = 0; i < node.getNodeChildren().size(); i++){
+                printBeautyfull(node.getNodeChildren().get(i), nTabs+1);
+            }
+        }
     }
 }

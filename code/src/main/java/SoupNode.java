@@ -29,10 +29,6 @@ public class SoupNode {
         this.getStringChildren().add(text);
     }
 
-
-
-
-
     public String getTag() {
         return tag;
     }
@@ -85,13 +81,17 @@ public class SoupNode {
         return attributeNames;
     }
 
+
     @Override
     public String toString() {
         return "SoupNode{" +
                 "tag='" + tag + '\'' +
-                ", attributes=" + attributeNames.toString() +
-                ", textChildren=" + getStringChildren().toString() +
-                ", nodeChildren= \n\t" + getNodeChildren().toString() +
+                ", full_tag='" + full_tag + '\'' +
+                ", attributes=" + attributes +
+                ", attributeNames=" + attributeNames +
+                ", parent=" + parent +
+                ", nodeChildren=" + nodeChildren +
+                ", stringChildren=" + stringChildren +
                 '}';
     }
 }
