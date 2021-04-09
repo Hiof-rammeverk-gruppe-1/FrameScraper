@@ -129,7 +129,6 @@ public class Scraper {
             }
 
             // read String content
-            //TODO: read text children here?
             if (!(readTag || readAttKey || readAttValue) && !parentStack.isEmpty()){
                 if (isIgnoreContentTag(parentStack.peek().getTag()))
                     continue;
@@ -143,7 +142,6 @@ public class Scraper {
                 if (Character.isLetter(ch) || Character.isDigit(ch))
                     tag += ch;
                 else {
-                    //TODO: her skal det være logikk om når vi stopper og legge til barn hos en spesiel node
                     if (tag.isEmpty() && ch == '/'){
                         String tagEnded = parentStack.pop().getTag();
                         if (html.substring(i + 1, i + 1 + tagEnded.length()).equals(tagEnded)){
@@ -216,6 +214,7 @@ public class Scraper {
         return false;
     }
 
+    //TODO: implement
     private boolean isIgnoreContentTag(String tag){
         return false;
     }
