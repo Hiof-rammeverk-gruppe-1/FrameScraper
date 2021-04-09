@@ -29,14 +29,14 @@ public class Scraper {
      */
     public Scraper(String URL) throws IOException {
         this.URL = URL;
-//        System.out.println(request(URL));
-//        createTree(request(URL));
+        System.out.println(request(URL));
+        createTree(request(URL));
 
 //        System.out.println("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
 //        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
 
         System.out.println("<body id=\"hi\" class=\"class1\"><img src=\"bodiethesefools.png\" >Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
-        createTree("<body id=\"hi\" class=\"class1\"><script>if(<p> >= 12){hello there}</script><img src=\"bodiethesefools.png\" >Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+        createTree("<body id=\"hi\" class=\"class1\"><script controls id=\"javawannabee\">if(<p> >= 12){hello there}</script><img src=\"bodiethesefools.png\" >Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
 
 
 //        System.out.println("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
@@ -44,8 +44,10 @@ public class Scraper {
 
     }
 
-
-
+    //TODO: make more failsafe
+    //TODO: if a tag is not ended?
+    //TODO: there seems to be an issue with attributtes that dont have any value / has quickfix
+    //TODO: doctype
     private void createTree(String html){
 
         String tag = "";
@@ -82,7 +84,7 @@ public class Scraper {
                 continue;
             }
 
-
+            //TODO: DOCTYPE problem
             // to go into ignore/comment mode
             if (ch == '<'){
                 if (html.charAt(i+1) == '!')
@@ -103,6 +105,7 @@ public class Scraper {
             //  when tag is to be ended
             if (ch == '>'){
                 if (readTag && tag.isEmpty());
+                //TODO: excepion class
 //                        throw new Exception("There exist and empty tag in this html");
                 else if (readTag)
                     buildingNode.setTag(tag);
@@ -126,7 +129,6 @@ public class Scraper {
                 if (isIgnoreableContentTag(buildingNode.getTag()))
                     isIgnoreable = true;
 
-//                this.nodes.add(buildingNode);
 
                 // reset locals
                 tag = "";
@@ -163,7 +165,7 @@ public class Scraper {
                             continue;
                         }
 
-                        //TODO: EXCEPTION class
+                        //TODO: exception class
 //                        else
 //                            throw new Exception("Ended tag doesn't fit current parent");
                     }
@@ -185,6 +187,13 @@ public class Scraper {
                         readAttKey = false;
                         readAttValue = true;
                     }
+                }
+                //TODO: quick fix for solo attributtes
+                else if(ch == ' '){
+                    buildingNode.getAttributeNames().add(attKey);
+                    buildingNode.getAttributes().put(attKey, "");
+
+                    attKey = "";
                 }
             }
 //            read key value
