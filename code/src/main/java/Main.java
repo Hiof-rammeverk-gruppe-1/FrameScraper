@@ -12,7 +12,9 @@ public class Main {
         //System.out.println("getContentFromTag: "+ Arrays.toString(sr.getContentFromTag("h1")));
         //System.out.println("getContentFromId: "+ sr.getContentFromId("header1"));
         //System.out.println("getContentFromClass: "+ sr.getContentFromClass("class1"));
-
+        //System.out.println("getLinksInPage: "+ sr.getLinksInPage());
+        //System.out.println("contains: " + sr.contains("hild"));
+        //System.out.println("contains CaseInSensetive: " + sr.containsCaseSensetive("Child"));
 
 
     }

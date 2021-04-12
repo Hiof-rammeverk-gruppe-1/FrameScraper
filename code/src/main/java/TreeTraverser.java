@@ -4,6 +4,8 @@ public class TreeTraverser {
     private static ArrayList<String> tagArray = new ArrayList<String>();
     private static ArrayList<String> idArray = new ArrayList<String>();
     private static ArrayList<String> classArray = new ArrayList<String>();
+    private static ArrayList<String> linksArray = new ArrayList<String>();
+    private static boolean containsVar = false;
 
 
     public static void traversingGetContentFromTag(SoupNode node, String tag){
@@ -57,5 +59,54 @@ public class TreeTraverser {
 
     public static ArrayList<String> getClassArray() {
         return classArray;
+    }
+
+    public static void traversingGetLinksInPage(SoupNode node){
+        String tag = "a";
+
+        if (node.getTag().equals(tag)){
+            linksArray.add(node.getAttributes().get("href"));
+        }
+        for (int i=0; i<node.getNodeChildren().size(); i++){
+            traversingGetLinksInPage(node.getNodeChildren().get(i));
+        }
+    }
+
+    public static ArrayList<String> getLinksArray() {
+        return linksArray;
+    }
+
+    public static Boolean traversingContains(SoupNode node, String searchString) {
+
+        for (int j = 0; j < node.getStringChildren().size(); j++){
+            if (node.getStringChildren().get(j).contains(searchString)) {
+                containsVar = true;
+                break;
+            }
+        }
+
+        if (!containsVar)
+            for (int i = 0; i < node.getNodeChildren().size(); i++) {
+                traversingContains(node.getNodeChildren().get(i), searchString);
+            }
+        return containsVar;
+    }
+
+    public static Boolean traversingContainsCaseInSensetive(SoupNode node, String searchString) {
+
+        String SS = searchString.toLowerCase();
+
+        for (int j = 0; j < node.getStringChildren().size(); j++){
+            if (node.getStringChildren().get(j).toLowerCase().contains(SS)) {
+                containsVar = true;
+                break;
+            }
+        }
+
+        if (!containsVar)
+            for (int i = 0; i < node.getNodeChildren().size(); i++) {
+                traversingContainsCaseInSensetive(node.getNodeChildren().get(i), searchString);
+            }
+        return containsVar;
     }
 }

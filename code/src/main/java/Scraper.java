@@ -32,8 +32,8 @@ public class Scraper {
 //        System.out.println(request(URL));
 //        createTree(request(URL));
 
-        System.out.println("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
-        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p class=\"class2\">yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+        //System.out.println("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<a href=\"https://www.w3schools.com/\" target=\"_blank\">Visit W3Schools!</a><p>yo mama</p></p>og min mor er borte<a href=\"https://www.test.com/\" </a><h1 id=\"header1\">child of child.</h1></body>");
+        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte <p lang=\"no\" id=\"para\">yo who<a src=\"blabal\" target=\"_blank\" href=\"https://www.w3schools.com/\" >https://www.w3schools.com/</a><p>yo mama</p></p>og min mor er borte <a href=\"https://www.test.com/\"> Testloink2 </a><h1 id=\"header1\">chIld, of CHIld.</h1></body>");
 
 //        System.out.println("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
 //        createTree("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
@@ -275,8 +275,6 @@ public class Scraper {
         return TreeTraverser.getTagArray();
     }
 
-
-
     /**
      *
      * @param id The id of an element which we want to get the content from
@@ -303,10 +301,13 @@ public class Scraper {
 
     /**
      *
-     * @return the links as String in String[]
+     * @return the links as String in ArrayList
      */
-    public String[] getLinksInPage(){
-        return null;
+    public ArrayList<String> getLinksInPage(){
+
+        TreeTraverser.traversingGetLinksInPage(root);
+
+        return TreeTraverser.getLinksArray();
     }
 
     /**
@@ -315,7 +316,14 @@ public class Scraper {
      * @return returns boolean based on if the String was found or not. True for was found and false for was not found.
      */
     public boolean contains(String searchString){
-        return true;
+
+        Boolean contains = TreeTraverser.traversingContains(root, searchString);
+        return contains;
+    }
+
+    public boolean containsCaseSensetive(String searchString){
+        Boolean contains = TreeTraverser.traversingContainsCaseInSensetive(root, searchString);
+        return contains;
     }
 
     /**
