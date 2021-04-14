@@ -15,7 +15,7 @@ public class ShopScraper extends ConceptScraper{
      * @param url Link to target site for scraping
      * @throws IOException Throws an IO Exception whenever user input is crashing with an expected string value
      */
-    public ShopScraper(String url) throws IOException {
+    public ShopScraper(String url) throws IOException, Exception {
         super(url);
     }
 

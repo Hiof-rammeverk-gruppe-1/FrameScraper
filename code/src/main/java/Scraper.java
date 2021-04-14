@@ -27,28 +27,16 @@ public class Scraper {
      * @param URL Link to target site for scraping
      * @throws IOException Throws an IO Exception whenever user input is crashing with an expected string value
      */
-    public Scraper(String URL) throws IOException {
+    public Scraper(String URL) throws IOException, Exception {
         this.URL = URL;
-        System.out.println(request(URL));
+
         createTree(request(URL));
-
-//        System.out.println("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
-//        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
-
-        System.out.println("<body id=\"hi\" class=\"class1\"><img src=\"bodiethesefools.png\" >Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
-        createTree("<body id=\"hi\" class=\"class1\"><script controls id=\"javawannabee\">if(<p> >= 12){hello there}</script><img src=\"bodiethesefools.png\" >Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
-
-
-//        System.out.println("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
-//        createTree("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
 
     }
 
-    //TODO: make more failsafe
-    //TODO: if a tag is not ended?
-    //TODO: there seems to be an issue with attributtes that dont have any value / has quickfix
-    //TODO: doctype
-    private void createTree(String html){
+    //TODO: REFACTOR
+    //         - making it more clear when a tag is ended
+    private void createTree(String html) throws ParseException {
 
         String tag = "";
         String attKey = "";
@@ -61,6 +49,7 @@ public class Scraper {
         boolean lookForLastQuote = false;
         boolean isComment = false;
         boolean isIgnoreable = false;
+        boolean isDoctype = false;
 
         SoupNode buildingNode = new SoupNode();
         Stack<SoupNode> parentStack = new Stack<>();
@@ -76,7 +65,6 @@ public class Scraper {
                     isIgnoreable = false;
 
             //comment mode
-            //TODO: DOCTYPE problem
             if (isComment){
                 if (ch == '>' && html.charAt(i-1) == '-' && html.charAt(i-2) == '-'){
                     isComment = false;
@@ -84,11 +72,22 @@ public class Scraper {
                 continue;
             }
 
-            //TODO: DOCTYPE problem
+            // if doctypemode alternative ignoremode
+            if (isDoctype){
+                if (ch == '>')
+                    isDoctype = false;
+                continue;
+            }
+
+
             // to go into ignore/comment mode
             if (ch == '<'){
                 if (html.charAt(i+1) == '!')
-                    isComment = true;
+                    if (html.charAt(i+2) == '-' && html.charAt(i+3) == '-')
+                        isComment = true;
+                    else
+                        isDoctype = true;
+
                 else{
                     readTag = true;
 
@@ -102,11 +101,10 @@ public class Scraper {
                 continue;
             }
 
-            //  when tag is to be ended
+            //  when head of tag is to be ended
             if (ch == '>'){
-                if (readTag && tag.isEmpty());
-                //TODO: excepion class
-//                        throw new Exception("There exist and empty tag in this html");
+                if (readTag && tag.isEmpty())
+                        throw new ParseException("There exist an empty tag in this html", buildingNode);
                 else if (readTag)
                     buildingNode.setTag(tag);
                 else if (readAttKey && !(attKey.isEmpty())){
@@ -157,17 +155,18 @@ public class Scraper {
                     tag += ch;
                 else {
                     if (tag.isEmpty() && ch == '/'){
-                        String tagEnded = parentStack.pop().getTag();
+
+                        SoupNode parentToEnd = parentStack.pop();
+                        String tagEnded = parentToEnd.getTag();
+
                         if (html.substring(i + 1, i + 1 + tagEnded.length()).equals(tagEnded)){
                             i = i + 1 + tagEnded.length();
 
                             readTag = false;
                             continue;
                         }
-
-                        //TODO: exception class
-//                        else
-//                            throw new Exception("Ended tag doesn't fit current parent");
+                        else
+                            throw new ParseException("Ended tag doesn't fit current parent", parentToEnd);
                     }
 
 
@@ -189,7 +188,7 @@ public class Scraper {
                     }
                 }
                 //TODO: quick fix for solo attributtes
-                else if(ch == ' '){
+                else if(ch == ' ' && !attKey.isEmpty()){
                     buildingNode.getAttributeNames().add(attKey);
                     buildingNode.getAttributes().put(attKey, "");
 
@@ -199,14 +198,15 @@ public class Scraper {
 //            read key value
             else if(readAttValue){
                 //see first quotes "
-                if(ch == '\"' && !lookForLastQuote){
-                    lookForLastQuote = true;
-                    continue;
+                if (!lookForLastQuote){
+                    if (ch == '\"'){
+                        lookForLastQuote = true;
+                        continue;
+                    }
+                    else
+                        throw new ParseException("Missing quotes after attributtes", buildingNode);
                 }
-                else{
-//                    throw new Exception("Missing quotes after attributtes");
-                }
-                //build value string untill we see see last quotes "
+
                 if(lookForLastQuote){
                     if (ch == '\"'){
 
@@ -240,7 +240,7 @@ public class Scraper {
     }
 
     private boolean isIgnoreableContentTag(String tag){
-        String[] ignoreableTags = {"script"};
+        String[] ignoreableTags = {"script", "style"};
 
         for (int i = 0; i < ignoreableTags.length; i++){
             if (tag.equals(ignoreableTags[i]))
