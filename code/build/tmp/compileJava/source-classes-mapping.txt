@@ -1,7 +1,7 @@
-soup/Soup.java
- soup.Soup
-soup/SoupNode.java
- soup.SoupNode
+SoupNode.java
+ SoupNode
+TreeTraverser.java
+ TreeTraverser
 Main.java
  Main
 ConceptScraper.java
