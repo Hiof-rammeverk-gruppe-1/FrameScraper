@@ -29,13 +29,19 @@ public class Scraper {
      */
     public Scraper(String URL) throws IOException, Exception {
         this.URL = URL;
+//        System.out.println(request(URL));
+//        TreeBuilder.createTree(request(URL));
 
-        createTree(request(URL));
+//        System.out.println("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+//        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+
+        System.out.println("<!DOCTYPE html><body id=\"hi\" class=\"class1\" async><script controls id=\"javawannabee\">if(<p> >= 12){hello there}</script><img src=\"bodiethesefools.png\" >Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+        createTree("<!DOCTYPE html><body id=\"hi\" class=\"class1\" async><script controls id=\"javawannabee\">if(<p> >= 12){hello there}</script><img src=\"bodiethesefools.png\" >Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
+
 
     }
 
     //TODO: REFACTOR
-    //         - making it more clear when a tag is ended
     private void createTree(String html) throws ParseException {
 
         String tag = "";
