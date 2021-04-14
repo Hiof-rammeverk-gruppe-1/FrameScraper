@@ -21,7 +21,6 @@ public class Scraper {
 
     private ArrayList<SoupNode> nodes = new ArrayList<>();
 
-
     /**
      * Constructor for a shop scraper
      * @param URL Link to target site for scraping
@@ -32,12 +31,7 @@ public class Scraper {
 //        System.out.println(request(URL));
 //        createTree(request(URL));
 
-        System.out.println("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p>yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
-        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte<p lang=\"no\" id=\"para\">yo who<p class=\"class2\">yo mama</p></p>og min mor er borte<h1 id=\"header1\">child of child</h1></body>");
-
-//        System.out.println("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
-//        createTree("<body id=\"hi\" class=\"class1\"><!--<p lang=\"no\" id=\"para\">asdqwe</p></body>-->");
-
+        createTree("<body id=\"hi\" class=\"class1\">Hei jeg hedder dorte <img id=\"bestebildet\" class=\"bestebildene\" src=\"img_girl.jpg\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"> <video id=\"bestevideoen\" class=\"bestevideoene\" src=\"video_girl.mp4\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"><p lang=\"no\" id=\"para\">yo who<a src=\"blabal\" target=\"_blank\" href=\"https://www.w3schools.com/\" >https://www.w3schools.com/</a><p>yo mama</p></p>og min mor er borte <a href=\"https://www.test.com/\"> Testloink2 </a><img class=\"bestebildene\" src=\"www.google.com/hjelp/img_boy.jpg\" alt=\"Girl in an jacket\" width=\"500\" height=\"600\"> <video src=\"www.google.com/hjelp/video_boy.wma\" alt=\"Boy in a jacket\" width=\"500\" height=\"600\"> <h1 id=\"header1\">chIld, of CHIld.</h1></body>");
     }
 
 
@@ -266,21 +260,19 @@ public class Scraper {
     /**
      *
      * @param tag The tag from which we want to see the content of
-     * @return The content is returned as Strings in String[]
+     * @return The content is returned as Strings in an Arraylist of Strings
      */
-    public String[] getContentFromTag(String tag){
+    public ArrayList<String> getContentFromTag(String tag){
 
         TreeTraverser.traversingGetContentFromTag(root, tag);
 
         return TreeTraverser.getTagArray();
     }
 
-
-
     /**
      *
      * @param id The id of an element which we want to get the content from
-     * @return returns the content as String in String[]
+     * @return The content is returned as Strings in a Arraylist of Strings
      */
     public ArrayList<String> getContentFromId(String id){
 
@@ -292,7 +284,7 @@ public class Scraper {
     /**
      *
      * @param className The class name of the element which we want to get the content of
-     * @return returns the content of the given class as strings in String[]
+     * @return returns the content of the given class as strings in an Arraylist of Strings
      */
     public ArrayList<String> getContentFromClass(String className){
 
@@ -303,35 +295,106 @@ public class Scraper {
 
     /**
      *
-     * @return the links as String in String[]
+     * @return the links as String in an Arraylist of Strings
      */
-    public String[] getLinksInPage(){
-        return null;
+    public ArrayList<String> getLinksInPage(){
+
+        TreeTraverser.traversingGetLinksInPage(root);
+
+        return TreeTraverser.getLinksArray();
     }
 
     /**
      *
-     * @param searchString string we want to see if exist in the HTML code
+     * @param searchString string we want to see if exist in the HTML code. IS case sensetive
      * @return returns boolean based on if the String was found or not. True for was found and false for was not found.
      */
     public boolean contains(String searchString){
-        return true;
+
+        Boolean contains = TreeTraverser.traversingContains(root, searchString);
+        return contains;
     }
 
     /**
      *
-     * @return all found classes as strings in String[]
+     * @param searchString string we want to see if exist in the HTML code. IS NOT case sensetive
+     * @return returns boolean based on if the String was found or not. True for was found and false for was not found.
      */
-    public String[] getClassesInPage(){
-        return null;
+    public boolean containsCaseInSensetive(String searchString){
+        Boolean contains = TreeTraverser.traversingContainsCaseInSensetive(root, searchString);
+        return contains;
     }
 
     /**
      *
-     * @return all found id's as strings in String[]
+     * @return the source for the images as String in an Arraylist of Strings
      */
-    public String[] getIdsInPage(){
-        return null;
+    public ArrayList<String> getAllImagesFromPage(){
+            TreeTraverser.traversingGetAllImagesFromPage(root);
+        return TreeTraverser.getImgArray();
+    }
+
+    /**
+     * @param pictureId id as String we want to get the picture from
+     * @return the source for the image as String
+     */
+    public String getImageById(String pictureId){
+            String pic = TreeTraverser.traversingGetImageById(root, pictureId);
+        return pic;
+    }
+
+    /**
+     * @param pictureClass class as String we want to get the pictures from
+     * @return the source for the images as String in an Arraylist of Strings
+     */
+    public ArrayList<String> getImageByClass(String pictureClass){
+        TreeTraverser.traversingGetImageByClass(root, pictureClass);
+        return TreeTraverser.getImgClassArray();
+    }
+
+    /**
+     *
+     * @return the source for the videos as String in an Arraylist of Strings
+     */
+    public ArrayList<String> getAllVideosFromPage(){
+        TreeTraverser.traversingGetAllVideosFromPage(root);
+        return TreeTraverser.getVideoArray();
+    }
+
+    /**
+     * @param videoId id as String we want to get the video from
+     * @return the source for the video as String
+     */
+    public String getVideoById(String videoId){
+        String vid = TreeTraverser.traversingGetVideoById(root, videoId);
+        return vid;
+    }
+
+    /**
+     * @param videoClass class as String we want to get the video from
+     * @return the source for the videos as String in an Arraylist of Strings
+     */
+    public ArrayList<String> getVideoByClass(String videoClass){
+        TreeTraverser.traversingGetVideoByClass(root, videoClass);
+        return TreeTraverser.getVideoClassArray();
+    }
+
+    /**
+     *
+     * @return all found classes as strings in an Arraylist of Strings
+     */
+    public ArrayList<String> getClassesInPage(){
+        TreeTraverser.traversingGetClassesInPage(root);
+        return TreeTraverser.getAllClassArray();
+    }
+
+    /**
+     *
+     * @return all found id's as strings in an Arraylist of Strings
+     */
+    public ArrayList<String> getIdsInPage(){
+        TreeTraverser.traversingGetIdsInPage(root);
+        return TreeTraverser.getAllIdsArray();
     }
 
     public SoupNode getRoot() {

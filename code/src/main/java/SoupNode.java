@@ -29,10 +29,6 @@ public class SoupNode {
         this.getStringChildren().add(text);
     }
 
-
-
-
-
     public String getTag() {
         return tag;
     }
