@@ -4,10 +4,18 @@ import java.util.Arrays;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+
+// denne klassen kommer ikke til å være med i endelige innlevering
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, Exception {
         Scraper sr = new Scraper("https://www.multicom.no/");
+
         System.out.println(sr.getRoot());
+
+        System.out.println();
+        sr.printBeautyfull();
+
+
 
         //System.out.println("getContentFromTag: "+ sr.getContentFromTag("h1"));
         //System.out.println("getContentFromId: "+ sr.getContentFromId("header1"));
