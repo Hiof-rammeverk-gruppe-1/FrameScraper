@@ -1,7 +1,9 @@
-soup/Soup.java
- soup.Soup
-soup/SoupNode.java
- soup.SoupNode
+SoupNode.java
+ SoupNode
+ParseException.java
+ ParseException
+TreeBuilder.java
+ TreeBuilder
 Main.java
  Main
 ConceptScraper.java

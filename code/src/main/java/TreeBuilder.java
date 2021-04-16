@@ -235,10 +235,7 @@ public class TreeBuilder {
         String tag = "";
         String attKey = "";
         String attValue = "";
-
-
-
-
+        
         ch = html.charAt(index);
         while (ch != '>'){
 
