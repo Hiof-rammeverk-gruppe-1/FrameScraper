@@ -2,15 +2,17 @@ SoupNode.java
  SoupNode
 ParseException.java
  ParseException
-TreeBuilder.java
- TreeBuilder
-Main.java
- Main
-ConceptScraper.java
- ConceptScraper
-Scraper.java
- Scraper
-StockScraper.java
- StockScraper
 ShopScraper.java
  ShopScraper
+ConceptScraper.java
+ ConceptScraper
+StockScraper.java
+ StockScraper
+TreeBuilder.java
+ TreeBuilder
+TreeTraverser.java
+ TreeTraverser
+Scraper.java
+ Scraper
+Main.java
+ Main

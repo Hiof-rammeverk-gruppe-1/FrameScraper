@@ -9,11 +9,15 @@ group 'com.github.Hiof-rammeverk-gruppe-1'
 version '1.0-SNAPSHOT'
 
 repositories {
-    //mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
     //testCompile group: 'junit', name: 'junit', version: '4.12'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
+
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -34,5 +38,8 @@ artifacts {
 wrapper {
     gradleVersion = "6.5.1"
     distributionType = Wrapper.DistributionType.BIN
+}
+test {
+    useJUnitPlatform()
 }
 
