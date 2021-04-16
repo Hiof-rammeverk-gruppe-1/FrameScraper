@@ -20,7 +20,7 @@ public abstract class ConceptScraper {
      *           and instantiates a new object from the webpage.
      * @throws IOException Throws if the string sent in could not be processed as intended.
      */
-    public ConceptScraper(String URL) throws IOException {
+    public ConceptScraper(String URL) throws IOException, Exception {
         scraper = new Scraper(URL);
     }
 
