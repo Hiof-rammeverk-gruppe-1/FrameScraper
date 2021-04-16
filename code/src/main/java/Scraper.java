@@ -26,13 +26,14 @@ public class Scraper {
      * @param URL Link to target site for scraping
      * @throws IOException Throws an IO Exception whenever user input is crashing with an expected string value
      */
-    public Scraper(String URL) throws IOException, Exception {
+    public Scraper(String URL) throws IOException, ParseException {
         this.URL = URL;
-        createTree(request(URL));
-
+        websiteContent = request(URL);
+        createTree(websiteContent);
     }
+
     public Scraper(String siteContent, boolean test) {
-    
+        websiteContent = siteContent;
         createTree(siteContent);
     }
 
