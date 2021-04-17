@@ -251,7 +251,7 @@ public class Scraper {
         return false;
     }
 
-    private String request(String URL){
+    public static String request(String URL){
 
         //Instantiating the URL class
         URL url = null;
@@ -443,7 +443,7 @@ public class Scraper {
         printBeautyfull(root, 0);
     }
 
-    private void printBeautyfull(SoupNode node, int nTabs){
+    public static void printBeautyfull(SoupNode node, int nTabs){
 
         if (node != null){
             String tabs = "";
