@@ -10,27 +10,46 @@ public class Main {
     public static void main(String[] args) throws IOException, Exception {
         Scraper sr = new Scraper("https://www.multicom.no/");
 
-        System.out.println(sr.getRoot());
+        //System.out.println(sr.getRoot());
 
-        System.out.println();
-        sr.printBeautyfull();
+        //System.out.println();
+        //sr.printBeautyfull();
 
+/*
+        //returns string/Array of Strings
+        System.out.println("getContentFromTag: "+ sr.getContentFromTagAsString("h1"));
+        System.out.println("getContentFromId: "+ sr.getContentFromIdAsString("header1"));
+        System.out.println("getContentFromClass: "+ sr.getContentFromClassAsString("class1"));
+        System.out.println("getLinksInPage: "+ sr.getLinksInPageAsString());
+        System.out.println("getAllImagesFromPage : " + sr.getAllImagesFromPageAsString());
+        System.out.println("getImageById : " + sr.getImageByIdAsString("bestebildet"));
+        System.out.println("getImageByClass : " + sr.getImageByClassAsString("bestebildene"));
+        System.out.println("getAllVideosFromPage : " + sr.getAllVideosFromPageAsString());
+        System.out.println("getVideoById : " + sr.getVideoByIdAsString("bestevideoen"));
+        System.out.println("getVideoByClass : " + sr.getVideoByClassAsString("bestevideoene"));
+        System.out.println("getClassesInPage : " + sr.getClassesInPage());
+        System.out.println("getIdsInPage : " + sr.getIdsInPage());
 
+        //returns boolean
+        System.out.println("contains: " + sr.containsAsBoolean("hild"));
+        System.out.println("contains CaseInSensetive: " + sr.containsCaseInSensetiveAsBoolean("Child"));
 
-        //System.out.println("getContentFromTag: "+ sr.getContentFromTag("h1"));
-        //System.out.println("getContentFromId: "+ sr.getContentFromId("header1"));
-        //System.out.println("getContentFromClass: "+ sr.getContentFromClass("class1"));
-        //System.out.println("getLinksInPage: "+ sr.getLinksInPage());
-        //System.out.println("contains: " + sr.contains("hild"));
-        //System.out.println("contains CaseInSensetive: " + sr.containsCaseInSensetive("Child"));
-        //System.out.println("getAllImagesFromPage : " + sr.getAllImagesFromPage());
-        //System.out.println("getImageById : " + sr.getImageById("bestebildet"));
-        //System.out.println("getImageByClass : " + sr.getImageByClass("bestebildene"));
-        //System.out.println("getAllVideosFromPage : " + sr.getAllVideosFromPage());
-        //System.out.println("getVideoById : " + sr.getVideoById("bestevideoen"));
-        //System.out.println("getVideoByClass : " + sr.getVideoByClass("bestevideoene"));
-        //System.out.println("getClassesInPage : " + sr.getClassesInPage());
-        //System.out.println("getIdsInPage : " + sr.getIdsInPage());
+        //return nodes
+        System.out.println("getContentFromTag: "+ sr.getContentFromTagAsNode("h1"));
+        System.out.println("getContentFromId: "+ sr.getContentFromIdAsNode("header1"));
+        System.out.println("getContentFromClass: "+ sr.getContentFromClassAsNode("class1"));
+        System.out.println("getLinksInPage: "+ sr.getLinksInPageAsNode());
+        System.out.println("contains: " + sr.containsAsNode("hild"));
+        System.out.println("contains CaseInSensetive: " + sr.containsCaseInSensetiveAsNode("Child"));
+        System.out.println("getAllImagesFromPage : " + sr.getAllImagesFromPageAsNode());
+        System.out.println("getImageById : " + sr.getImageByIdAsNode("bestebildet"));
+        System.out.println("getImageByClass : " + sr.getImageByClassAsNode("bestebildene"));
+        System.out.println("getAllVideosFromPage : " + sr.getAllVideosFromPageAsNode());
+        System.out.println("getVideoById : " + sr.getVideoByIdAsNode("bestevideoen"));
+        System.out.println("getVideoByClass : " + sr.getVideoByClassAsNode("bestevideoene"));
+        System.out.println("contains: " + sr.containsAsNode("hild"));
+        System.out.println("contains CaseInSensetive: " + sr.containsCaseInSensetiveAsNode("Child"));
+*/
 
     }
 }
