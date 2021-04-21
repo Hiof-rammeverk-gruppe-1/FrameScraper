@@ -1,32 +1,22 @@
+package Scraper;
+
+import Scraper.Exceptions.ParseException;
+
 import java.util.Stack;
 
-
-//TODO: there seems to be an issue with attributtes that dont have any value / has quickfix // maybe introduced new bug?
-//TODO: issue with attribute reading
-
-//TODO: REFACTOR
-//         - making it more clear when a tag is ended
-//TODO: if a tag is not ended?
-public class TreeBuilder {
+public final class TreeBuilder {
 
     private static int index = 0;
 
-    private static String tag = "";
-    private static String attKey = "";
-    private static String attValue = "";
-    private static String stringContent = "";
+    private static Stack<SoupNode> parentStack;
 
-    private static boolean readTag = false;
-    private static boolean readAttKey = false;
-    private static boolean readAttValue = false;
-    private static boolean lookForLastQuote = false;
-    private static boolean isComment = false;
-    private static boolean isIgnoreable = false;
-    private static boolean isDoctype = false;
+    protected static SoupNode createTree(String html) throws ParseException {
 
-    private static Stack<SoupNode> parentStack = new Stack<>();
+        parentStack = new Stack<>();
 
-    public static SoupNode createTree(String html) throws ParseException {
+        boolean isComment = false;
+        boolean isIgnoreable = false;
+        boolean isDoctype = false;
 
         SoupNode root = null;
         SoupNode buildingNode;
@@ -84,11 +74,6 @@ public class TreeBuilder {
                     if (isIgnoreableContentTag(buildingNode.getTag()))
                         isIgnoreable = true;
 
-//                    if (!parentStack.isEmpty() && !stringContent.isEmpty()){
-//                        parentStack.peek().addStringChild(stringContent);
-//                        stringContent = "";
-//                    }
-
                 }
                 continue;
             }
@@ -97,154 +82,12 @@ public class TreeBuilder {
             if (!parentStack.isEmpty()){
                 readStringChild(html);
             }
-
-            //  when head of tag is to be ended
-//            if (ch == '>'){
-//                if (readTag && tag.isEmpty())
-//                    throw new ParseException("There exist an empty tag in this html", buildingNode);
-//                else if (readTag)
-//                    buildingNode.setTag(tag);
-//                else if (readAttKey && !(attKey.isEmpty())){
-//                    buildingNode.getAttributeNames().add(attKey);
-//
-//                    buildingNode.getAttributes().put(attKey, "");
-//                }
-//
-//                //add nodes
-//                if (root == null)
-//                    root = buildingNode;
-//
-//                if (!parentStack.isEmpty())
-//                    parentStack.peek().addNodeChild(buildingNode);
-//
-//                if (!isSingletonTag(buildingNode.getTag())){
-//                    parentStack.push(buildingNode);
-//                }
-//
-//                if (isIgnoreableContentTag(buildingNode.getTag()))
-//                    isIgnoreable = true;
-//
-//
-//                // reset locals
-//                tag = "";
-//                attKey = "";
-//                attValue = "";
-//
-//                readTag = false;
-//                readAttKey = false;
-//                readAttValue = false;
-//                lookForLastQuote = false;
-//                isComment = false;
-//
-//                buildingNode = new SoupNode();
-//
-//                continue;
-//            }
-
-            // read String content
-//            if (!(readTag || readAttKey || readAttValue) && !parentStack.isEmpty()){
-//                stringContent += ch;
-//            }
-
-            //read tag
-//            if (readTag) {
-//                if (Character.isLetter(ch) || Character.isDigit(ch))
-//                    tag += ch;
-//                else {
-//                    if (tag.isEmpty() && ch == '/'){
-//
-//                        SoupNode parentToEnd = parentStack.pop();
-//                        String tagEnded = parentToEnd.getTag();
-//
-//                        if (html.substring(i + 1, i + 1 + tagEnded.length()).equals(tagEnded)){
-//                            i = i + 1 + tagEnded.length();
-//
-//                            readTag = false;
-//                            continue;
-//                        }
-//                        else
-//                            throw new ParseException("Ended tag doesn't fit current parent", parentToEnd);
-//                    }
-//
-//
-//                    readTag = false;
-//                    readAttKey = true;
-//                    buildingNode.setTag(tag);
-//                    tag = "";
-//                    continue;
-//                }
-//            }
-////            read key
-//            else if (readAttKey){
-//                if (Character.isLetter(ch))
-//                    attKey += ch;
-//                else if(ch == '='){
-//                    if(!attKey.isEmpty()){
-//                        readAttKey = false;
-//                        readAttValue = true;
-//                    }
-//                }
-//                //TODO: quick fix for solo attributtes
-//                else if(ch == ' ' && !attKey.isEmpty()){
-//                    buildingNode.getAttributeNames().add(attKey);
-//                    buildingNode.getAttributes().put(attKey, "");
-//
-//                    attKey = "";
-//                }
-//            }
-////            read key value
-//            else if(readAttValue){
-//                //see first quotes "
-//                if (!lookForLastQuote){
-//                    if (ch == '\"'){
-//                        lookForLastQuote = true;
-//                        continue;
-//                    }
-//                    else
-//                        throw new ParseException("Missing quotes after attributtes", buildingNode);
-//                }
-////                if(ch == '\"' && !lookForLastQuote){
-////                    lookForLastQuote = true;
-////                    continue;
-////                }
-////                else if(ch != '\"' && !lookForLastQuote){
-////                    throw new ParseException("Missing quotes after attributtes");
-////                }
-//                //build value string untill we see see last quotes "
-//                if(lookForLastQuote){
-//                    if (ch == '\"'){
-//
-//                        buildingNode.getAttributeNames().add(attKey);
-//
-//                        buildingNode.getAttributes().put(attKey, attValue);
-//
-//                        readAttValue = false;
-//                        readAttKey = true;
-//                        lookForLastQuote = false;
-//
-//                        attKey = "";
-//                        attValue = "";
-//
-//                        continue;
-//                    }
-//                    attValue += ch;
-//                }
-//
-//            }
         }
 
         return root;
     }
 
-    
-    public static void main(String[] args) throws ParseException {
-
-        SoupNode root = createTree(Scraper.request("https://www.multicom.no"));
-
-        Scraper.printBeautyfull(root, 0);
-    }
-
-    private static void readTail(String html) throws ParseException{
+    private static void readTail(String html) throws ParseException {
         index += 2;
 
         String tag = "";
@@ -290,7 +133,9 @@ public class TreeBuilder {
         SoupNode buildingNode = new SoupNode();
 
         index++;
-        readTag = true;
+        boolean readTag = true;
+        boolean readAttKey = false;
+        boolean readAttValue = false;
 
         int quotes = 0;
 

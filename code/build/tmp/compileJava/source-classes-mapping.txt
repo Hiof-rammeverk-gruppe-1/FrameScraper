@@ -1,18 +1,18 @@
-SoupNode.java
- SoupNode
-ParseException.java
- ParseException
-ShopScraper.java
- ShopScraper
-ConceptScraper.java
- ConceptScraper
-StockScraper.java
- StockScraper
-TreeBuilder.java
- TreeBuilder
-TreeTraverser.java
- TreeTraverser
-Scraper.java
- Scraper
+Scraper/SoupNode.java
+ Scraper.SoupNode
+Scraper/TreeTraverser.java
+ Scraper.TreeTraverser
+Scraper/Exceptions/ParseException.java
+ Scraper.Exceptions.ParseException
+Scraper/TreeBuilder.java
+ Scraper.TreeBuilder
 Main.java
  Main
+StockScraper.java
+ StockScraper
+Scraper/Scraper.java
+ Scraper.Scraper
+ShopScraper.java
+ ShopScraper
+Scraper/ConceptScraper.java
+ Scraper.ConceptScraper

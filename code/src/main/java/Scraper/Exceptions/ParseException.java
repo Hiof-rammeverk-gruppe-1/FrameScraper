@@ -1,3 +1,7 @@
+package Scraper.Exceptions;
+
+import Scraper.SoupNode;
+
 public class ParseException extends Exception {
     public ParseException(String message) {
         super(message);

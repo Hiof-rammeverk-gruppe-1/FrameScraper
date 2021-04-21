@@ -1,6 +1,8 @@
+import Scraper.ConceptScraper;
+
 import java.io.IOException;
 /**
- * Shopscraper class representing a specific instantiation of a ConceptScraper
+ * Shopscraper class representing a specific instantiation of a Scraper.ConceptScraper
  * @author Mathias Jarbekk
  * @author Thomas Johannessen
  * @author Joakim Jensen
@@ -8,7 +10,7 @@ import java.io.IOException;
  * @version 1.0
  * @see ConceptScraper
  */
-public class ShopScraper extends ConceptScraper{
+public class ShopScraper extends ConceptScraper {
 
     /**
      * Constructor for a shop scraper
