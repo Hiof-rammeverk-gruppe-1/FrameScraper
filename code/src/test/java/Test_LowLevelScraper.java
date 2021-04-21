@@ -44,7 +44,7 @@ public class Test_LowLevelScraper {
     @Test
     public void TagContentFromUserRequestedHtmlTagReturnedCorrectly() {
         String[] expectedArray = {"yo who", "yo mama"};
-        ArrayList<String> actualArray = sc.getContentFromTag("p");
+        ArrayList<String> actualArray = sc.getContentFromTagAsString("p");
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -52,7 +52,7 @@ public class Test_LowLevelScraper {
     @Test
     public void IdContentFromUserRequestedHtmlIDReturnedCorrectly() {
         String[] expectedArray = {"chIld, of CHIld."};
-        ArrayList<String> actualArray = sc.getContentFromId("header1");
+        ArrayList<String> actualArray = sc.getContentFromIdAsString("header1");
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -60,7 +60,7 @@ public class Test_LowLevelScraper {
     @Test
     public void ClassContentFromUserRequestedHtmlClassReturnedCorrectly() {
         String[] expectedArray = {"yo who", "https://www.w3schools.com/"};
-        ArrayList<String> actualArray = sc.getContentFromClass("testClass");
+        ArrayList<String> actualArray = sc.getContentFromClassAsString("testClass");
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -68,7 +68,7 @@ public class Test_LowLevelScraper {
     @Test
     public void returnsLinksFromSiteCorrectly() {
         String[] expectedArray = {"https://www.w3schools.com/", "https://www.test.com/"};
-        ArrayList<String> actualArray = sc.getLinksInPage();
+        ArrayList<String> actualArray = sc.getLinksInPageAsString();
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -76,7 +76,7 @@ public class Test_LowLevelScraper {
     @Test
     public void returnsTrueIfSiteContainsCaseSensitiveStringFromUser() {
         boolean expected = true;
-        boolean actual = sc.contains("Hei");
+        boolean actual = sc.containsAsBoolean("Hei");
 
         assertEquals(expected, actual);
     }
@@ -84,7 +84,7 @@ public class Test_LowLevelScraper {
     @Test
     public void returnsFalseIfSiteDoesNotContainsCaseSensitiveStringFromUser() {
         boolean expected = false;
-        boolean actual = sc.contains("sdhaesf");
+        boolean actual = sc.containsAsBoolean("sdhaesf");
 
         assertEquals(expected, actual);
     }
@@ -94,7 +94,7 @@ public class Test_LowLevelScraper {
         boolean expected = true;
 
         //Not a single string is in full caps-lock
-        boolean actual = sc.containsCaseInSensetive("HEI");
+        boolean actual = sc.containsCaseInSensetiveAsBoolean("HEI");
 
         assertEquals(expected, actual);
     }
@@ -102,7 +102,7 @@ public class Test_LowLevelScraper {
     @Test
     public void returnsFalseIfSiteDoesNotConatainStringFromUser() {
         boolean expected = false;
-        boolean actual = sc.containsCaseInSensetive("sdhaesf");
+        boolean actual = sc.containsCaseInSensetiveAsBoolean("sdhaesf");
 
         assertEquals(expected, actual);
     }
@@ -110,7 +110,7 @@ public class Test_LowLevelScraper {
     @Test
     public void getsAllImagineLinksFromSite() {
         String[] expectedArray = {"img_girl.jpg", "www.google.com/hjelp/img_boy.jpg"};
-        ArrayList<String> actualArray = sc.getAllImagesFromPage();
+        ArrayList<String> actualArray = sc.getAllImagesFromPageAsString();
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -118,7 +118,7 @@ public class Test_LowLevelScraper {
     @Test
     public void getsSpecificImageByIdFromSite() {
         String expected = "img_girl.jpg";
-        String actual = sc.getImageById("bestebildet");
+        String actual = sc.getImageByIdAsString("bestebildet");
 
         assertEquals(expected, actual);
     }
@@ -126,7 +126,7 @@ public class Test_LowLevelScraper {
     @Test
     public void getsSpecificImagesByClassNameFromSite() {
         String[] expectedArray = {"img_girl.jpg", "www.google.com/hjelp/img_boy.jpg"};
-        ArrayList<String> actualArray = sc.getImageByClass("bestebildene");
+        ArrayList<String> actualArray = sc.getImageByClassAsString("bestebildene");
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -134,7 +134,7 @@ public class Test_LowLevelScraper {
     @Test
     public void getsAllVideosFromSiteCorrectly() {
         String[] expectedArray = {"video_girl.mp4", "www.google.com/hjelp/video_boy.wma"};
-        ArrayList<String> actualArray = sc.getAllVideosFromPage();
+        ArrayList<String> actualArray = sc.getAllVideosFromPageAsString();
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -142,7 +142,7 @@ public class Test_LowLevelScraper {
     @Test
     public void getsSpecificVideoByIdFromSite() {
         String expected = "video_girl.mp4";
-        String actual = sc.getVideoById("bestevideoen");
+        String actual = sc.getVideoByIdAsString("bestevideoen");
 
         assertEquals(expected, actual);
     }
@@ -150,7 +150,7 @@ public class Test_LowLevelScraper {
     @Test
     public void getsSpecificVideosByClassNameFromSite() {
         String[] expectedArray = {"video_girl.mp4"};
-        ArrayList<String> actualArray = sc.getVideoByClass("bestevideoene");
+        ArrayList<String> actualArray = sc.getVideoByClassAsString("bestevideoene");
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
