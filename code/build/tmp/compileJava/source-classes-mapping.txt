@@ -1,18 +1,14 @@
 Scraper/SoupNode.java
  Scraper.SoupNode
-Scraper/TreeTraverser.java
- Scraper.TreeTraverser
-Scraper/Exceptions/ParseException.java
- Scraper.Exceptions.ParseException
 Scraper/TreeBuilder.java
  Scraper.TreeBuilder
+Scraper/Exceptions/ParseException.java
+ Scraper.Exceptions.ParseException
+Scraper/TreeTraverser.java
+ Scraper.TreeTraverser
 Main.java
  Main
-StockScraper.java
- StockScraper
 Scraper/Scraper.java
  Scraper.Scraper
-ShopScraper.java
- ShopScraper
 Scraper/ConceptScraper.java
  Scraper.ConceptScraper

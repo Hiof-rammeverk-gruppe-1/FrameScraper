@@ -87,129 +87,240 @@ public class Scraper {
     }
 
     /**
-     *
+     * A methode for getting the content from a specific HTML-tag in the webpage
      * @param tag The tag from which we want to see the content of
      * @return The content is returned as Strings in an Arraylist of Strings
      */
-    public ArrayList<String> getContentFromTag(String tag){
-
-        TreeTraverser.traversingGetContentFromTag(root, tag);
-
-        return TreeTraverser.getTagArray();
+    public ArrayList<String> getContentFromTagAsString(String tag){
+            TreeTraverser.traversingGetContentFromTagAsString(root, tag);
+        return TreeTraverser.getTagStringArray();
     }
 
     /**
-     *
+     * A methode for getting the content from a specific HTML-tag in the webpage
+     * @param tag The tag from which we want to see the content of
+     * @return The content is returned as Nodes in an Arraylist of Nodes
+     */
+    public ArrayList<SoupNode> getContentFromTagAsNode(String tag){
+            TreeTraverser.traversingGetContentFromTagAsNode(root, tag);
+        return TreeTraverser.getTagNodeArray();
+    }
+
+    /**
+     * A methode for getting the content from a id in the webpage
      * @param id The id of an element which we want to get the content from
      * @return The content is returned as Strings in a Arraylist of Strings
      */
-    public ArrayList<String> getContentFromId(String id){
-
-        TreeTraverser.traversingGetContentFromId(root,id);
-
-        return TreeTraverser.getIdArray();
+    public ArrayList<String> getContentFromIdAsString(String id){
+            TreeTraverser.traversingGetContentFromIdAsString(root,id);
+        return TreeTraverser.getIdStringArray();
     }
 
     /**
-     *
+     * A methode for getting the content from a id in the webpage
+     * @param id The id of an element which we want to get the content from
+     * @return The content is returned as Nodes in a Arraylist of Nodes
+     */
+    public ArrayList<SoupNode> getContentFromIdAsNode(String id){
+            TreeTraverser.traversingGetContentFromIdAsNode(root,id);
+        return TreeTraverser.getIdNodeArray();
+    }
+
+    /**
+     * A methode for getting the content from a class in the webpage
      * @param className The class name of the element which we want to get the content of
      * @return returns the content of the given class as strings in an Arraylist of Strings
      */
-    public ArrayList<String> getContentFromClass(String className){
-
-        TreeTraverser.traversingGetContentFromClass(root,className);
-
-        return TreeTraverser.getClassArray();
+    public ArrayList<String> getContentFromClassAsString(String className){
+            TreeTraverser.traversingGetContentFromClassAsString(root,className);
+        return TreeTraverser.getClassStringArray();
     }
 
     /**
-     *
+     * A methode for getting the content from a class in the webpage
+     * @param className The class name of the element which we want to get the content of
+     * @return returns the content of the given class as Nodes in an Arraylist of Nodes
+     */
+    public ArrayList<SoupNode> getContentFromClassAsNode(String className){
+            TreeTraverser.traversingGetContentFromClassAsNode(root,className);
+        return TreeTraverser.getClassNodeArray();
+    }
+
+    /**
+     *A methode for getting all links (<a-tags) in the webpage
      * @return the links as String in an Arraylist of Strings
      */
-    public ArrayList<String> getLinksInPage(){
-
-        TreeTraverser.traversingGetLinksInPage(root);
-
-        return TreeTraverser.getLinksArray();
+    public ArrayList<String> getLinksInPageAsString(){
+            TreeTraverser.traversingGetLinksInPageAsString(root);
+        return TreeTraverser.getLinksStringArray();
     }
 
     /**
-     *
+     *A methode for getting all links (<a-tags) in the webpage
+     * @return the links as Nodes in an Arraylist of Nodes
+     */
+    public ArrayList<SoupNode> getLinksInPageAsNode(){
+            TreeTraverser.traversingGetLinksInPageAsNode(root);
+        return TreeTraverser.getLinksNodeArray();
+    }
+
+    /**
+     * A methode for seaching if a webpage contains a string. this methode IS CASE SENSETIVE.
      * @param searchString string we want to see if exist in the HTML code. IS case sensetive
      * @return returns boolean based on if the String was found or not. True for was found and false for was not found.
      */
-    public boolean contains(String searchString){
-
-        Boolean contains = TreeTraverser.traversingContains(root, searchString);
+    public boolean containsAsBoolean(String searchString){
+            Boolean contains = TreeTraverser.traversingContainsAsBoolean(root, searchString);
         return contains;
     }
 
     /**
-     *
+     * A methode for seaching if a webpage contains a string. this methode IS CASE SENSETIVE.
+     * @param searchString string we want to see if exist in the HTML code. IS case sensetive
+     * @return returns all nodes where it the search string was found in an arraylist of nodes
+     */
+    public ArrayList<SoupNode> containsAsNode(String searchString){
+        TreeTraverser.traversingContainsAsNode(root, searchString);
+        return TreeTraverser.getContainsNodeArray();
+    }
+
+    /**
+     * A methode for seaching if a webpage contains a string.
      * @param searchString string we want to see if exist in the HTML code. IS NOT case sensetive
      * @return returns boolean based on if the String was found or not. True for was found and false for was not found.
      */
-    public boolean containsCaseInSensetive(String searchString){
-        Boolean contains = TreeTraverser.traversingContainsCaseInSensetive(root, searchString);
+    public boolean containsCaseInSensetiveAsBoolean(String searchString){
+        Boolean contains = TreeTraverser.traversingContainsCaseInSensetiveAsBoolean(root, searchString);
         return contains;
     }
 
+
     /**
-     *
+     * A methode for seaching if a webpage contains a string.
+     * @param searchString string we want to see if exist in the HTML code. IS NOT case sensetive
+     * @return returns all nodes where it the search string was found in an arraylist of nodes
+     */
+    public ArrayList<SoupNode> containsCaseInSensetiveAsNode(String searchString){
+            TreeTraverser.traversingContainsCaseInSensetiveAsNode(root, searchString);
+        return TreeTraverser.getContainsCaseInSensitiveNodeArray();
+    }
+
+
+    /**
+     * A methode for getting all Images from the webpage
      * @return the source for the images as String in an Arraylist of Strings
      */
-    public ArrayList<String> getAllImagesFromPage(){
-            TreeTraverser.traversingGetAllImagesFromPage(root);
-        return TreeTraverser.getImgArray();
+    public ArrayList<String> getAllImagesFromPageAsString(){
+            TreeTraverser.traversingGetAllImagesFromPageAsString(root);
+        return TreeTraverser.getImgStringArray();
     }
 
     /**
+     * A methode for getting all Images from the webpage
+     * @return the source for the images as Nodes in an Arraylist of Nodes
+     */
+    public ArrayList<SoupNode> getAllImagesFromPageAsNode(){
+        TreeTraverser.traversingGetAllImagesFromPageAsNode(root);
+        return TreeTraverser.getImgNodeArray();
+    }
+
+    /**
+     * A methode for getting a Image with that id from the webpage
      * @param pictureId id as String we want to get the picture from
      * @return the source for the image as String
      */
-    public String getImageById(String pictureId){
-            String pic = TreeTraverser.traversingGetImageById(root, pictureId);
-        return pic;
+    public String getImageByIdAsString(String pictureId){
+        return TreeTraverser.traversingGetImageByIdAsString(root, pictureId);
     }
 
     /**
+     * A methode for getting a Image with that id from the webpage
+     * @param pictureId id as String we want to get the picture from
+     * @return the source for the image as Nodes in an Arraylist of Nodes
+     */
+    public SoupNode getImageByIdAsNode(String pictureId){
+        return TreeTraverser.traversingGetImageByIdAsNode(root, pictureId);
+    }
+
+    /**
+     * A methode for getting all the Images with that classname from the webpage
      * @param pictureClass class as String we want to get the pictures from
      * @return the source for the images as String in an Arraylist of Strings
      */
-    public ArrayList<String> getImageByClass(String pictureClass){
-        TreeTraverser.traversingGetImageByClass(root, pictureClass);
-        return TreeTraverser.getImgClassArray();
+    public ArrayList<String> getImageByClassAsString(String pictureClass){
+        TreeTraverser.traversingGetImageByClassAsString(root, pictureClass);
+        return TreeTraverser.getImgClassStringArray();
     }
 
     /**
-     *
+     * A methode for getting all the Images with that classname from the webpage
+     * @param pictureClass class as String we want to get the pictures from
+     * @return the source for the images as Nodes in an Arraylist of Nodes
+     */
+    public ArrayList<SoupNode> getImageByClassAsNode(String pictureClass){
+        TreeTraverser.traversingGetImageByClassAsNode(root, pictureClass);
+        return TreeTraverser.getImgClassNodeArray();
+    }
+
+
+    /**
+     *A methode for getting all Videos from the webpage
      * @return the source for the videos as String in an Arraylist of Strings
      */
-    public ArrayList<String> getAllVideosFromPage(){
-        TreeTraverser.traversingGetAllVideosFromPage(root);
-        return TreeTraverser.getVideoArray();
+    public ArrayList<String> getAllVideosFromPageAsString(){
+        TreeTraverser.traversingGetAllVideosFromPageAsString(root);
+        return TreeTraverser.getVideoStringArray();
     }
 
     /**
-     * @param videoId id as String we want to get the video from
-     * @return the source for the video as String
+     *A methode for getting all Videos from the webpage
+     * @return the source for the videos as Nodes in an Arraylist of Nodes
      */
-    public String getVideoById(String videoId){
-        String vid = TreeTraverser.traversingGetVideoById(root, videoId);
-        return vid;
+    public ArrayList<SoupNode> getAllVideosFromPageAsNode(){
+        TreeTraverser.traversingGetAllVideosFromPageAsNode(root);
+        return TreeTraverser.getVideoNodeArray();
     }
 
     /**
+     * A methode for getting a Videos with that id from the webpage
+     * @param videoId id as String we want to get the video from
+     * @return the source for the video as String in a ArrayList of strings
+     */
+    public String getVideoByIdAsString(String videoId){
+        return TreeTraverser.traversingGetVideoByIdAsString(root, videoId);
+    }
+
+    /**
+     * A methode for getting a Videos with that id from the webpage
+     * @param videoId id as String we want to get the video from
+     * @return the source for the video as Nods in a Arraylist of Nodes
+     */
+    public SoupNode getVideoByIdAsNode(String videoId){
+        return TreeTraverser.traversingGetVideoByIdAsNode(root, videoId);
+    }
+
+    /**
+     * A methode for getting all the Videos with that classname from the webpage
      * @param videoClass class as String we want to get the video from
      * @return the source for the videos as String in an Arraylist of Strings
      */
-    public ArrayList<String> getVideoByClass(String videoClass){
-        TreeTraverser.traversingGetVideoByClass(root, videoClass);
-        return TreeTraverser.getVideoClassArray();
+    public ArrayList<String> getVideoByClassAsString(String videoClass){
+        TreeTraverser.traversingGetVideoByClassAsString(root, videoClass);
+        return TreeTraverser.getVideoClassStringArray();
     }
 
     /**
-     *
+     * A methode for getting all the Videos with that classname from the webpage
+     * @param videoClass class as String we want to get the video from
+     * @return the source for the videos as Node in an Arraylist of Nodes
+     */
+    public ArrayList<SoupNode> getVideoByClassAsNode(String videoClass){
+        TreeTraverser.traversingGetVideoByClassAsNode(root, videoClass);
+        return TreeTraverser.getVideoClassNodeArray();
+    }
+
+    /**
+     * A methode for getting all the HTML classes for the webpage
      * @return all found classes as strings in an Arraylist of Strings
      */
     public ArrayList<String> getClassesInPage(){
@@ -218,7 +329,7 @@ public class Scraper {
     }
 
     /**
-     *
+     * A methode for getting all the HTML id's for the webpage
      * @return all found id's as strings in an Arraylist of Strings
      */
     public ArrayList<String> getIdsInPage(){
