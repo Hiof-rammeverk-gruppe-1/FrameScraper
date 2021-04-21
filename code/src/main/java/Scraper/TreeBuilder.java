@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public final class TreeBuilder {
 
-    private static int index = 0;
+    private static int index;
 
     private static Stack<SoupNode> parentStack;
 
