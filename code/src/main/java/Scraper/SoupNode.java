@@ -1,3 +1,5 @@
+package Scraper;
+
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -76,7 +78,7 @@ public class SoupNode {
 
     @Override
     public String toString() {
-        return "SoupNode{" +
+        return "Scraper.SoupNode{" +
                 "tag='" + tag + '\'' +
                 ", attributes=" + attributes +
                 ", attributeNames=" + attributeNames +

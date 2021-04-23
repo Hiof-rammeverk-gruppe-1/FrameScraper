@@ -1,3 +1,8 @@
+package Scraper;
+
+import Scraper.Exceptions.ParseException;
+
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -6,7 +11,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 /**
- * Shopscraper class representing a specific instantiation of a ConceptScraper
+ * Shopscraper class representing a specific instantiation of a Scraper.ConceptScraper
  * @author Mathias Jarbekk
  * @author Thomas Johannessen
  * @author Joakim Jensen
@@ -29,226 +34,12 @@ public class Scraper {
     public Scraper(String URL) throws IOException, ParseException {
         this.URL = URL;
         websiteContent = request(URL);
-        createTree(websiteContent);
+        this.root = TreeBuilder.createTree(websiteContent);
     }
 
-    public Scraper(String siteContent, boolean test) {
+    public Scraper(String siteContent, boolean test) throws ParseException {
         websiteContent = siteContent;
-        createTree(siteContent);
-    }
-
-    //TODO: REFACTOR
-    private void createTree(String html) throws ParseException {
-
-        String tag = "";
-        String attKey = "";
-        String attValue = "";
-        String stringContent = "";
-
-        boolean readTag = false;
-        boolean readAttKey = false;
-        boolean readAttValue = false;
-        boolean lookForLastQuote = false;
-        boolean isComment = false;
-        boolean isIgnoreable = false;
-        boolean isDoctype = false;
-
-        SoupNode buildingNode = new SoupNode();
-        Stack<SoupNode> parentStack = new Stack<>();
-
-        for(int i = 0; i < html.length(); i++){
-            char ch = html.charAt(i);
-
-            // ignore content of tag mode
-            if (isIgnoreable)
-                if (!(ch == '<' && html.charAt(i+1) == '/'))
-                    continue;
-                else
-                    isIgnoreable = false;
-
-            //comment mode
-            if (isComment){
-                if (ch == '>' && html.charAt(i-1) == '-' && html.charAt(i-2) == '-'){
-                    isComment = false;
-                }
-                continue;
-            }
-
-            // if doctypemode alternative ignoremode
-            if (isDoctype){
-                if (ch == '>')
-                    isDoctype = false;
-                continue;
-            }
-
-
-            // to go into ignore/comment mode
-            if (ch == '<'){
-                if (html.charAt(i+1) == '!')
-                    if (html.charAt(i+2) == '-' && html.charAt(i+3) == '-')
-                        isComment = true;
-                    else
-                        isDoctype = true;
-
-                else{
-                    readTag = true;
-
-                    if (!parentStack.isEmpty() && !stringContent.isEmpty()){
-                        parentStack.peek().addStringChild(stringContent);
-                        stringContent = "";
-                    }
-
-                }
-
-                continue;
-            }
-
-            //  when head of tag is to be ended
-            if (ch == '>'){
-                if (readTag && tag.isEmpty())
-                        throw new ParseException("There exist an empty tag in this html", buildingNode);
-                else if (readTag)
-                    buildingNode.setTag(tag);
-                else if (readAttKey && !(attKey.isEmpty())){
-                    buildingNode.getAttributeNames().add(attKey);
-
-                    buildingNode.getAttributes().put(attKey, "");
-                }
-
-                //add nodes
-                if (this.root == null)
-                    this.root = buildingNode;
-
-                if (!parentStack.isEmpty())
-                    parentStack.peek().addNodeChild(buildingNode);
-
-                if (!isSingletonTag(buildingNode.getTag())){
-                    parentStack.push(buildingNode);
-                }
-
-                if (isIgnoreableContentTag(buildingNode.getTag()))
-                    isIgnoreable = true;
-
-
-                // reset locals
-                tag = "";
-                attKey = "";
-                attValue = "";
-
-                readTag = false;
-                readAttKey = false;
-                readAttValue = false;
-                lookForLastQuote = false;
-                isComment = false;
-
-                buildingNode = new SoupNode();
-
-                continue;
-            }
-
-            // read String content
-            if (!(readTag || readAttKey || readAttValue) && !parentStack.isEmpty()){
-                stringContent += ch;
-            }
-
-            //read tag
-            if (readTag) {
-                if (Character.isLetter(ch) || Character.isDigit(ch))
-                    tag += ch;
-                else {
-                    if (tag.isEmpty() && ch == '/'){
-
-                        SoupNode parentToEnd = parentStack.pop();
-                        String tagEnded = parentToEnd.getTag();
-
-                        if (html.substring(i + 1, i + 1 + tagEnded.length()).equals(tagEnded)){
-                            i = i + 1 + tagEnded.length();
-
-                            readTag = false;
-                            continue;
-                        }
-                        else
-                            throw new ParseException("Ended tag doesn't fit current parent", parentToEnd);
-                    }
-
-
-                    readTag = false;
-                    readAttKey = true;
-                    buildingNode.setTag(tag);
-                    tag = "";
-                    continue;
-                }
-            }
-//            read key
-            else if (readAttKey){
-                if (Character.isLetter(ch))
-                    attKey += ch;
-                else if(ch == '='){
-                    if(!attKey.isEmpty()){
-                        readAttKey = false;
-                        readAttValue = true;
-                    }
-                }
-                //TODO: quick fix for solo attributtes
-                else if(ch == ' ' && !attKey.isEmpty()){
-                    buildingNode.getAttributeNames().add(attKey);
-                    buildingNode.getAttributes().put(attKey, "");
-
-                    attKey = "";
-                }
-            }
-//            read key value
-            else if(readAttValue){
-                //see first quotes "
-                if (!lookForLastQuote){
-                    if (ch == '\"'){
-                        lookForLastQuote = true;
-                        continue;
-                    }
-                    else
-                        throw new ParseException("Missing quotes after attributtes", buildingNode);
-                }
-
-                if(lookForLastQuote){
-                    if (ch == '\"'){
-
-                        buildingNode.getAttributeNames().add(attKey);
-
-                        buildingNode.getAttributes().put(attKey, attValue);
-
-                        readAttValue = false;
-                        readAttKey = true;
-                        lookForLastQuote = false;
-
-                        attKey = "";
-                        attValue = "";
-
-                        continue;
-                    }
-                    attValue += ch;
-                }
-
-            }
-        }
-    }
-
-    private boolean isSingletonTag(String tag){
-        String[] singletons = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr", "command", "keygen", "menuitem"};
-
-        for (int i = 0; i < singletons.length; i++)
-            if (tag.equals(singletons[i]))
-                return true;
-        return false;
-    }
-
-    private boolean isIgnoreableContentTag(String tag){
-        String[] ignoreableTags = {"script", "style"};
-
-        for (int i = 0; i < ignoreableTags.length; i++){
-            if (tag.equals(ignoreableTags[i]))
-                return true;
-        }
-        return false;
+        TreeBuilder.createTree(siteContent);
     }
 
     private String request(String URL){
@@ -554,7 +345,7 @@ public class Scraper {
         printBeautyfull(root, 0);
     }
 
-    private void printBeautyfull(SoupNode node, int nTabs){
+    public void printBeautyfull(SoupNode node, int nTabs){
 
         if (node != null){
             String tabs = "";
@@ -564,7 +355,7 @@ public class Scraper {
             }
 
             String str = tabs +
-                    "SoupNode{" +
+                    "Scraper.SoupNode{" +
                     "tag=\'" + node.getTag() + '\'' +
                     ", attributes=" + node.getAttributeNames().toString() +
                     ", textChildren=" + node.getStringChildren().toString() + '}';
