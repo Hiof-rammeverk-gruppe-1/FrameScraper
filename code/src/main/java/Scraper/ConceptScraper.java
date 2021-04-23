@@ -1,8 +1,12 @@
+package Scraper;
+
+import Scraper.Scraper;
+
 import java.io.IOException;
 
 /**
- * ConceptScraper is a abstract class to let the predefined
- * classes use the methods from Scraper with correct inheriting.
+ * Scraper.ConceptScraper is a abstract class to let the predefined
+ * classes use the methods from Scraper.Scraper with correct inheriting.
  * @author Mathias Jarbekk
  * @author Thomas Johannessen
  * @author Joakim Jensen
@@ -15,8 +19,8 @@ public abstract class ConceptScraper {
     private Scraper scraper;
 
     /**
-     * Constructor for ConceptScraper, which is used by the predefined classes to access the Scraper
-     * @param URL String with the URL. This is forwarded to the Scraper
+     * Constructor for Scraper.ConceptScraper, which is used by the predefined classes to access the Scraper.Scraper
+     * @param URL String with the URL. This is forwarded to the Scraper.Scraper
      *           and instantiates a new object from the webpage.
      * @throws IOException Throws if the string sent in could not be processed as intended.
      */
@@ -25,9 +29,9 @@ public abstract class ConceptScraper {
     }
 
     /**
-     * Used to access the Scraper, and apply the Scrapers methods to the objects from ShopScraper, StockScraper
+     * Used to access the Scraper.Scraper, and apply the Scrapers methods to the objects from ShopScraper, StockScraper
      * and for user instantiated objects.
-     * @return A object of the Scraper class which all the Scrapers methods can be applied to.
+     * @return A object of the Scraper.Scraper class which all the Scrapers methods can be applied to.
      */
     public Scraper getScraper(){
         return scraper;

@@ -1,3 +1,6 @@
+package Scraper;
+
+
 import java.util.ArrayList;
 
 public class TreeTraverser {

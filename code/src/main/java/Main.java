@@ -1,14 +1,19 @@
+import Scraper.Scraper;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Dictionary;
-import java.util.Hashtable;
+
+import Scraper.TreeBuilder;
 
 
 // denne klassen kommer ikke til å være med i endelige innlevering
 public class Main {
     public static void main(String[] args) throws IOException, Exception {
-        Scraper sr = new Scraper("https://www.multicom.no/");
+
+        Scraper sr = new Scraper("https://webscraper.io/test-sites/e-commerce/allinone");
+
+        sr.printBeautyfull();
+
+
 
         //System.out.println(sr.getRoot());
 
@@ -50,6 +55,7 @@ public class Main {
         System.out.println("contains: " + sr.containsAsNode("hild"));
         System.out.println("contains CaseInSensetive: " + sr.containsCaseInSensetiveAsNode("Child"));
 */
+
 
     }
 }
