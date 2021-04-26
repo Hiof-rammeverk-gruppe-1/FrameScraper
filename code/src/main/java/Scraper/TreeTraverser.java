@@ -183,7 +183,8 @@ public class TreeTraverser {
         String tag = "video";
 
         if (node.getTag().equals(tag)){
-            VideoStringArray.add(node.getAttributes().get("src"));
+            if(node.getNodeChildren().get(0) != null)
+                VideoStringArray.add(node.getNodeChildren().get(0).getAttributes().get("src"));
         }
         for (int i=0; i<node.getNodeChildren().size(); i++){
             traversingGetAllVideosFromPageAsString(node.getNodeChildren().get(i));
@@ -197,7 +198,7 @@ public class TreeTraverser {
     public static String traversingGetVideoByIdAsString(SoupNode node, String videoId) {
         if (node.getAttributeNames().contains("id")){
             if (node.getAttributes().get("id").equals(videoId)) {
-                srcString = node.getAttributes().get("src");
+                srcString = node.getNodeChildren().get(0).getAttributes().get("src");
             }
         }
 
@@ -293,7 +294,7 @@ public class TreeTraverser {
     }
 
     public static void traversingGetContentFromClassAsNode(SoupNode node, String className) {
-        if (node.getAttributeNames().contains("class")){
+        if (node.getAttributeNames() != null && node.getAttributeNames().contains("class")){
             if (node.getAttributes().get("class").equals(className)) {
                 for(int i = 0; i < node.getStringChildren().size(); i++) {
                     classNodeArray.add(node);
@@ -411,7 +412,8 @@ public class TreeTraverser {
         String tag = "video";
 
         if (node.getTag().equals(tag)){
-            VideoNodeArray.add(node);
+            if(node.getNodeChildren().get(0) != null)
+                VideoNodeArray.add(node.getNodeChildren().get(0));
         }
         for (int i=0; i<node.getNodeChildren().size(); i++){
             traversingGetAllVideosFromPageAsNode(node.getNodeChildren().get(i));
