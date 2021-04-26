@@ -10,7 +10,7 @@ public class Main {
 //        Scraper sc = Scraper.buildScraperWithFile("DummyHTMLForScraper.html");
 
 
-//        Scraper sc = Scraper.buildScraperWithString("<html lang=\"en\"><body><h1 id=\"header1\">Hello world</h1><p>This is my world</p></body></html>");
+        Scraper sc = Scraper.buildScraperWithString("<html lang=\"en\"><body><h1 id=\"header1\">Hello world</h1><p>This is my world</p></body></html>");
 
         sc.printBeautyfull();
 
