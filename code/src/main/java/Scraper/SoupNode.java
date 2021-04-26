@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class SoupNode {
+public final class SoupNode {
     private String tag;
 //    private String full_tag;
 

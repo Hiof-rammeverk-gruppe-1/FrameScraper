@@ -1,14 +1,11 @@
 package Scraper;
 
 import Scraper.Exceptions.ParseException;
+import HTMLString.HTMLString;
 
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Stack;
 
 /**
  * Shopscraper class representing a specific instantiation of a Scraper.ConceptScraper
@@ -20,9 +17,15 @@ import java.util.Stack;
  * @see ConceptScraper
  */
 public class Scraper {
-    private String URL;
+    private final static int FILE = 0;
+    private final static int WEBURL = 1;
+    private final static int STRING = 2;
+
+    private String url;
     private String websiteContent;
     private SoupNode root = null;
+
+
 
     private ArrayList<SoupNode> nodes = new ArrayList<>();
 
@@ -32,8 +35,8 @@ public class Scraper {
      * @throws IOException Throws an IO Exception whenever user input is crashing with an expected string value
      */
     public Scraper(String URL) throws IOException, ParseException {
-        this.URL = URL;
-        websiteContent = request(URL);
+        this.url = URL;
+        websiteContent = HTMLString.requestHTMLWithUrl(URL);
         this.root = TreeBuilder.createTree(websiteContent);
     }
 
@@ -42,40 +45,56 @@ public class Scraper {
         TreeBuilder.createTree(siteContent);
     }
 
-    private String request(String URL){
+    // nye Scraper konstruktør
+    private Scraper (String source, int sourceType){
 
-        //Instantiating the URL class
-        URL url = null;
         try {
-            url = new URL(URL);
-        } catch (MalformedURLException e) {
+            if (sourceType == FILE){
+                this.websiteContent = HTMLString.readHTMLFromFile(source);
+                this.url = source;
+                this.root = TreeBuilder.createTree(this.websiteContent);
+            }
+            else if(sourceType == WEBURL){
+                this.websiteContent = HTMLString.requestHTMLWithUrl(source);
+                this.url = source;
+                this.root = TreeBuilder.createTree(this.websiteContent);
+            }
+            else if (sourceType == STRING){
+                this.websiteContent = source;
+                this.root = TreeBuilder.createTree(source);
+            }
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-        //Retrieving the contents of the specified page
-        Scanner sc = null;
-        try {
-            sc = new Scanner(url.openStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //Instantiating the StringBuffer class to hold the result
-        StringBuffer sb = new StringBuffer();
 
-        while(sc.hasNext()) {
-            sb.append(sc.next() + " ");
-            //System.out.println(sc.next());
-        }
-
-        //Retrieving the String from the String Buffer object
-        return sb.toString();
     }
+
+
+    /**
+     * A methode for getting the content from a specific HTML-tag in the webpage
+     * @param path Path to the html-file
+     * @return Scraper object build from file
+     */
+    public static Scraper buildScraperWithFile(String path){
+        return new Scraper(path, FILE);
+    }
+
+    /**
+     * A methode for getting the content from a specific HTML-tag in the webpage
+     * @param url WebUrl to the website that is to be scraped
+     * @return Scraper object build from the websites html-source
+     */
+    public static Scraper buildScraperWithWebUrl(String url){
+        return new Scraper(url, WEBURL);
+    }
+
 
     /**
      *
      * @return The url as a String
      */
-    public String getURL() {
-        return URL;
+    public String getUrl() {
+        return url;
     }
 
     /**

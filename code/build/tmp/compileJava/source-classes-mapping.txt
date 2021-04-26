@@ -6,6 +6,10 @@ Scraper/Exceptions/ParseException.java
  Scraper.Exceptions.ParseException
 Scraper/TreeTraverser.java
  Scraper.TreeTraverser
+Scraper/Exceptions/ScrapeException.java
+ Scraper.Exceptions.ScrapeException
+HTMLString/HTMLString.java
+ HTMLString.HTMLString
 Scraper/ConceptScraper.java
  Scraper.ConceptScraper
 Scraper/Scraper.java
