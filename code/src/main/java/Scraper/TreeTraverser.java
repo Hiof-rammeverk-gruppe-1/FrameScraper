@@ -14,6 +14,7 @@ public class TreeTraverser {
     private static ArrayList<String> VideoClassStringArray = new ArrayList<String>();
     private static ArrayList<String> AllIdArray = new ArrayList<String>();
     private static ArrayList<String> AllClassArray = new ArrayList<String>();
+    private static ArrayList<String> AttributeContentStringArray = new ArrayList<>();
     private static ArrayList<SoupNode> tagNodeArray = new ArrayList<>();
     private static ArrayList<SoupNode> idNodeArray = new ArrayList<>();
     private static ArrayList<SoupNode> classNodeArray = new ArrayList<>();
@@ -24,6 +25,7 @@ public class TreeTraverser {
     private static ArrayList<SoupNode> VideoClassNodeArray = new ArrayList<>();
     private static ArrayList<SoupNode> ContainsNodeArray = new ArrayList<>();
     private static ArrayList<SoupNode> ContainsCaseInSensitiveNodeArray = new ArrayList<>();
+    private static ArrayList<SoupNode> AttributeContentNodeArray = new ArrayList<>();
     private static boolean containsVar = false;
     private static String srcString;
     private static SoupNode srcNode;
@@ -447,5 +449,38 @@ public class TreeTraverser {
 
     public static ArrayList<SoupNode> getVideoClassNodeArray() {
         return VideoClassNodeArray;
+    }
+
+    public static void traversingGetAttributeContentWithTagAndNameAsNode(SoupNode node, String tag, String attribute) {
+
+        if (node.getTag().contains(tag)){
+            if (node.getAttributeNames().contains(attribute)) {
+                AttributeContentNodeArray.add(node);
+            }
+        }
+
+        for (int i = 0; i < node.getNodeChildren().size(); i++) {
+            traversingGetAttributeContentWithTagAndNameAsNode(node.getNodeChildren().get(i), tag, attribute);
+        }
+    }
+
+    public static ArrayList<SoupNode> getAttributeContentNodeArray() {
+        return AttributeContentNodeArray;
+    }
+
+    public static void traversingGetAttributeContentWithTagAndNameAsString(SoupNode node, String tag, String attribute) {
+        if (node.getTag().contains(tag)){
+            if (node.getAttributeNames().contains(attribute)) {
+                AttributeContentStringArray.add(node.getAttributes().get(attribute));
+            }
+        }
+
+        for (int i = 0; i < node.getNodeChildren().size(); i++) {
+            traversingGetAttributeContentWithTagAndNameAsString(node.getNodeChildren().get(i), tag, attribute);
+        }
+    }
+
+    public static ArrayList<String> getAttributeContentStringArray() {
+        return AttributeContentStringArray;
     }
 }

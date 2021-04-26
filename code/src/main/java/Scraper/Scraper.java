@@ -337,6 +337,30 @@ public class Scraper {
         return TreeTraverser.getAllIdsArray();
     }
 
+    /**
+     * A methode for getting the content from a attribute of a tag as Node
+     * @param tag name of the tag you want to search for
+     * @param attribute name of the attribute you want to search for
+     * @return a list with the content of the attribute in the tag as Node in an Arraylist of Nodes
+     */
+    public ArrayList<SoupNode> getAttributeContentWithTagAndNameAsNode(String tag, String attribute){
+        TreeTraverser.traversingGetAttributeContentWithTagAndNameAsNode(root, tag,attribute);
+        return TreeTraverser.getAttributeContentNodeArray();
+    }
+
+    /**
+     * A methode for getting the content from a attribute of a tag as String
+     * @param tag name of the tag you want to search for
+     * @param attribute name of the attribute you want to search for
+     * @return a list with the content of the attribute in the tag as String in an Arraylist of Strings
+     */
+    public ArrayList<String> getAttributeContentWithTagAndNameAsString(String tag, String attribute){
+        TreeTraverser.traversingGetAttributeContentWithTagAndNameAsString(root, tag,attribute);
+        return TreeTraverser.getAttributeContentStringArray();
+    }
+
+
+
     public SoupNode getRoot() {
         return root;
     }
