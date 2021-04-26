@@ -1,18 +1,18 @@
-Scraper/SoupNode.java
- Scraper.SoupNode
-Scraper/TreeBuilder.java
- Scraper.TreeBuilder
-Scraper/Exceptions/ParseException.java
- Scraper.Exceptions.ParseException
-Scraper/TreeTraverser.java
- Scraper.TreeTraverser
 Scraper/Exceptions/ScrapeException.java
  Scraper.Exceptions.ScrapeException
-HTMLString/HTMLString.java
- HTMLString.HTMLString
-Scraper/ConceptScraper.java
- Scraper.ConceptScraper
-Scraper/Scraper.java
- Scraper.Scraper
+Scraper/Exceptions/ParseException.java
+ Scraper.Exceptions.ParseException
+Scraper/SoupNode.java
+ Scraper.SoupNode
+Scraper/TreeTraverser.java
+ Scraper.TreeTraverser
+Scraper/TreeBuilder.java
+ Scraper.TreeBuilder
 Main.java
  Main
+Scraper/Scraper.java
+ Scraper.Scraper
+Scraper/ConceptScraper.java
+ Scraper.ConceptScraper
+HTMLString/HTMLToString.java
+ HTMLString.HTMLToString

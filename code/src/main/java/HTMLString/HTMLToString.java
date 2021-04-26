@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-public final class HTMLString {
+public final class HTMLToString {
 
     public static String requestHTMLWithUrl(String Url){
 

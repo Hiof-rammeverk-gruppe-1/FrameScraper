@@ -1,7 +1,7 @@
 package Scraper;
 
 import Scraper.Exceptions.ParseException;
-import HTMLString.HTMLString;
+import HTMLString.HTMLToString;
 
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class Scraper {
      */
     public Scraper(String URL) throws IOException, ParseException {
         this.url = URL;
-        websiteContent = HTMLString.requestHTMLWithUrl(URL);
+        websiteContent = HTMLToString.requestHTMLWithUrl(URL);
         this.root = TreeBuilder.createTree(websiteContent);
     }
 
@@ -50,12 +50,12 @@ public class Scraper {
 
         try {
             if (sourceType == FILE){
-                this.websiteContent = HTMLString.readHTMLFromFile(source);
+                this.websiteContent = HTMLToString.readHTMLFromFile(source);
                 this.url = source;
                 this.root = TreeBuilder.createTree(this.websiteContent);
             }
             else if(sourceType == WEBURL){
-                this.websiteContent = HTMLString.requestHTMLWithUrl(source);
+                this.websiteContent = HTMLToString.requestHTMLWithUrl(source);
                 this.url = source;
                 this.root = TreeBuilder.createTree(this.websiteContent);
             }
@@ -72,7 +72,7 @@ public class Scraper {
 
     /**
      * A methode for getting the content from a specific HTML-tag in the webpage
-     * @param path Path to the html-file
+     * @param path: Path to the html-file
      * @return Scraper object build from file
      */
     public static Scraper buildScraperWithFile(String path){
@@ -81,11 +81,20 @@ public class Scraper {
 
     /**
      * A methode for getting the content from a specific HTML-tag in the webpage
-     * @param url WebUrl to the website that is to be scraped
+     * @param url: WebUrl to the website that is to be scraped
      * @return Scraper object build from the websites html-source
      */
     public static Scraper buildScraperWithWebUrl(String url){
         return new Scraper(url, WEBURL);
+    }
+
+    /**
+     * A methode for getting the content from a specific HTML-tag in the webpage
+     * @param html: A string which contains html
+     * @return Scraper object build from the websites html-source
+     */
+    public static Scraper buildScraperWithString(String html){
+        return new Scraper(html, STRING);
     }
 
 
