@@ -183,7 +183,7 @@ public class TreeTraverser {
         String tag = "video";
 
         if (node.getTag().equals(tag)){
-            VideoStringArray.add(node.getAttributes().get("src"));
+                VideoStringArray.add(node.getAttributes().get("src"));
         }
         for (int i=0; i<node.getNodeChildren().size(); i++){
             traversingGetAllVideosFromPageAsString(node.getNodeChildren().get(i));
@@ -411,7 +411,7 @@ public class TreeTraverser {
         String tag = "video";
 
         if (node.getTag().equals(tag)){
-            VideoNodeArray.add(node);
+                VideoNodeArray.add(node);
         }
         for (int i=0; i<node.getNodeChildren().size(); i++){
             traversingGetAllVideosFromPageAsNode(node.getNodeChildren().get(i));
