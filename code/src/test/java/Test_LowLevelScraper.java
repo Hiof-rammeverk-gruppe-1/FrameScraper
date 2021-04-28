@@ -11,7 +11,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class Test_LowLevelScraper {
-    String siteContent = "<!DOCTYPE html> <body id=\"hi\" class=\"class1\">Hei jeg hedder dorte <img id=\"bestebildet\" class=\"bestebildene\" src=\"img_girl.jpg\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"> <video id=\"bestevideoen\"> <source class=\"bestevideoene\" src=\"video_girl.mp4\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"></video><p lang=\"no\" id=\"para\" class=\"testClass\">yo who<a src=\"blabal\" target=\"_blank\" class=\"testClass\" href=\"https://www.w3schools.com/\" >https://www.w3schools.com/</a><p>yo mama</p></p>og min mor er borte <a href=\"https://www.test.com/\"> Testloink2 </a><img class=\"bestebildene\" src=\"www.google.com/hjelp/img_boy.jpg\" alt=\"Girl in an jacket\" width=\"500\" height=\"600\"> <video> <source src=\"www.google.com/hjelp/video_boy.wma\" alt=\"Boy in a jacket\" width=\"500\" height=\"600\"></video> <h1 id=\"header1\">chIld, of CHIld.</h1></body>";
+    String siteContent = "<!DOCTYPE html> <body id=\"hi\" class=\"class1\">Hei jeg hedder dorte <img id=\"bestebildet\" class=\"bestebildene\" src=\"img_girl.jpg\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"> <video id=\"bestevideoen\" class=\"bestevideoene\" src=\"video_girl.mp4\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"></video><p lang=\"no\" id=\"para\" class=\"testClass\">yo who<a src=\"blabal\" target=\"_blank\" class=\"testClass\" href=\"https://www.w3schools.com/\" >https://www.w3schools.com/</a><p>yo mama</p></p>og min mor er borte <a href=\"https://www.test.com/\"> Testloink2 </a><img class=\"bestebildene\" src=\"www.google.com/hjelp/img_boy.jpg\" alt=\"Girl in an jacket\" width=\"500\" height=\"600\"> <video src=\"www.google.com/hjelp/video_boy.wma\" alt=\"Boy in a jacket\" width=\"500\" height=\"600\"></video> <h1 id=\"header1\">chIld, of CHIld.</h1></body>";
     Scraper sc = new Scraper(siteContent, true);
     SoupNode rootNode = sc.getRoot();
 
@@ -20,7 +20,7 @@ public class Test_LowLevelScraper {
 
     @Test
     public void createsTreeCorrectly() {
-        String expectedOutput = "SoupNode{tag='body', attributes=[id, class], stringChildren=[Hei jeg hedder dorte ], nodeChildren= \n\t" +
+        /*String expectedOutput = "SoupNode{tag='body', attributes=[id, class], stringChildren=[Hei jeg hedder dorte ], nodeChildren= \n\t" +
                 "[SoupNode{tag='img', attributes=[id, class, src, alt, width, height], stringChildren=[ ], nodeChildren= \n\t" +
                 "[SoupNode{tag='video', attributes=[id, class, src, alt, width, height], stringChildren=[og min mor er borte ], nodeChildren= \n\t" +
                 "[SoupNode{tag='p', attributes=[lang, id, class], stringChildren=[yo who], nodeChildren= \n\t" +
@@ -32,6 +32,8 @@ public class Test_LowLevelScraper {
                 "[SoupNode{tag='h1', attributes=[id], stringChildren=[chIld, of CHIld.], nodeChildren= \n\t" +
                 "[]}]}, SoupNode{tag='', attributes=[body], stringChildren=[], nodeChildren= \n\t" +
                 "[]}]}]}]}]}";
+                */
+        String expectedOutput = "Scraper.SoupNode{tag='body', attributes={class=class1, id=hi}, attributeNames=[id, class], nodeChildren=[Scraper.SoupNode{tag='img', attributes={height=600, width=500, class=bestebildene, alt=Girl in a jacket, src=img_girl.jpg, id=bestebildet}, attributeNames=[id, class, src, alt, width, height], nodeChildren=[], stringChildren=[]}, Scraper.SoupNode{tag='video', attributes={height=600, width=500, class=bestevideoene, alt=Girl in a jacket, src=video_girl.mp4, id=bestevideoen}, attributeNames=[id, class, src, alt, width, height], nodeChildren=[], stringChildren=[]}, Scraper.SoupNode{tag='p', attributes={class=testClass, lang=no, id=para}, attributeNames=[lang, id, class], nodeChildren=[Scraper.SoupNode{tag='a', attributes={href=https://www.w3schools.com/, class=testClass, target=_blank, src=blabal}, attributeNames=[src, target, class, href], nodeChildren=[], stringChildren=[https://www.w3schools.com/]}, Scraper.SoupNode{tag='p', attributes={}, attributeNames=[], nodeChildren=[], stringChildren=[yo mama]}], stringChildren=[yo who]}, Scraper.SoupNode{tag='a', attributes={href=https://www.test.com/}, attributeNames=[href], nodeChildren=[], stringChildren=[Testloink2 ]}, Scraper.SoupNode{tag='img', attributes={height=600, width=500, class=bestebildene, alt=Girl in an jacket, src=www.google.com/hjelp/img_boy.jpg}, attributeNames=[class, src, alt, width, height], nodeChildren=[], stringChildren=[]}, Scraper.SoupNode{tag='video', attributes={height=600, width=500, alt=Boy in a jacket, src=www.google.com/hjelp/video_boy.wma}, attributeNames=[src, alt, width, height], nodeChildren=[], stringChildren=[]}, Scraper.SoupNode{tag='h1', attributes={id=header1}, attributeNames=[id], nodeChildren=[], stringChildren=[chIld, of CHIld.]}], stringChildren=[Hei jeg hedder dorte , og min mor er borte ]}";
         String actual = rootNode.toString();
         assertEquals(expectedOutput, actual);
     }
