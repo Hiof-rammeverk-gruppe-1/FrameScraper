@@ -3,7 +3,14 @@ package Scraper;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
-
+/**
+ * SoupNode: an object representing a individual element from the html source.
+ * The object contains information of what content is nested within it: other html-elements or text.
+ * The object also hold information about the element itself, being what tag it is and what attributes it hold, including values to the attributes. This information is used in particular when searching after elements
+ * @author Joakim Jensen
+ * @version 1.0
+ * @see Scraper
+ */
 public final class SoupNode {
     private String tag;
 //    private String full_tag;

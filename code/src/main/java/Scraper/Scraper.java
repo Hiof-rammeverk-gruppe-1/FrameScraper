@@ -74,6 +74,7 @@ public class Scraper {
      * A methode for getting the content from a specific HTML-tag in the webpage
      * @param path: Path to the html-file
      * @return Scraper object build from file
+     * example: Scraper sc = Scraper.buildScraperWithFile("index.html");
      */
     public static Scraper buildScraperWithFile(String path){
         return new Scraper(path, FILE);
@@ -83,6 +84,7 @@ public class Scraper {
      * A methode for getting the content from a specific HTML-tag in the webpage
      * @param url: WebUrl to the website that is to be scraped
      * @return Scraper object build from the websites html-source
+     * example: Scraper sc = Scraper.buildScraperWithWebUrl("https://webscraper.io/test-sites/e-commerce/allinone");
      */
     public static Scraper buildScraperWithWebUrl(String url){
         return new Scraper(url, WEBURL);
@@ -92,11 +94,11 @@ public class Scraper {
      * A methode for getting the content from a specific HTML-tag in the webpage
      * @param html: A string which contains html
      * @return Scraper object build from the websites html-source
+     * example: Scraper sc = Scraper.buildScraperWithString("<html lang="en"><body><h1 id="header1">Hello world</h1><p>This is my world</p></body></html>");
      */
     public static Scraper buildScraperWithString(String html){
         return new Scraper(html, STRING);
     }
-
 
     /**
      *
