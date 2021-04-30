@@ -119,8 +119,7 @@ public class Test_TreeTraverser {
         ArrayList<String> actualArray = new ArrayList<>();
 
         for (SoupNode soupNode : nodeArray)
-            if (soupNode.getAttributeNames().contains("href"))
-                actualArray.add(soupNode.getAttributes().get("href"));
+            actualArray.add(soupNode.getAttributes().get("href"));
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -174,8 +173,7 @@ public class Test_TreeTraverser {
         ArrayList<String> actualArray = new ArrayList<>();
 
         for (SoupNode soupNode : nodeArray)
-            if (soupNode.getAttributeNames().contains("src"))
-                actualArray.add(soupNode.getAttributes().get("src"));
+            actualArray.add(soupNode.getAttributes().get("src"));
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -192,7 +190,7 @@ public class Test_TreeTraverser {
     public void getSpecificImageByIdFromSiteAsNode() {
         String expectedImage = "img_girl.jpg";
         SoupNode actualNode = sc.getImageByIdAsNode("bestebildet");
-        
+
         assertEquals(expectedImage, actualNode.getAttributes().get("src"));
     }
 
@@ -200,6 +198,18 @@ public class Test_TreeTraverser {
     public void getsSpecificImagesByClassNameFromSiteAsString() {
         String[] expectedArray = {"img_girl.jpg", "www.google.com/hjelp/img_boy.jpg"};
         ArrayList<String> actualArray = sc.getImageByClassAsString("bestebildene");
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
+    }
+
+    @Test
+    public void getsSpecificImagesByClassNameFromSiteAsNode() {
+        String[] expectedArray = {"img_girl.jpg", "www.google.com/hjelp/img_boy.jpg"};
+        ArrayList<SoupNode> nodeArray = sc.getImageByClassAsNode("bestebildene");
+        ArrayList<String> actualArray = new ArrayList<>();
+
+        for (SoupNode soupNode : nodeArray)
+            actualArray.add(soupNode.getAttributes().get("src"));
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -213,11 +223,31 @@ public class Test_TreeTraverser {
     }
 
     @Test
+    public void getsAllVideosFromSiteCorrectlyAsNode() {
+        String[] expectedArray = {"video_girl.mp4", "www.google.com/hjelp/video_boy.wma"};
+        ArrayList<SoupNode> nodeArray = sc.getAllVideosFromPageAsNode();
+        ArrayList<String> actualArray = new ArrayList<>();
+
+        for (SoupNode soupNode : nodeArray)
+            actualArray.add(soupNode.getAttributes().get("src"));
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
+    }
+
+    @Test
     public void getsSpecificVideoByIdFromSiteAsString() {
         String expected = "video_girl.mp4";
         String actual = sc.getVideoByIdAsString("bestevideoen");
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getsSpecificVideoByIdFromSiteAsNode() {
+        String expected = "video_girl.mp4";
+        SoupNode actualNode = sc.getVideoByIdAsNode("bestevideoen");
+
+        assertEquals(expected, actualNode.getAttributes().get("src"));
     }
 
     @Test
@@ -229,7 +259,19 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void returnsAllClassesInSiteCorrectlyAsString() {
+    public void getsSpecificVideosByClassNameFromSiteAsNode() {
+        String[] expectedArray = {"video_girl.mp4"};
+        ArrayList<SoupNode> nodeArray = sc.getVideoByClassAsNode("bestevideoene");
+        ArrayList<String> actualArray = new ArrayList<>();
+
+        for (SoupNode soupNode : nodeArray)
+            actualArray.add(soupNode.getAttributes().get("src"));
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
+    }
+
+    @Test
+    public void returnsAllClassesInSiteCorrectly() {
         String[] expectedArray = {"class1", "bestebildene", "bestevideoene", "testClass"};
         ArrayList<String> actualArray = sc.getClassesInPage();
         System.out.println(sc.getClassesInPage());
@@ -237,11 +279,23 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void returnsAllIdsInSiteCorrectlyAsString() {
+    public void returnsAllIdsInSiteCorrectly() {
         String[] expectedArray = {"hi", "bestebildet", "bestevideoen", "para", "header1"};
         ArrayList<String> actualArray = sc.getIdsInPage();
 
         assertArrayEquals(expectedArray, actualArray.toArray());
+    }
+
+    @Test
+    public void returnsContentWithTagAndAttributeGivenCorrectlyAsString() {
+        System.out.println(sc.getAttributeContentWithTagAndNameAsString("img", "class"));
+        fail("Se på denne Thomas");
+    }
+
+    @Test
+    public void returnsContentWithTagAndAttributeGivenCorrectlyAsNode() {
+        System.out.println(sc.getAttributeContentWithTagAndNameAsNode("img", "class"));
+        fail("Se på denne Thomas");
     }
 
 }
