@@ -14,7 +14,7 @@ build
 
 # Thomas jitpack add in
 *.class
-build/
+build
 
 *.jar
 *.aar
