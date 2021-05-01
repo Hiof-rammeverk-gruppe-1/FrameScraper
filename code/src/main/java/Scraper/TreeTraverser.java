@@ -15,23 +15,23 @@ public class TreeTraverser {
     private static ArrayList<String> AllIdArray = new ArrayList<String>();
     private static ArrayList<String> AllClassArray = new ArrayList<String>();
     private static ArrayList<String> AttributeContentStringArray = new ArrayList<>();
-    private static ArrayList<SoupNode> tagNodeArray = new ArrayList<>();
-    private static ArrayList<SoupNode> idNodeArray = new ArrayList<>();
-    private static ArrayList<SoupNode> classNodeArray = new ArrayList<>();
-    private static ArrayList<SoupNode> linksNodeArray = new ArrayList<>();
-    private static ArrayList<SoupNode> ImgNodeArray = new ArrayList<>();
-    private static ArrayList<SoupNode> ImgClassNodeArray = new ArrayList<>();
-    private static ArrayList<SoupNode> VideoNodeArray = new ArrayList<>();
-    private static ArrayList<SoupNode> VideoClassNodeArray = new ArrayList<>();
-    private static ArrayList<SoupNode> ContainsNodeArray = new ArrayList<>();
-    private static ArrayList<SoupNode> ContainsCaseInSensitiveNodeArray = new ArrayList<>();
-    private static ArrayList<SoupNode> AttributeContentNodeArray = new ArrayList<>();
+    private static ArrayList<Element> tagNodeArray = new ArrayList<>();
+    private static ArrayList<Element> idNodeArray = new ArrayList<>();
+    private static ArrayList<Element> classNodeArray = new ArrayList<>();
+    private static ArrayList<Element> linksNodeArray = new ArrayList<>();
+    private static ArrayList<Element> ImgNodeArray = new ArrayList<>();
+    private static ArrayList<Element> ImgClassNodeArray = new ArrayList<>();
+    private static ArrayList<Element> VideoNodeArray = new ArrayList<>();
+    private static ArrayList<Element> VideoClassNodeArray = new ArrayList<>();
+    private static ArrayList<Element> ContainsNodeArray = new ArrayList<>();
+    private static ArrayList<Element> ContainsCaseInSensitiveNodeArray = new ArrayList<>();
+    private static ArrayList<Element> AttributeContentNodeArray = new ArrayList<>();
     private static boolean containsVar = false;
     private static String srcString;
-    private static SoupNode srcNode;
+    private static Element srcNode;
 
 
-    public static void traversingGetContentFromTagAsString(SoupNode node, String tag){
+    public static void traversingGetContentFromTagAsString(Element node, String tag){
 
         if (node.getTag().equals(tag)){
             for(int i = 0; i < node.getStringChildren().size(); i++) {
@@ -47,7 +47,7 @@ public class TreeTraverser {
         return tagStringArray;
     }
 
-    public static void traversingGetContentFromIdAsString(SoupNode node, String id) {
+    public static void traversingGetContentFromIdAsString(Element node, String id) {
 
         if (node.getAttributeNames().contains("id")){
             if (node.getAttributes().get("id").equals(id)) {
@@ -66,7 +66,7 @@ public class TreeTraverser {
         return idStringArray;
     }
 
-    public static void traversingGetContentFromClassAsString(SoupNode node, String className) {
+    public static void traversingGetContentFromClassAsString(Element node, String className) {
         if (node.getAttributeNames().contains("class")){
             if (node.getAttributes().get("class").equals(className)) {
                 for(int i = 0; i < node.getStringChildren().size(); i++) {
@@ -84,7 +84,7 @@ public class TreeTraverser {
         return classStringArray;
     }
 
-    public static void traversingGetLinksInPageAsString(SoupNode node){
+    public static void traversingGetLinksInPageAsString(Element node){
         String tag = "a";
 
         if (node.getTag().equals(tag)){
@@ -99,7 +99,7 @@ public class TreeTraverser {
         return linksStringArray;
     }
 
-    public static Boolean traversingContainsAsBoolean(SoupNode node, String searchString) {
+    public static Boolean traversingContainsAsBoolean(Element node, String searchString) {
 
         for (int j = 0; j < node.getStringChildren().size(); j++){
             if (node.getStringChildren().get(j).contains(searchString)) {
@@ -115,7 +115,7 @@ public class TreeTraverser {
         return containsVar;
     }
 
-    public static Boolean traversingContainsCaseInSensetiveAsBoolean(SoupNode node, String searchString) {
+    public static Boolean traversingContainsCaseInSensetiveAsBoolean(Element node, String searchString) {
 
         String SS = searchString.toLowerCase();
 
@@ -133,7 +133,7 @@ public class TreeTraverser {
         return containsVar;
     }
 
-    public static void traversingGetAllImagesFromPageAsString(SoupNode node) {
+    public static void traversingGetAllImagesFromPageAsString(Element node) {
         String tag = "img";
 
         if (node.getTag().equals(tag)){
@@ -148,7 +148,7 @@ public class TreeTraverser {
         return ImgStringArray;
     }
 
-    public static String traversingGetImageByIdAsString(SoupNode node, String pictureId) {
+    public static String traversingGetImageByIdAsString(Element node, String pictureId) {
 
         if (node.getAttributeNames().contains("id")){
             if (node.getAttributes().get("id").equals(pictureId)) {
@@ -162,7 +162,7 @@ public class TreeTraverser {
         return srcString;
     }
 
-    public static void traversingGetImageByClassAsString(SoupNode node, String pictureClass) {
+    public static void traversingGetImageByClassAsString(Element node, String pictureClass) {
 
         if (node.getAttributeNames().contains("class")){
             if (node.getAttributes().get("class").equals(pictureClass)) {
@@ -179,7 +179,7 @@ public class TreeTraverser {
         return ImgClassStringArray;
     }
 
-    public static void traversingGetAllVideosFromPageAsString(SoupNode node) {
+    public static void traversingGetAllVideosFromPageAsString(Element node) {
         String tag = "video";
 
         if (node.getTag().equals(tag)){
@@ -194,7 +194,7 @@ public class TreeTraverser {
         return VideoStringArray;
     }
 
-    public static String traversingGetVideoByIdAsString(SoupNode node, String videoId) {
+    public static String traversingGetVideoByIdAsString(Element node, String videoId) {
         if (node.getAttributeNames().contains("id")){
             if (node.getAttributes().get("id").equals(videoId)) {
                 srcString = node.getAttributes().get("src");
@@ -207,7 +207,7 @@ public class TreeTraverser {
         return srcString;
     }
 
-    public static void traversingGetVideoByClassAsString(SoupNode node, String videoClass) {
+    public static void traversingGetVideoByClassAsString(Element node, String videoClass) {
         if (node.getAttributeNames().contains("class")){
             if (node.getAttributes().get("class").equals(videoClass)) {
                 VideoClassStringArray.add(node.getAttributes().get("src"));
@@ -224,7 +224,7 @@ public class TreeTraverser {
     }
 
 
-    public static void traversingGetClassesInPage(SoupNode node) {
+    public static void traversingGetClassesInPage(Element node) {
         if (node.getAttributeNames().contains("class")){
             if (!AllClassArray.contains(node.getAttributes().get("class"))) {
                 AllClassArray.add(node.getAttributes().get("class"));
@@ -240,7 +240,7 @@ public class TreeTraverser {
         return AllClassArray;
     }
 
-    public static void traversingGetIdsInPage(SoupNode node) {
+    public static void traversingGetIdsInPage(Element node) {
         if (node.getAttributeNames().contains("id")){
             if (!AllIdArray.contains(node.getAttributes().get("id"))) {
                 AllIdArray.add(node.getAttributes().get("id"));
@@ -257,7 +257,7 @@ public class TreeTraverser {
     }
 
 
-    public static void traversingGetContentFromTagAsNode(SoupNode node, String tag){
+    public static void traversingGetContentFromTagAsNode(Element node, String tag){
 
         if (node.getTag().equals(tag)){
             for(int i = 0; i < node.getStringChildren().size(); i++) {
@@ -269,11 +269,11 @@ public class TreeTraverser {
         }
     }
 
-    public static ArrayList<SoupNode> getTagNodeArray() {
+    public static ArrayList<Element> getTagNodeArray() {
         return tagNodeArray;
     }
 
-    public static void traversingGetContentFromIdAsNode(SoupNode node, String id) {
+    public static void traversingGetContentFromIdAsNode(Element node, String id) {
 
         if (node.getAttributeNames().contains("id")){
             if (node.getAttributes().get("id").equals(id)) {
@@ -288,11 +288,11 @@ public class TreeTraverser {
         }
     }
 
-    public static ArrayList<SoupNode> getIdNodeArray() {
+    public static ArrayList<Element> getIdNodeArray() {
         return idNodeArray;
     }
 
-    public static void traversingGetContentFromClassAsNode(SoupNode node, String className) {
+    public static void traversingGetContentFromClassAsNode(Element node, String className) {
         if (node.getAttributeNames().contains("class")){
             if (node.getAttributes().get("class").equals(className)) {
                 for(int i = 0; i < node.getStringChildren().size(); i++) {
@@ -306,11 +306,11 @@ public class TreeTraverser {
         }
     }
 
-    public static ArrayList<SoupNode> getClassNodeArray() {
+    public static ArrayList<Element> getClassNodeArray() {
         return classNodeArray;
     }
 
-    public static void traversingGetLinksInPageAsNode(SoupNode node){
+    public static void traversingGetLinksInPageAsNode(Element node){
         String tag = "a";
 
         if (node.getTag().equals(tag)){
@@ -321,11 +321,11 @@ public class TreeTraverser {
         }
     }
 
-    public static ArrayList<SoupNode> getLinksNodeArray() {
+    public static ArrayList<Element> getLinksNodeArray() {
         return linksNodeArray;
     }
 
-    public static void traversingContainsAsNode(SoupNode node, String searchString) {
+    public static void traversingContainsAsNode(Element node, String searchString) {
 
         for (int j = 0; j < node.getStringChildren().size(); j++){
             if (node.getStringChildren().get(j).contains(searchString)) {
@@ -338,11 +338,11 @@ public class TreeTraverser {
         }
     }
 
-    public static ArrayList<SoupNode> getContainsNodeArray() {
+    public static ArrayList<Element> getContainsNodeArray() {
         return ContainsNodeArray;
     }
 
-    public static void traversingContainsCaseInSensetiveAsNode(SoupNode node, String searchString) {
+    public static void traversingContainsCaseInSensetiveAsNode(Element node, String searchString) {
 
         String SS = searchString.toLowerCase();
 
@@ -357,11 +357,11 @@ public class TreeTraverser {
         }
     }
 
-    public static ArrayList<SoupNode> getContainsCaseInSensitiveNodeArray() {
+    public static ArrayList<Element> getContainsCaseInSensitiveNodeArray() {
         return ContainsCaseInSensitiveNodeArray;
     }
 
-    public static void traversingGetAllImagesFromPageAsNode(SoupNode node) {
+    public static void traversingGetAllImagesFromPageAsNode(Element node) {
         String tag = "img";
 
         if (node.getTag().equals(tag)){
@@ -372,11 +372,11 @@ public class TreeTraverser {
         }
     }
 
-    public static ArrayList<SoupNode> getImgNodeArray() {
+    public static ArrayList<Element> getImgNodeArray() {
         return ImgNodeArray;
     }
 
-    public static SoupNode traversingGetImageByIdAsNode(SoupNode node, String pictureId) {
+    public static Element traversingGetImageByIdAsNode(Element node, String pictureId) {
 
         if (node.getAttributeNames().contains("id")){
             if (node.getAttributes().get("id").equals(pictureId)) {
@@ -390,7 +390,7 @@ public class TreeTraverser {
         return srcNode;
     }
 
-    public static void traversingGetImageByClassAsNode(SoupNode node, String pictureClass) {
+    public static void traversingGetImageByClassAsNode(Element node, String pictureClass) {
 
         if (node.getAttributeNames().contains("class")){
             if (node.getAttributes().get("class").equals(pictureClass)) {
@@ -403,11 +403,11 @@ public class TreeTraverser {
         }
     }
 
-    public static ArrayList<SoupNode> getImgClassNodeArray() {
+    public static ArrayList<Element> getImgClassNodeArray() {
         return ImgClassNodeArray;
     }
 
-    public static void traversingGetAllVideosFromPageAsNode(SoupNode node) {
+    public static void traversingGetAllVideosFromPageAsNode(Element node) {
         String tag = "video";
 
         if (node.getTag().equals(tag)){
@@ -418,11 +418,11 @@ public class TreeTraverser {
         }
     }
 
-    public static ArrayList<SoupNode> getVideoNodeArray() {
+    public static ArrayList<Element> getVideoNodeArray() {
         return VideoNodeArray;
     }
 
-    public static SoupNode traversingGetVideoByIdAsNode(SoupNode node, String videoId) {
+    public static Element traversingGetVideoByIdAsNode(Element node, String videoId) {
         if (node.getAttributeNames().contains("id")){
             if (node.getAttributes().get("id").equals(videoId)) {
                 srcNode = node;
@@ -435,7 +435,7 @@ public class TreeTraverser {
         return srcNode;
     }
 
-    public static void traversingGetVideoByClassAsNode(SoupNode node, String videoClass) {
+    public static void traversingGetVideoByClassAsNode(Element node, String videoClass) {
         if (node.getAttributeNames().contains("class")){
             if (node.getAttributes().get("class").equals(videoClass)) {
                 VideoClassNodeArray.add(node);
@@ -447,11 +447,11 @@ public class TreeTraverser {
         }
     }
 
-    public static ArrayList<SoupNode> getVideoClassNodeArray() {
+    public static ArrayList<Element> getVideoClassNodeArray() {
         return VideoClassNodeArray;
     }
 
-    public static void traversingGetAttributeContentWithTagAndNameAsNode(SoupNode node, String tag, String attribute) {
+    public static void traversingGetAttributeContentWithTagAndNameAsNode(Element node, String tag, String attribute) {
 
         if (node.getTag().contains(tag)){
             if (node.getAttributeNames().contains(attribute)) {
@@ -464,11 +464,11 @@ public class TreeTraverser {
         }
     }
 
-    public static ArrayList<SoupNode> getAttributeContentNodeArray() {
+    public static ArrayList<Element> getAttributeContentNodeArray() {
         return AttributeContentNodeArray;
     }
 
-    public static void traversingGetAttributeContentWithTagAndNameAsString(SoupNode node, String tag, String attribute) {
+    public static void traversingGetAttributeContentWithTagAndNameAsString(Element node, String tag, String attribute) {
         if (node.getTag().contains(tag)){
             if (node.getAttributeNames().contains(attribute)) {
                 AttributeContentStringArray.add(node.getAttributes().get(attribute));

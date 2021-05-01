@@ -23,11 +23,11 @@ public class Scraper {
 
     private String url;
     private String websiteContent;
-    private SoupNode root = null;
+    private Element root = null;
 
 
 
-    private ArrayList<SoupNode> nodes = new ArrayList<>();
+    private ArrayList<Element> nodes = new ArrayList<>();
 
     /**
      * Constructor for a shop scraper
@@ -133,7 +133,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getContentFromTagAsString(String)
      */
-    public ArrayList<String> getContentFromTagAsString(String tag, SoupNode startNode){
+    public ArrayList<String> getContentFromTagAsString(String tag, Element startNode){
         TreeTraverser.traversingGetContentFromTagAsString(startNode, tag);
         return TreeTraverser.getTagStringArray();
     }
@@ -143,7 +143,7 @@ public class Scraper {
      * @param tag The tag from which we want to see the content of
      * @return The content is returned as Nodes in an Arraylist of Nodes
      */
-    public ArrayList<SoupNode> getContentFromTagAsNode(String tag){
+    public ArrayList<Element> getContentFromTagAsNode(String tag){
             TreeTraverser.traversingGetContentFromTagAsNode(root, tag);
         return TreeTraverser.getTagNodeArray();
     }
@@ -155,7 +155,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getContentFromTagAsNode(String)
      */
-    public ArrayList<SoupNode> getContentFromTagAsNode(String tag, SoupNode startNode){
+    public ArrayList<Element> getContentFromTagAsNode(String tag, Element startNode){
         TreeTraverser.traversingGetContentFromTagAsNode(startNode, tag);
         return TreeTraverser.getTagNodeArray();
     }
@@ -177,7 +177,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getContentFromIdAsString(String)
      */
-    public ArrayList<String> getContentFromIdAsString(String id, SoupNode startNode){
+    public ArrayList<String> getContentFromIdAsString(String id, Element startNode){
         TreeTraverser.traversingGetContentFromIdAsString(startNode,id);
         return TreeTraverser.getIdStringArray();
     }
@@ -187,7 +187,7 @@ public class Scraper {
      * @param id The id of an element which we want to get the content from
      * @return The content is returned as Nodes in a Arraylist of Nodes
      */
-    public ArrayList<SoupNode> getContentFromIdAsNode(String id){
+    public ArrayList<Element> getContentFromIdAsNode(String id){
             TreeTraverser.traversingGetContentFromIdAsNode(root, id);
         return TreeTraverser.getIdNodeArray();
     }
@@ -199,7 +199,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getContentFromIdAsNode(String)
      */
-    public ArrayList<SoupNode> getContentFromIdAsNode(String id, SoupNode startNode){
+    public ArrayList<Element> getContentFromIdAsNode(String id, Element startNode){
         TreeTraverser.traversingGetContentFromIdAsNode(startNode, id);
         return TreeTraverser.getIdNodeArray();
     }
@@ -221,7 +221,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getContentFromClassAsString(String)
      */
-    public ArrayList<String> getContentFromClassAsString(String className, SoupNode startNode){
+    public ArrayList<String> getContentFromClassAsString(String className, Element startNode){
         TreeTraverser.traversingGetContentFromClassAsString(startNode, className);
         return TreeTraverser.getClassStringArray();
     }
@@ -231,7 +231,7 @@ public class Scraper {
      * @param className The class name of the element which we want to get the content of
      * @return returns the content of the given class as Nodes in an Arraylist of Nodes
      */
-    public ArrayList<SoupNode> getContentFromClassAsNode(String className){
+    public ArrayList<Element> getContentFromClassAsNode(String className){
             TreeTraverser.traversingGetContentFromClassAsNode(root, className);
         return TreeTraverser.getClassNodeArray();
     }
@@ -243,7 +243,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getContentFromClassAsNode(String)
      */
-    public ArrayList<SoupNode> getContentFromClassAsNode(String className, SoupNode startNode){
+    public ArrayList<Element> getContentFromClassAsNode(String className, Element startNode){
         TreeTraverser.traversingGetContentFromClassAsNode(startNode, className);
         return TreeTraverser.getClassNodeArray();
     }
@@ -264,7 +264,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getLinksInPageAsString()
      */
-    public ArrayList<String> getLinksInPageAsString(SoupNode startNode){
+    public ArrayList<String> getLinksInPageAsString(Element startNode){
         TreeTraverser.traversingGetLinksInPageAsString(startNode);
         return TreeTraverser.getLinksStringArray();
     }
@@ -273,7 +273,7 @@ public class Scraper {
      *A method for getting all links (<a-tags) in the webpage
      * @return the links as Nodes in an Arraylist of Nodes
      */
-    public ArrayList<SoupNode> getLinksInPageAsNode(){
+    public ArrayList<Element> getLinksInPageAsNode(){
             TreeTraverser.traversingGetLinksInPageAsNode(root);
         return TreeTraverser.getLinksNodeArray();
     }
@@ -285,7 +285,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getLinksInPageAsNode()
      */
-    public ArrayList<SoupNode> getLinksInPageAsNode(SoupNode startNode){
+    public ArrayList<Element> getLinksInPageAsNode(Element startNode){
         TreeTraverser.traversingGetLinksInPageAsNode(startNode);
         return TreeTraverser.getLinksNodeArray();
     }
@@ -307,7 +307,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#containsAsBoolean(String)
      */
-    public boolean containsAsBoolean(String searchString, SoupNode startNode){
+    public boolean containsAsBoolean(String searchString, Element startNode){
         Boolean contains = TreeTraverser.traversingContainsAsBoolean(startNode, searchString);
         return contains;
     }
@@ -317,7 +317,7 @@ public class Scraper {
      * @param searchString string we want to see if exist in the HTML code. IS case sensetive
      * @return returns all nodes where it the search string was found in an arraylist of nodes
      */
-    public ArrayList<SoupNode> containsAsNode(String searchString){
+    public ArrayList<Element> containsAsNode(String searchString){
         TreeTraverser.traversingContainsAsNode(root, searchString);
         return TreeTraverser.getContainsNodeArray();
     }
@@ -329,7 +329,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#containsAsNode(String)
      */
-    public ArrayList<SoupNode> containsAsNode(String searchString, SoupNode startNode){
+    public ArrayList<Element> containsAsNode(String searchString, Element startNode){
         TreeTraverser.traversingContainsAsNode(startNode, searchString);
         return TreeTraverser.getContainsNodeArray();
     }
@@ -351,7 +351,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#containsCaseInSensetiveAsBoolean(String)
      */
-    public boolean containsCaseInSensetiveAsBoolean(String searchString, SoupNode startNode){
+    public boolean containsCaseInSensetiveAsBoolean(String searchString, Element startNode){
         Boolean contains = TreeTraverser.traversingContainsCaseInSensetiveAsBoolean(startNode, searchString);
         return contains;
     }
@@ -361,7 +361,7 @@ public class Scraper {
      * @param searchString string we want to see if exist in the HTML code. IS NOT case sensetive
      * @return returns all nodes where it the search string was found in an arraylist of nodes
      */
-    public ArrayList<SoupNode> containsCaseInSensetiveAsNode(String searchString){
+    public ArrayList<Element> containsCaseInSensetiveAsNode(String searchString){
             TreeTraverser.traversingContainsCaseInSensetiveAsNode(root, searchString);
         return TreeTraverser.getContainsCaseInSensitiveNodeArray();
     }
@@ -373,7 +373,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#containsCaseInSensetiveAsNode(String)
      */
-    public ArrayList<SoupNode> containsCaseInSensetiveAsNode(String searchString, SoupNode startNode){
+    public ArrayList<Element> containsCaseInSensetiveAsNode(String searchString, Element startNode){
         TreeTraverser.traversingContainsCaseInSensetiveAsNode(startNode, searchString);
         return TreeTraverser.getContainsCaseInSensitiveNodeArray();
     }
@@ -394,7 +394,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getAllImagesFromPageAsString()
      */
-    public ArrayList<String> getAllImagesFromPageAsString(SoupNode startNode){
+    public ArrayList<String> getAllImagesFromPageAsString(Element startNode){
         TreeTraverser.traversingGetAllImagesFromPageAsString(startNode);
         return TreeTraverser.getImgStringArray();
     }
@@ -403,7 +403,7 @@ public class Scraper {
      * A method for getting all Images from the webpage
      * @return the source for the images as Nodes in an Arraylist of Nodes
      */
-    public ArrayList<SoupNode> getAllImagesFromPageAsNode(){
+    public ArrayList<Element> getAllImagesFromPageAsNode(){
         TreeTraverser.traversingGetAllImagesFromPageAsNode(root);
         return TreeTraverser.getImgNodeArray();
     }
@@ -415,7 +415,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getAllImagesFromPageAsNode()
      */
-    public ArrayList<SoupNode> getAllImagesFromPageAsNode(SoupNode startNode){
+    public ArrayList<Element> getAllImagesFromPageAsNode(Element startNode){
         TreeTraverser.traversingGetAllImagesFromPageAsNode(startNode);
         return TreeTraverser.getImgNodeArray();
     }
@@ -436,7 +436,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getImageByIdAsString(String)
      */
-    public String getImageByIdAsString(String pictureId, SoupNode startNode){
+    public String getImageByIdAsString(String pictureId, Element startNode){
         return TreeTraverser.traversingGetImageByIdAsString(startNode, pictureId);
     }
 
@@ -445,7 +445,7 @@ public class Scraper {
      * @param pictureId id as String we want to get the picture from
      * @return the source for the image as Nodes in an Arraylist of Nodes
      */
-    public SoupNode getImageByIdAsNode(String pictureId){
+    public Element getImageByIdAsNode(String pictureId){
         return TreeTraverser.traversingGetImageByIdAsNode(root, pictureId);
     }
 
@@ -456,7 +456,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getImageByIdAsNode(String)
      */
-    public SoupNode getImageByIdAsNode(String pictureId, SoupNode startNode){
+    public Element getImageByIdAsNode(String pictureId, Element startNode){
         return TreeTraverser.traversingGetImageByIdAsNode(startNode, pictureId);
     }
 
@@ -477,7 +477,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getImageByClassAsString(String)
      */
-    public ArrayList<String> getImageByClassAsString(String pictureClass, SoupNode startNode){
+    public ArrayList<String> getImageByClassAsString(String pictureClass, Element startNode){
         TreeTraverser.traversingGetImageByClassAsString(startNode, pictureClass);
         return TreeTraverser.getImgClassStringArray();
     }
@@ -487,7 +487,7 @@ public class Scraper {
      * @param pictureClass class as String we want to get the pictures from
      * @return the source for the images as Nodes in an Arraylist of Nodes
      */
-    public ArrayList<SoupNode> getImageByClassAsNode(String pictureClass){
+    public ArrayList<Element> getImageByClassAsNode(String pictureClass){
         TreeTraverser.traversingGetImageByClassAsNode(root, pictureClass);
         return TreeTraverser.getImgClassNodeArray();
     }
@@ -499,7 +499,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getImageByClassAsNode(String)
      */
-    public ArrayList<SoupNode> getImageByClassAsNode(String pictureClass, SoupNode startNode){
+    public ArrayList<Element> getImageByClassAsNode(String pictureClass, Element startNode){
         TreeTraverser.traversingGetImageByClassAsNode(startNode, pictureClass);
         return TreeTraverser.getImgClassNodeArray();
     }
@@ -520,7 +520,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getAllVideosFromPageAsString()
      */
-    public ArrayList<String> getAllVideosFromPageAsString(SoupNode startNode){
+    public ArrayList<String> getAllVideosFromPageAsString(Element startNode){
         TreeTraverser.traversingGetAllVideosFromPageAsString(startNode);
         return TreeTraverser.getVideoStringArray();
     }
@@ -529,7 +529,7 @@ public class Scraper {
      *A method for getting all Videos from the webpage
      * @return the source for the videos as Nodes in an Arraylist of Nodes
      */
-    public ArrayList<SoupNode> getAllVideosFromPageAsNode(){
+    public ArrayList<Element> getAllVideosFromPageAsNode(){
         TreeTraverser.traversingGetAllVideosFromPageAsNode(root);
         return TreeTraverser.getVideoNodeArray();
     }
@@ -541,7 +541,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getAllVideosFromPageAsNode()
      */
-    public ArrayList<SoupNode> getAllVideosFromPageAsNode(SoupNode startNode){
+    public ArrayList<Element> getAllVideosFromPageAsNode(Element startNode){
         TreeTraverser.traversingGetAllVideosFromPageAsNode(startNode);
         return TreeTraverser.getVideoNodeArray();
     }
@@ -562,7 +562,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getVideoByIdAsString(String)
      */
-    public String getVideoByIdAsString(String videoId, SoupNode startNode){
+    public String getVideoByIdAsString(String videoId, Element startNode){
         return TreeTraverser.traversingGetVideoByIdAsString(startNode, videoId);
     }
 
@@ -571,7 +571,7 @@ public class Scraper {
      * @param videoId id as String we want to get the video from
      * @return the source for the video as Nods in a Arraylist of Nodes
      */
-    public SoupNode getVideoByIdAsNode(String videoId){
+    public Element getVideoByIdAsNode(String videoId){
         return TreeTraverser.traversingGetVideoByIdAsNode(root, videoId);
     }
 
@@ -582,7 +582,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getVideoByIdAsNode(String)
      */
-    public SoupNode getVideoByIdAsNode(String videoId, SoupNode startNode){
+    public Element getVideoByIdAsNode(String videoId, Element startNode){
         return TreeTraverser.traversingGetVideoByIdAsNode(startNode, videoId);
     }
 
@@ -603,7 +603,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getVideoByClassAsString(String)
      */
-    public ArrayList<String> getVideoByClassAsString(String videoClass, SoupNode startNode){
+    public ArrayList<String> getVideoByClassAsString(String videoClass, Element startNode){
         TreeTraverser.traversingGetVideoByClassAsString(startNode, videoClass);
         return TreeTraverser.getVideoClassStringArray();
     }
@@ -613,7 +613,7 @@ public class Scraper {
      * @param videoClass class as String we want to get the video from
      * @return the source for the videos as Node in an Arraylist of Nodes
      */
-    public ArrayList<SoupNode> getVideoByClassAsNode(String videoClass){
+    public ArrayList<Element> getVideoByClassAsNode(String videoClass){
         TreeTraverser.traversingGetVideoByClassAsNode(root, videoClass);
         return TreeTraverser.getVideoClassNodeArray();
     }
@@ -625,7 +625,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getVideoByClassAsNode(String)
      */
-    public ArrayList<SoupNode> getVideoByClassAsNode(String videoClass, SoupNode startNode){
+    public ArrayList<Element> getVideoByClassAsNode(String videoClass, Element startNode){
         TreeTraverser.traversingGetVideoByClassAsNode(startNode, videoClass);
         return TreeTraverser.getVideoClassNodeArray();
     }
@@ -646,7 +646,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getClassesInPage()
      */
-    public ArrayList<String> getClassesInPage(SoupNode startNode){
+    public ArrayList<String> getClassesInPage(Element startNode){
         TreeTraverser.traversingGetClassesInPage(startNode);
         return TreeTraverser.getAllClassArray();
     }
@@ -667,7 +667,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getIdsInPage()
      */
-    public ArrayList<String> getIdsInPage(SoupNode startNode){
+    public ArrayList<String> getIdsInPage(Element startNode){
         TreeTraverser.traversingGetIdsInPage(startNode);
         return TreeTraverser.getAllIdsArray();
     }
@@ -678,7 +678,7 @@ public class Scraper {
      * @param attribute name of the attribute you want to search for
      * @return a list with the content of the attribute in the tag as Node in an Arraylist of Nodes
      */
-    public ArrayList<SoupNode> getAttributeContentWithTagAndNameAsNode(String tag, String attribute){
+    public ArrayList<Element> getAttributeContentWithTagAndNameAsNode(String tag, String attribute){
         TreeTraverser.traversingGetAttributeContentWithTagAndNameAsNode(root, tag,attribute);
         return TreeTraverser.getAttributeContentNodeArray();
     }
@@ -690,7 +690,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getAttributeContentWithTagAndNameAsNode(String, String)
      */
-    public ArrayList<SoupNode> getAttributeContentWithTagAndNameAsNode(String tag, String attribute, SoupNode startNode){
+    public ArrayList<Element> getAttributeContentWithTagAndNameAsNode(String tag, String attribute, Element startNode){
         TreeTraverser.traversingGetAttributeContentWithTagAndNameAsNode(startNode, tag,attribute);
         return TreeTraverser.getAttributeContentNodeArray();
     }
@@ -713,14 +713,14 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getAttributeContentWithTagAndNameAsString(String, String)
      */
-    public ArrayList<String> getAttributeContentWithTagAndNameAsString(String tag, String attribute, SoupNode startNode){
+    public ArrayList<String> getAttributeContentWithTagAndNameAsString(String tag, String attribute, Element startNode){
         TreeTraverser.traversingGetAttributeContentWithTagAndNameAsString(startNode, tag,attribute);
         return TreeTraverser.getAttributeContentStringArray();
     }
 
 
 
-    public SoupNode getRoot() {
+    public Element getRoot() {
         return root;
     }
 
@@ -728,7 +728,7 @@ public class Scraper {
         printBeautyfull(root, 0);
     }
 
-    public void printBeautyfull(SoupNode node, int nTabs){
+    public void printBeautyfull(Element node, int nTabs){
 
         if (node != null){
             String tabs = "";
