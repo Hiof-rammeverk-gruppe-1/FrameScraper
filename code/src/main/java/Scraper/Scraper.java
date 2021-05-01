@@ -30,7 +30,7 @@ public class Scraper {
     private ArrayList<Element> nodes = new ArrayList<>();
 
     /**
-     * Constructor for a shop scraper
+     * Constructor for a scraper
      * @param URL Link to target site for scraping
      * @throws IOException Throws an IO Exception whenever user input is crashing with an expected string value
      */
@@ -253,7 +253,7 @@ public class Scraper {
      * @return the links as String in an Arraylist of Strings
      */
     public ArrayList<String> getLinksInPageAsString(){
-            TreeTraverser.traversingGetLinksInPageAsString(root);
+            TreeTraverser.traversingGetLinksInPageAsString(root,getUrl());
         return TreeTraverser.getLinksStringArray();
     }
 
@@ -264,8 +264,9 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getLinksInPageAsString()
      */
+
     public ArrayList<String> getLinksInPageAsString(Element startNode){
-        TreeTraverser.traversingGetLinksInPageAsString(startNode);
+        TreeTraverser.traversingGetLinksInPageAsString(startNode,getUrl());
         return TreeTraverser.getLinksStringArray();
     }
 
