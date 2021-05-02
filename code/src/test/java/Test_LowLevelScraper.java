@@ -178,4 +178,20 @@ public class Test_LowLevelScraper {
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
+
+    @Test
+    public void getsSpecificAttributeByTagAndAttributeNameFromSite() {
+        String[] expectedArray = {"500","500"};
+        ArrayList<String> actualArray = sc.getAttributeContentWithTagAndNameAsString("img","width");
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
+    }
+
+    @Test
+    public void getsSpecificAttributeByIdAndAttributeNameFromSite() {
+        String[] expectedArray = {"Girl in a jacket"};
+        ArrayList<String> actualArray = sc.getAttributeContentWithIdAndNameAsString("bestebildet","alt");
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
+    }
 }
