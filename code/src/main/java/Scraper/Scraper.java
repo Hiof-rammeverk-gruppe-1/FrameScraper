@@ -719,6 +719,29 @@ public class Scraper {
         return TreeTraverser.getAttributeContentStringArray();
     }
 
+    /**
+     * A method for getting the content from a attribute of a tag with the id, as String
+     * @param id name of the tag you want to search for
+     * @param attribute name of the attribute you want to search for
+     * @return a list with the content of the attribute in the tag with the id, as String in an Arraylist of Strings
+     */
+    public ArrayList<String> getAttributeContentWithIdAndNameAsString(String id, String attribute){
+        TreeTraverser.traversingGetAttributeContentWithIdAndNameAsString(root, id,attribute);
+        return TreeTraverser.getAttributeIdContentStringArray();
+    }
+
+    /**
+     * Works like {@link Scraper#getAttributeContentWithIdAndNameAsString(String, String)} except you can choose your own startnode
+     * from anywhere in the HTML code tree
+     *
+     * @param startNode Node to start the search from.
+     * @see Scraper#getAttributeContentWithIdAndNameAsString(String, String)
+     */
+    public ArrayList<String> getAttributeContentWithIdAndNameAsString(String id, String attribute, SoupNode startNode){
+        TreeTraverser.traversingGetAttributeContentWithIdAndNameAsString(startNode, id,attribute);
+        return TreeTraverser.getAttributeIdContentStringArray();
+    }
+
 
 
     public Element getRoot() {
