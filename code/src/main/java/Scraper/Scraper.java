@@ -27,7 +27,7 @@ public class Scraper {
 
 
 
-    private ArrayList<Element> nodes = new ArrayList<>();
+    private ArrayList<Element> elements = new ArrayList<>();
 
     /**
      * Constructor for a scraper
@@ -127,37 +127,37 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getContentFromTagAsString(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getContentFromTagAsString(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getContentFromTagAsString(String)
      */
-    public ArrayList<String> getContentFromTagAsString(String tag, Element startNode){
-        TreeTraverser.traversingGetContentFromTagAsString(startNode, tag);
+    public ArrayList<String> getContentFromTagAsString(String tag, Element startElement){
+        TreeTraverser.traversingGetContentFromTagAsString(startElement, tag);
         return TreeTraverser.getTagStringArray();
     }
 
     /**
      * A method for getting the content from a specific HTML-tag in the webpage
      * @param tag The tag from which we want to see the content of
-     * @return The content is returned as Nodes in an Arraylist of Nodes
+     * @return The content is returned as Elements in an Arraylist of Elements
      */
-    public ArrayList<Element> getContentFromTagAsNode(String tag){
-            TreeTraverser.traversingGetContentFromTagAsNode(root, tag);
-        return TreeTraverser.getTagNodeArray();
+    public ArrayList<Element> getContentFromTagAsElement(String tag){
+            TreeTraverser.traversingGetContentFromTagAsElement(root, tag);
+        return TreeTraverser.getTagElementArray();
     }
 
     /**
-     * Works like {@link Scraper#getContentFromTagAsNode(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getContentFromTagAsElement(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#getContentFromTagAsNode(String)
+     * @param startElement Element to start the search from.
+     * @see Scraper#getContentFromTagAsElement(String)
      */
-    public ArrayList<Element> getContentFromTagAsNode(String tag, Element startNode){
-        TreeTraverser.traversingGetContentFromTagAsNode(startNode, tag);
-        return TreeTraverser.getTagNodeArray();
+    public ArrayList<Element> getContentFromTagAsElement(String tag, Element startElement){
+        TreeTraverser.traversingGetContentFromTagAsElement(startElement, tag);
+        return TreeTraverser.getTagElementArray();
     }
 
     /**
@@ -171,37 +171,37 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getContentFromIdAsString(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getContentFromIdAsString(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getContentFromIdAsString(String)
      */
-    public ArrayList<String> getContentFromIdAsString(String id, Element startNode){
-        TreeTraverser.traversingGetContentFromIdAsString(startNode,id);
+    public ArrayList<String> getContentFromIdAsString(String id, Element startElement){
+        TreeTraverser.traversingGetContentFromIdAsString(startElement,id);
         return TreeTraverser.getIdStringArray();
     }
 
     /**
      * A method for getting the content from a id in the webpage
      * @param id The id of an element which we want to get the content from
-     * @return The content is returned as Nodes in a Arraylist of Nodes
+     * @return The content is returned as Elements in a Arraylist of Elements
      */
-    public ArrayList<Element> getContentFromIdAsNode(String id){
-            TreeTraverser.traversingGetContentFromIdAsNode(root, id);
-        return TreeTraverser.getIdNodeArray();
+    public ArrayList<Element> getContentFromIdAsElement(String id){
+            TreeTraverser.traversingGetContentFromIdAsElement(root, id);
+        return TreeTraverser.getIdElementArray();
     }
 
     /**
-     * Works like {@link Scraper#getContentFromIdAsNode(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getContentFromIdAsElement(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#getContentFromIdAsNode(String)
+     * @param startElement Element to start the search from.
+     * @see Scraper#getContentFromIdAsElement(String)
      */
-    public ArrayList<Element> getContentFromIdAsNode(String id, Element startNode){
-        TreeTraverser.traversingGetContentFromIdAsNode(startNode, id);
-        return TreeTraverser.getIdNodeArray();
+    public ArrayList<Element> getContentFromIdAsElement(String id, Element startElement){
+        TreeTraverser.traversingGetContentFromIdAsElement(startElement, id);
+        return TreeTraverser.getIdElementArray();
     }
 
     /**
@@ -215,37 +215,37 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getContentFromClassAsString(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getContentFromClassAsString(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getContentFromClassAsString(String)
      */
-    public ArrayList<String> getContentFromClassAsString(String className, Element startNode){
-        TreeTraverser.traversingGetContentFromClassAsString(startNode, className);
+    public ArrayList<String> getContentFromClassAsString(String className, Element startElement){
+        TreeTraverser.traversingGetContentFromClassAsString(startElement, className);
         return TreeTraverser.getClassStringArray();
     }
 
     /**
      * A method for getting the content from a class in the webpage
      * @param className The class name of the element which we want to get the content of
-     * @return returns the content of the given class as Nodes in an Arraylist of Nodes
+     * @return returns the content of the given class as Elements in an Arraylist of Elements
      */
-    public ArrayList<Element> getContentFromClassAsNode(String className){
-            TreeTraverser.traversingGetContentFromClassAsNode(root, className);
-        return TreeTraverser.getClassNodeArray();
+    public ArrayList<Element> getContentFromClassAsElement(String className){
+            TreeTraverser.traversingGetContentFromClassAsElement(root, className);
+        return TreeTraverser.getClassElementArray();
     }
 
     /**
-     * Works like {@link Scraper#getContentFromClassAsNode(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getContentFromClassAsElement(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#getContentFromClassAsNode(String)
+     * @param startElement Element to start the search from.
+     * @see Scraper#getContentFromClassAsElement(String)
      */
-    public ArrayList<Element> getContentFromClassAsNode(String className, Element startNode){
-        TreeTraverser.traversingGetContentFromClassAsNode(startNode, className);
-        return TreeTraverser.getClassNodeArray();
+    public ArrayList<Element> getContentFromClassAsElement(String className, Element startElement){
+        TreeTraverser.traversingGetContentFromClassAsElement(startElement, className);
+        return TreeTraverser.getClassElementArray();
     }
 
     /**
@@ -258,37 +258,37 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getLinksInPageAsString()} except you can choose your own startnode
+     * Works like {@link Scraper#getLinksInPageAsString()} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getLinksInPageAsString()
      */
 
-    public ArrayList<String> getLinksInPageAsString(Element startNode){
-        TreeTraverser.traversingGetLinksInPageAsString(startNode,getUrl());
+    public ArrayList<String> getLinksInPageAsString(Element startElement){
+        TreeTraverser.traversingGetLinksInPageAsString(startElement,getUrl());
         return TreeTraverser.getLinksStringArray();
     }
 
     /**
      *A method for getting all links (<a-tags) in the webpage
-     * @return the links as Nodes in an Arraylist of Nodes
+     * @return the links as Elements in an Arraylist of Elements
      */
-    public ArrayList<Element> getLinksInPageAsNode(){
-            TreeTraverser.traversingGetLinksInPageAsNode(root);
-        return TreeTraverser.getLinksNodeArray();
+    public ArrayList<Element> getLinksInPageAsElement(){
+            TreeTraverser.traversingGetLinksInPageAsElement(root);
+        return TreeTraverser.getLinksElementArray();
     }
 
     /**
-     * Works like {@link Scraper#getLinksInPageAsNode()} except you can choose your own startnode
+     * Works like {@link Scraper#getLinksInPageAsElement()} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#getLinksInPageAsNode()
+     * @param startElement Element to start the search from.
+     * @see Scraper#getLinksInPageAsElement()
      */
-    public ArrayList<Element> getLinksInPageAsNode(Element startNode){
-        TreeTraverser.traversingGetLinksInPageAsNode(startNode);
-        return TreeTraverser.getLinksNodeArray();
+    public ArrayList<Element> getLinksInPageAsElement(Element startElement){
+        TreeTraverser.traversingGetLinksInPageAsElement(startElement);
+        return TreeTraverser.getLinksElementArray();
     }
 
     /**
@@ -302,37 +302,37 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#containsAsBoolean(String)} except you can choose your own startnode
+     * Works like {@link Scraper#containsAsBoolean(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#containsAsBoolean(String)
      */
-    public boolean containsAsBoolean(String searchString, Element startNode){
-        Boolean contains = TreeTraverser.traversingContainsAsBoolean(startNode, searchString);
+    public boolean containsAsBoolean(String searchString, Element startElement){
+        Boolean contains = TreeTraverser.traversingContainsAsBoolean(startElement, searchString);
         return contains;
     }
 
     /**
      * A method for seaching if a webpage contains a string. this methode IS CASE SENSETIVE.
      * @param searchString string we want to see if exist in the HTML code. IS case sensetive
-     * @return returns all nodes where it the search string was found in an arraylist of nodes
+     * @return returns all elements where it the search string was found in an arraylist of elements
      */
-    public ArrayList<Element> containsAsNode(String searchString){
-        TreeTraverser.traversingContainsAsNode(root, searchString);
-        return TreeTraverser.getContainsNodeArray();
+    public ArrayList<Element> containsAsElement(String searchString){
+        TreeTraverser.traversingContainsAsElement(root, searchString);
+        return TreeTraverser.getContainsElementArray();
     }
 
     /**
-     * Works like {@link Scraper#containsAsNode(String)} except you can choose your own startnode
+     * Works like {@link Scraper#containsAsElement(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#containsAsNode(String)
+     * @param startElement Element to start the search from.
+     * @see Scraper#containsAsElement(String)
      */
-    public ArrayList<Element> containsAsNode(String searchString, Element startNode){
-        TreeTraverser.traversingContainsAsNode(startNode, searchString);
-        return TreeTraverser.getContainsNodeArray();
+    public ArrayList<Element> containsAsElement(String searchString, Element startElement){
+        TreeTraverser.traversingContainsAsElement(startElement, searchString);
+        return TreeTraverser.getContainsElementArray();
     }
 
     /**
@@ -346,37 +346,37 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#containsCaseInSensetiveAsBoolean(String)} except you can choose your own startnode
+     * Works like {@link Scraper#containsCaseInSensetiveAsBoolean(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#containsCaseInSensetiveAsBoolean(String)
      */
-    public boolean containsCaseInSensetiveAsBoolean(String searchString, Element startNode){
-        Boolean contains = TreeTraverser.traversingContainsCaseInSensetiveAsBoolean(startNode, searchString);
+    public boolean containsCaseInSensetiveAsBoolean(String searchString, Element startElement){
+        Boolean contains = TreeTraverser.traversingContainsCaseInSensetiveAsBoolean(startElement, searchString);
         return contains;
     }
 
     /**
      * A method for seaching if a webpage contains a string.
      * @param searchString string we want to see if exist in the HTML code. IS NOT case sensetive
-     * @return returns all nodes where it the search string was found in an arraylist of nodes
+     * @return returns all elements where it the search string was found in an arraylist of elements
      */
-    public ArrayList<Element> containsCaseInSensetiveAsNode(String searchString){
-            TreeTraverser.traversingContainsCaseInSensetiveAsNode(root, searchString);
-        return TreeTraverser.getContainsCaseInSensitiveNodeArray();
+    public ArrayList<Element> containsCaseInSensetiveAsElement(String searchString){
+            TreeTraverser.traversingContainsCaseInSensetiveAsElement(root, searchString);
+        return TreeTraverser.getContainsCaseInSensitiveElementArray();
     }
 
     /**
-     * Works like {@link Scraper#containsCaseInSensetiveAsNode(String)} except you can choose your own startnode
+     * Works like {@link Scraper#containsCaseInSensetiveAsElement(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#containsCaseInSensetiveAsNode(String)
+     * @param startElement Element to start the search from.
+     * @see Scraper#containsCaseInSensetiveAsElement(String)
      */
-    public ArrayList<Element> containsCaseInSensetiveAsNode(String searchString, Element startNode){
-        TreeTraverser.traversingContainsCaseInSensetiveAsNode(startNode, searchString);
-        return TreeTraverser.getContainsCaseInSensitiveNodeArray();
+    public ArrayList<Element> containsCaseInSensetiveAsElement(String searchString, Element startElement){
+        TreeTraverser.traversingContainsCaseInSensetiveAsElement(startElement, searchString);
+        return TreeTraverser.getContainsCaseInSensitiveElementArray();
     }
 
     /**
@@ -389,36 +389,36 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getAllImagesFromPageAsString()} except you can choose your own startnode
+     * Works like {@link Scraper#getAllImagesFromPageAsString()} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getAllImagesFromPageAsString()
      */
-    public ArrayList<String> getAllImagesFromPageAsString(Element startNode){
-        TreeTraverser.traversingGetAllImagesFromPageAsString(startNode);
+    public ArrayList<String> getAllImagesFromPageAsString(Element startElement){
+        TreeTraverser.traversingGetAllImagesFromPageAsString(startElement);
         return TreeTraverser.getImgStringArray();
     }
 
     /**
      * A method for getting all Images from the webpage
-     * @return the source for the images as Nodes in an Arraylist of Nodes
+     * @return the source for the images as Elements in an Arraylist of Elements
      */
-    public ArrayList<Element> getAllImagesFromPageAsNode(){
-        TreeTraverser.traversingGetAllImagesFromPageAsNode(root);
-        return TreeTraverser.getImgNodeArray();
+    public ArrayList<Element> getAllImagesFromPageAsElement(){
+        TreeTraverser.traversingGetAllImagesFromPageAsElement(root);
+        return TreeTraverser.getImgElementArray();
     }
 
     /**
-     * Works like {@link Scraper#getAllImagesFromPageAsNode()} except you can choose your own startnode
+     * Works like {@link Scraper#getAllImagesFromPageAsElement()} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#getAllImagesFromPageAsNode()
+     * @param startElement Element to start the search from.
+     * @see Scraper#getAllImagesFromPageAsElement()
      */
-    public ArrayList<Element> getAllImagesFromPageAsNode(Element startNode){
-        TreeTraverser.traversingGetAllImagesFromPageAsNode(startNode);
-        return TreeTraverser.getImgNodeArray();
+    public ArrayList<Element> getAllImagesFromPageAsElement(Element startElement){
+        TreeTraverser.traversingGetAllImagesFromPageAsElement(startElement);
+        return TreeTraverser.getImgElementArray();
     }
 
     /**
@@ -431,34 +431,34 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getImageByIdAsString(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getImageByIdAsString(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getImageByIdAsString(String)
      */
-    public String getImageByIdAsString(String pictureId, Element startNode){
-        return TreeTraverser.traversingGetImageByIdAsString(startNode, pictureId);
+    public String getImageByIdAsString(String pictureId, Element startElement){
+        return TreeTraverser.traversingGetImageByIdAsString(startElement, pictureId);
     }
 
     /**
      * A method for getting a Image with that id from the webpage
      * @param pictureId id as String we want to get the picture from
-     * @return the source for the image as Nodes in an Arraylist of Nodes
+     * @return the source for the image as Elements in an Arraylist of Elements
      */
-    public Element getImageByIdAsNode(String pictureId){
-        return TreeTraverser.traversingGetImageByIdAsNode(root, pictureId);
+    public Element getImageByIdAsElement(String pictureId){
+        return TreeTraverser.traversingGetImageByIdAsElement(root, pictureId);
     }
 
     /**
-     * Works like {@link Scraper#getImageByIdAsNode(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getImageByIdAsElement(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#getImageByIdAsNode(String)
+     * @param startElement Element to start the search from.
+     * @see Scraper#getImageByIdAsElement(String)
      */
-    public Element getImageByIdAsNode(String pictureId, Element startNode){
-        return TreeTraverser.traversingGetImageByIdAsNode(startNode, pictureId);
+    public Element getImageByIdAsElement(String pictureId, Element startElement){
+        return TreeTraverser.traversingGetImageByIdAsElement(startElement, pictureId);
     }
 
     /**
@@ -472,37 +472,37 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getImageByClassAsString(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getImageByClassAsString(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getImageByClassAsString(String)
      */
-    public ArrayList<String> getImageByClassAsString(String pictureClass, Element startNode){
-        TreeTraverser.traversingGetImageByClassAsString(startNode, pictureClass);
+    public ArrayList<String> getImageByClassAsString(String pictureClass, Element startElement){
+        TreeTraverser.traversingGetImageByClassAsString(startElement, pictureClass);
         return TreeTraverser.getImgClassStringArray();
     }
 
     /**
      * A method for getting all the Images with that classname from the webpage
      * @param pictureClass class as String we want to get the pictures from
-     * @return the source for the images as Nodes in an Arraylist of Nodes
+     * @return the source for the images as Elements in an Arraylist of Elements
      */
-    public ArrayList<Element> getImageByClassAsNode(String pictureClass){
-        TreeTraverser.traversingGetImageByClassAsNode(root, pictureClass);
-        return TreeTraverser.getImgClassNodeArray();
+    public ArrayList<Element> getImageByClassAsElement(String pictureClass){
+        TreeTraverser.traversingGetImageByClassAsElement(root, pictureClass);
+        return TreeTraverser.getImgClassElementArray();
     }
 
     /**
-     * Works like {@link Scraper#getImageByClassAsNode(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getImageByClassAsElement(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#getImageByClassAsNode(String)
+     * @param startElement Element to start the search from.
+     * @see Scraper#getImageByClassAsElement(String)
      */
-    public ArrayList<Element> getImageByClassAsNode(String pictureClass, Element startNode){
-        TreeTraverser.traversingGetImageByClassAsNode(startNode, pictureClass);
-        return TreeTraverser.getImgClassNodeArray();
+    public ArrayList<Element> getImageByClassAsElement(String pictureClass, Element startElement){
+        TreeTraverser.traversingGetImageByClassAsElement(startElement, pictureClass);
+        return TreeTraverser.getImgClassElementArray();
     }
 
     /**
@@ -515,36 +515,36 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getAllVideosFromPageAsString()} except you can choose your own startnode
+     * Works like {@link Scraper#getAllVideosFromPageAsString()} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getAllVideosFromPageAsString()
      */
-    public ArrayList<String> getAllVideosFromPageAsString(Element startNode){
-        TreeTraverser.traversingGetAllVideosFromPageAsString(startNode);
+    public ArrayList<String> getAllVideosFromPageAsString(Element startElement){
+        TreeTraverser.traversingGetAllVideosFromPageAsString(startElement);
         return TreeTraverser.getVideoStringArray();
     }
 
     /**
      *A method for getting all Videos from the webpage
-     * @return the source for the videos as Nodes in an Arraylist of Nodes
+     * @return the source for the videos as Elements in an Arraylist of Elements
      */
-    public ArrayList<Element> getAllVideosFromPageAsNode(){
-        TreeTraverser.traversingGetAllVideosFromPageAsNode(root);
-        return TreeTraverser.getVideoNodeArray();
+    public ArrayList<Element> getAllVideosFromPageAsElement(){
+        TreeTraverser.traversingGetAllVideosFromPageAsElement(root);
+        return TreeTraverser.getVideoElementArray();
     }
 
     /**
-     * Works like {@link Scraper#getAllVideosFromPageAsNode()} except you can choose your own startnode
+     * Works like {@link Scraper#getAllVideosFromPageAsElement()} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#getAllVideosFromPageAsNode()
+     * @param startElement Element to start the search from.
+     * @see Scraper#getAllVideosFromPageAsElement()
      */
-    public ArrayList<Element> getAllVideosFromPageAsNode(Element startNode){
-        TreeTraverser.traversingGetAllVideosFromPageAsNode(startNode);
-        return TreeTraverser.getVideoNodeArray();
+    public ArrayList<Element> getAllVideosFromPageAsElement(Element startElement){
+        TreeTraverser.traversingGetAllVideosFromPageAsElement(startElement);
+        return TreeTraverser.getVideoElementArray();
     }
 
     /**
@@ -557,34 +557,34 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getVideoByIdAsString(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getVideoByIdAsString(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getVideoByIdAsString(String)
      */
-    public String getVideoByIdAsString(String videoId, Element startNode){
-        return TreeTraverser.traversingGetVideoByIdAsString(startNode, videoId);
+    public String getVideoByIdAsString(String videoId, Element startElement){
+        return TreeTraverser.traversingGetVideoByIdAsString(startElement, videoId);
     }
 
     /**
      * A method for getting a Videos with that id from the webpage
      * @param videoId id as String we want to get the video from
-     * @return the source for the video as Nods in a Arraylist of Nodes
+     * @return the source for the video as Nods in a Arraylist of Elements
      */
-    public Element getVideoByIdAsNode(String videoId){
-        return TreeTraverser.traversingGetVideoByIdAsNode(root, videoId);
+    public Element getVideoByIdAsElement(String videoId){
+        return TreeTraverser.traversingGetVideoByIdAsElement(root, videoId);
     }
 
     /**
-     * Works like {@link Scraper#getVideoByIdAsNode(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getVideoByIdAsElement(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#getVideoByIdAsNode(String)
+     * @param startElement Element to start the search from.
+     * @see Scraper#getVideoByIdAsElement(String)
      */
-    public Element getVideoByIdAsNode(String videoId, Element startNode){
-        return TreeTraverser.traversingGetVideoByIdAsNode(startNode, videoId);
+    public Element getVideoByIdAsElement(String videoId, Element startElement){
+        return TreeTraverser.traversingGetVideoByIdAsElement(startElement, videoId);
     }
 
     /**
@@ -598,37 +598,37 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getVideoByClassAsString(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getVideoByClassAsString(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getVideoByClassAsString(String)
      */
-    public ArrayList<String> getVideoByClassAsString(String videoClass, Element startNode){
-        TreeTraverser.traversingGetVideoByClassAsString(startNode, videoClass);
+    public ArrayList<String> getVideoByClassAsString(String videoClass, Element startElement){
+        TreeTraverser.traversingGetVideoByClassAsString(startElement, videoClass);
         return TreeTraverser.getVideoClassStringArray();
     }
 
     /**
      * A method for getting all the Videos with that classname from the webpage
      * @param videoClass class as String we want to get the video from
-     * @return the source for the videos as Node in an Arraylist of Nodes
+     * @return the source for the videos as Element in an Arraylist of Elements
      */
-    public ArrayList<Element> getVideoByClassAsNode(String videoClass){
-        TreeTraverser.traversingGetVideoByClassAsNode(root, videoClass);
-        return TreeTraverser.getVideoClassNodeArray();
+    public ArrayList<Element> getVideoByClassAsElement(String videoClass){
+        TreeTraverser.traversingGetVideoByClassAsElement(root, videoClass);
+        return TreeTraverser.getVideoClassElementArray();
     }
 
     /**
-     * Works like {@link Scraper#getVideoByClassAsNode(String)} except you can choose your own startnode
+     * Works like {@link Scraper#getVideoByClassAsElement(String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#getVideoByClassAsNode(String)
+     * @param startElement Element to start the search from.
+     * @see Scraper#getVideoByClassAsElement(String)
      */
-    public ArrayList<Element> getVideoByClassAsNode(String videoClass, Element startNode){
-        TreeTraverser.traversingGetVideoByClassAsNode(startNode, videoClass);
-        return TreeTraverser.getVideoClassNodeArray();
+    public ArrayList<Element> getVideoByClassAsElement(String videoClass, Element startElement){
+        TreeTraverser.traversingGetVideoByClassAsElement(startElement, videoClass);
+        return TreeTraverser.getVideoClassElementArray();
     }
 
     /**
@@ -641,14 +641,14 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getClassesInPage()} except you can choose your own startnode
+     * Works like {@link Scraper#getClassesInPage()} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getClassesInPage()
      */
-    public ArrayList<String> getClassesInPage(Element startNode){
-        TreeTraverser.traversingGetClassesInPage(startNode);
+    public ArrayList<String> getClassesInPage(Element startElement){
+        TreeTraverser.traversingGetClassesInPage(startElement);
         return TreeTraverser.getAllClassArray();
     }
 
@@ -662,38 +662,38 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getIdsInPage()} except you can choose your own startnode
+     * Works like {@link Scraper#getIdsInPage()} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getIdsInPage()
      */
-    public ArrayList<String> getIdsInPage(Element startNode){
-        TreeTraverser.traversingGetIdsInPage(startNode);
+    public ArrayList<String> getIdsInPage(Element startElement){
+        TreeTraverser.traversingGetIdsInPage(startElement);
         return TreeTraverser.getAllIdsArray();
     }
 
     /**
-     * A method for getting the content from a attribute of a tag as Node
+     * A method for getting the content from a attribute of a tag as Element
      * @param tag name of the tag you want to search for
      * @param attribute name of the attribute you want to search for
-     * @return a list with the content of the attribute in the tag as Node in an Arraylist of Nodes
+     * @return a list with the content of the attribute in the tag as Element in an Arraylist of Elements
      */
-    public ArrayList<Element> getAttributeContentWithTagAndNameAsNode(String tag, String attribute){
-        TreeTraverser.traversingGetAttributeContentWithTagAndNameAsNode(root, tag,attribute);
-        return TreeTraverser.getAttributeContentNodeArray();
+    public ArrayList<Element> getAttributeContentWithTagAndNameAsElement(String tag, String attribute){
+        TreeTraverser.traversingGetAttributeContentWithTagAndNameAsElement(root, tag,attribute);
+        return TreeTraverser.getAttributeContentElementArray();
     }
 
     /**
-     * Works like {@link Scraper#getAttributeContentWithTagAndNameAsNode(String, String)} except you can choose your own startnode
+     * Works like {@link Scraper#getAttributeContentWithTagAndNameAsElement(String, String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
-     * @see Scraper#getAttributeContentWithTagAndNameAsNode(String, String)
+     * @param startElement Element to start the search from.
+     * @see Scraper#getAttributeContentWithTagAndNameAsElement(String, String)
      */
-    public ArrayList<Element> getAttributeContentWithTagAndNameAsNode(String tag, String attribute, Element startNode){
-        TreeTraverser.traversingGetAttributeContentWithTagAndNameAsNode(startNode, tag,attribute);
-        return TreeTraverser.getAttributeContentNodeArray();
+    public ArrayList<Element> getAttributeContentWithTagAndNameAsElement(String tag, String attribute, Element startElement){
+        TreeTraverser.traversingGetAttributeContentWithTagAndNameAsElement(startElement, tag,attribute);
+        return TreeTraverser.getAttributeContentElementArray();
     }
 
     /**
@@ -708,14 +708,14 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getAttributeContentWithTagAndNameAsString(String, String)} except you can choose your own startnode
+     * Works like {@link Scraper#getAttributeContentWithTagAndNameAsString(String, String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getAttributeContentWithTagAndNameAsString(String, String)
      */
-    public ArrayList<String> getAttributeContentWithTagAndNameAsString(String tag, String attribute, Element startNode){
-        TreeTraverser.traversingGetAttributeContentWithTagAndNameAsString(startNode, tag,attribute);
+    public ArrayList<String> getAttributeContentWithTagAndNameAsString(String tag, String attribute, Element startElement){
+        TreeTraverser.traversingGetAttributeContentWithTagAndNameAsString(startElement, tag,attribute);
         return TreeTraverser.getAttributeContentStringArray();
     }
 
@@ -731,14 +731,14 @@ public class Scraper {
     }
 
     /**
-     * Works like {@link Scraper#getAttributeContentWithIdAndNameAsString(String, String)} except you can choose your own startnode
+     * Works like {@link Scraper#getAttributeContentWithIdAndNameAsString(String, String)} except you can choose your own startelement
      * from anywhere in the HTML code tree
      *
-     * @param startNode Node to start the search from.
+     * @param startElement Element to start the search from.
      * @see Scraper#getAttributeContentWithIdAndNameAsString(String, String)
      */
-    public ArrayList<String> getAttributeContentWithIdAndNameAsString(String id, String attribute, SoupNode startNode){
-        TreeTraverser.traversingGetAttributeContentWithIdAndNameAsString(startNode, id,attribute);
+    public ArrayList<String> getAttributeContentWithIdAndNameAsString(String id, String attribute, Element startElement){
+        TreeTraverser.traversingGetAttributeContentWithIdAndNameAsString(startElement, id,attribute);
         return TreeTraverser.getAttributeIdContentStringArray();
     }
 
@@ -752,9 +752,9 @@ public class Scraper {
         printBeautyfull(root, 0);
     }
 
-    public void printBeautyfull(Element node, int nTabs){
+    public void printBeautyfull(Element element, int nTabs){
 
-        if (node != null){
+        if (element != null){
             String tabs = "";
 
             for (int i = 0; i < nTabs; i++){
@@ -762,15 +762,15 @@ public class Scraper {
             }
 
             String str = tabs +
-                    "Scraper.SoupNode{" +
-                    "tag=\'" + node.getTag() + '\'' +
-                    ", attributes=" + node.getAttributeNames().toString() +
-                    ", textChildren=" + node.getStringChildren().toString() + '}';
+                    "Scraper.Element{" +
+                    "tag=\'" + element.getTag() + '\'' +
+                    ", attributes=" + element.getAttributeNames().toString() +
+                    ", textChildren=" + element.getStringChildren().toString() + '}';
 
             System.out.println(str);
 
-            for (int i = 0; i < node.getNodeChildren().size(); i++){
-                printBeautyfull(node.getNodeChildren().get(i), nTabs+1);
+            for (int i = 0; i < element.getElementChildren().size(); i++){
+                printBeautyfull(element.getElementChildren().get(i), nTabs+1);
             }
         }
     }
