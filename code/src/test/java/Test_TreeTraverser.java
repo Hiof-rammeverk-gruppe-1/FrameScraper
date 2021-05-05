@@ -274,7 +274,6 @@ public class Test_TreeTraverser {
     public void returnsAllClassesInSiteCorrectly() {
         String[] expectedArray = {"class1", "bestebildene", "bestevideoene", "testClass"};
         ArrayList<String> actualArray = sc.getClassesInPage();
-        System.out.println(sc.getClassesInPage());
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
 

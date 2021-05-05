@@ -477,18 +477,13 @@ public final class TreeTraverser {
         if (node.getAttributeNames().contains("id")){
             if (node.getAttributes().get("id").equals(pictureId)) {
                 srcNode = node;
-                Element returnSrcNode = srcNode;
-                srcString = null;
-                return returnSrcNode;
             }
         }
 
         for (int i = 0; i < node.getNodeChildren().size(); i++) {
             traversingGetImageByIdAsNode(node.getNodeChildren().get(i), pictureId);
         }
-        Element returnSrcNode = srcNode;
-        srcNode = null;
-        return returnSrcNode;
+        return srcNode;
     }
 
     public static void traversingGetImageByClassAsNode(Element node, String pictureClass) {
@@ -535,19 +530,13 @@ public final class TreeTraverser {
         if (node.getAttributeNames().contains("id")){
             if (node.getAttributes().get("id").equals(videoId)) {
                 srcNode = node;
-                Element returnSrcNode = srcNode;
-                srcNode = null;
-                return returnSrcNode;
             }
         }
 
         for (int i = 0; i < node.getNodeChildren().size(); i++) {
             traversingGetVideoByIdAsNode(node.getNodeChildren().get(i), videoId);
         }
-
-        Element returnSrcNode = srcNode;
-        srcNode = null;
-        return returnSrcNode;
+        return srcNode;
     }
 
 
