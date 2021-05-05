@@ -737,7 +737,7 @@ public class Scraper {
      * @param startNode Node to start the search from.
      * @see Scraper#getAttributeContentWithIdAndNameAsString(String, String)
      */
-    public ArrayList<String> getAttributeContentWithIdAndNameAsString(String id, String attribute, SoupNode startNode){
+    public ArrayList<String> getAttributeContentWithIdAndNameAsString(String id, String attribute, Element startNode){
         TreeTraverser.traversingGetAttributeContentWithIdAndNameAsString(startNode, id,attribute);
         return TreeTraverser.getAttributeIdContentStringArray();
     }
@@ -762,7 +762,7 @@ public class Scraper {
             }
 
             String str = tabs +
-                    "Scraper.SoupNode{" +
+                    "Scraper.Element{" +
                     "tag=\'" + node.getTag() + '\'' +
                     ", attributes=" + node.getAttributeNames().toString() +
                     ", textChildren=" + node.getStringChildren().toString() + '}';

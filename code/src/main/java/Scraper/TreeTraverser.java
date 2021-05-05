@@ -487,7 +487,7 @@ public final class TreeTraverser {
             traversingGetImageByIdAsNode(node.getNodeChildren().get(i), pictureId);
         }
         Element returnSrcNode = srcNode;
-        srcString = null;
+        srcNode = null;
         return returnSrcNode;
     }
 
@@ -549,6 +549,9 @@ public final class TreeTraverser {
         srcNode = null;
         return returnSrcNode;
     }
+
+
+
 
     public static void traversingGetVideoByClassAsNode(Element node, String videoClass) {
         if (node.getAttributeNames().contains("class")){

@@ -78,7 +78,7 @@ public final class Element {
 
     @Override
     public String toString() {
-        return "Scraper.SoupNode{" +
+        return "Scraper.Element{" +
                 "tag='" + tag + '\'' +
                 ", attributes=" + attributes +
                 ", attributeNames=" + attributeNames +
