@@ -328,9 +328,7 @@ public final class TreeTraverser {
     public static void traversingGetContentFromTagAsNode(Element node, String tag){
 
         if (node.getTag().equals(tag)){
-            for(int i = 0; i < node.getStringChildren().size(); i++) {
-                tagNodeArray.add(node);
-            }
+            tagNodeArray.add(node);
         }
         for (int i=0; i<node.getNodeChildren().size(); i++){
             traversingGetContentFromTagAsNode(node.getNodeChildren().get(i),tag);
@@ -349,9 +347,7 @@ public final class TreeTraverser {
 
         if (node.getAttributeNames().contains("id")){
             if (node.getAttributes().get("id").equals(id)) {
-                for(int i = 0; i < node.getStringChildren().size(); i++) {
-                    idNodeArray.add(node);
-                }
+                idNodeArray.add(node);
             }
         }
 
@@ -371,9 +367,7 @@ public final class TreeTraverser {
     public static void traversingGetContentFromClassAsNode(Element node, String className) {
         if (node.getAttributeNames().contains("class")){
             if (node.getAttributes().get("class").equals(className)) {
-                for(int i = 0; i < node.getStringChildren().size(); i++) {
-                    classNodeArray.add(node);
-                }
+                classNodeArray.add(node);
             }
         }
 
