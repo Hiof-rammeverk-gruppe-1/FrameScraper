@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/code.iml" filepath="$PROJECT_DIR$/.idea/modules/code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/code.main.iml" filepath="$PROJECT_DIR$/.idea/modules/code.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test/code.test.iml" filepath="$PROJECT_DIR$/.idea/modules/test/code.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.github.Hiof-rammeverk-gruppe-1.code.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.github.Hiof-rammeverk-gruppe-1.code.test.iml" />
+    </modules>
+  </component>
+</project>

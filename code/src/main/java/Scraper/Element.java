@@ -46,14 +46,6 @@ public final class Element {
         this.tag = tag;
     }
 
-//    public String getFull_tag() {
-//        return full_tag;
-//    }
-//
-//    public void setFull_tag(String full_tag) {
-//        this.full_tag = full_tag;
-//    }
-
     public Dictionary<String, String> getAttributes() {
         return attributes;
     }

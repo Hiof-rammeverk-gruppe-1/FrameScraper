@@ -2,19 +2,19 @@ HTMLString/HTMLToString.java
  HTMLString.HTMLToString
 Scraper/Exceptions/ScrapeException.java
  Scraper.Exceptions.ScrapeException
+Scraper/Element.java
+ Scraper.Element
+Scraper/Exceptions/ParseException.java
+ Scraper.Exceptions.ParseException
+Scraper/TreeBuilder.java
+ Scraper.TreeBuilder
 Scraper/TreeTraverser.java
  Scraper.TreeTraverser
 Main.java
  Main
-Scraper/TreeBuilder.java
- Scraper.TreeBuilder
 Scraper/Scraper.java
  Scraper.Scraper
-Scraper/Element.java
- Scraper.Element
 Scraper/ConceptScraper.java
  Scraper.ConceptScraper
-Scraper/Exceptions/ParseException.java
- Scraper.Exceptions.ParseException
 Scraper/TestMain.java
  Scraper.TestMain

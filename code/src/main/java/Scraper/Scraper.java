@@ -76,7 +76,7 @@ public class Scraper {
      * @return Scraper object build from file
      * example: Scraper sc = Scraper.buildScraperWithFile("index.html");
      */
-    public static Scraper buildScraperWithFile(String path){
+    public static Scraper buildWithFile(String path){
         return new Scraper(path, FILE);
     }
 
@@ -86,7 +86,7 @@ public class Scraper {
      * @return Scraper object build from the websites html-source
      * example: Scraper sc = Scraper.buildScraperWithWebUrl("https://webscraper.io/test-sites/e-commerce/allinone");
      */
-    public static Scraper buildScraperWithWebUrl(String url){
+    public static Scraper buildWithWebUrl(String url){
         return new Scraper(url, WEBURL);
     }
 
@@ -96,7 +96,7 @@ public class Scraper {
      * @return Scraper object build from the websites html-source
      * example: Scraper sc = Scraper.buildScraperWithString("<html lang="en"><body><h1 id="header1">Hello world</h1><p>This is my world</p></body></html>");
      */
-    public static Scraper buildScraperWithString(String html){
+    public static Scraper buildWithString(String html){
         return new Scraper(html, STRING);
     }
 
