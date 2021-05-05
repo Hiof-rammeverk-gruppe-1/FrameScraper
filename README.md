@@ -5,7 +5,7 @@ FrameScraper is a Java framework designed to allow users to scrape and search th
 
 This framework was made as a part of the framework course at Østfold Univeristy College. Part of the reason why we made this framework was that we wished to have a quick and easy system for parsing HTML code and searching for specific content in said code.
 
-FrameScraper is recognized through both Maven and Gradle, so you can easily implement this into your own projects with a build.gradle dependency or a maven dependency; how to do this is described below.
+FrameScraper is recognized through both Maven and Gradle, so you can easily implement it into your own projects with a build.gradle dependency or a maven dependency; how to do this is described below.
 
 For more documentation please refer to our [JavaDoc](https://javadoc.jitpack.io/com/github/Hiof-rammeverk-gruppe-1/Framescraper/1.0.0/javadoc/).
 
@@ -43,7 +43,7 @@ You can now use the framework in your code.
 1. Click `New Project`
 2. Select `Maven` from the options on the left
 3. Specify projects SDK(JDK), and Click `Next`
-4. On the next page, give the project a `Name` and `Location`, and specify the following Maven project details that are added to the projects pom-file: `GroupId` and `ArtifactId``. Click Finish
+4. On the next page, give the project a `Name` and `Location`, and specify the following Maven project details that are added to the projects pom-file: `GroupId` and `ArtifactId`. Click Finish
 
 (Continue below for how to add the framework to the Maven-project)
 
