@@ -1,4 +1,0 @@
-DummyHTMLFileReader.java
- DummyHTMLFileReader
-Test_LowLevelScraper.java
- Test_LowLevelScraper
