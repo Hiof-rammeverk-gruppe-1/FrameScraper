@@ -16,11 +16,14 @@ FrameScraper is accessed through dependencies with maven and gradle.
 
 #### With Gradle:
 ##### Create Gradle project:
-1.
-2.
+1. Click `New Project`
+2. Select `Gradle` from the options on the left
+3. Specify projects SDK(JDK), and make sure the `Java`-box beneath is checked. Click `Next`
+4. On the next page, give the project a `Name` and `Location`, and specify the following Gradle project details that are added to the projects pom-file: `GroupId` and `ArtifactId`. Click Finish
+
+(Continue below for how to add the framework to the Gradle-project)
 ##### Adding to Gradle project:
-1.
-2.
+1. Open the projects `build.gradle` file, and add the following in the `<project>`-tag:
 
 ```
 repositories {
@@ -30,15 +33,22 @@ dependencies {
 	implementation 'com.github.Hiof-rammeverk-gruppe-1:Framescraper:1.0.0' 
 }
 ```
+2. When added, open your Gradle Projects tool window to the right, and `Reload`.
+
+You can now use the framework in your code.
+
 
 #### With Maven:
 ##### Create Maven project:
-1.
-2.
-##### Adding to Maven project:
-1.
-2.
+1. Click `New Project`
+2. Select `Maven` from the options on the left
+3. Specify projects SDK(JDK), and Click `Next`
+4. On the next page, give the project a `Name` and `Location`, and specify the following Maven project details that are added to the projects pom-file: `GroupId` and `ArtifactId``. Click Finish
 
+(Continue below for how to add the framework to the Maven-project)
+
+##### Adding to Maven project:
+1. Open the projects `pom.xml` file, and add the following at the bottom, or in their dedicated tags:
 
 ```
 <repositories>
@@ -56,6 +66,9 @@ dependencies {
 	</dependency>
 </dependencies>
 ```
+2. When added, open your Maven Projects tool window to the right, and `Reload`.
+
+You can now use the framework in your code.
 
 
 ## Getting Started
@@ -75,7 +88,7 @@ This is a guide for how to start using the webscraper FrameScraper:
      ```
          sc.X();
      ```
-     (X must be replaced by the methode you wish to use)
+     (X must be replaced by the metode you wish to use)
 
 
 
@@ -92,7 +105,7 @@ This is a guide for how to start using the webscraper FrameScraper:
      ```
          sc.X();
      ```
-     (X must be replaced by the methode you wish to use)
+     (X must be replaced by the metode you wish to use)
 
 
 
@@ -109,7 +122,7 @@ This is a guide for how to start using the webscraper FrameScraper:
      ```
          sc.X();
      ```
-     (X must be replaced by the methode you wish to use)
+     (X must be replaced by the metode you wish to use)
 
 
 
@@ -124,6 +137,6 @@ The Javadoc for the framework can be accessed to [this page](https://javadoc.jit
 
 	sc.getContentFromTagAsString("p");
 
-	(This will return a Arraylist of Strings with the elements: [This is the text-content of the HTML-p-tag, Text2])
+	(This will return a Arraylist of Strings: [This is the text-content of the HTML-p-tag, Text2])
 	
 ```
