@@ -10,12 +10,12 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Test_LowLevelScraper {
+public class Test_TreeTraverser {
     String siteContent = "<!DOCTYPE html> <body id=\"hi\" class=\"class1\">Hei jeg hedder dorte <img id=\"bestebildet\" class=\"bestebildene\" src=\"img_girl.jpg\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"> <video id=\"bestevideoen\" class=\"bestevideoene\" src=\"video_girl.mp4\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"></video><p lang=\"no\" id=\"para\" class=\"testClass\">yo who<a src=\"blabal\" target=\"_blank\" class=\"testClass\" href=\"https://www.w3schools.com/\" >https://www.w3schools.com/</a><p>yo mama</p></p>og min mor er borte <a href=\"https://www.test.com/\"> Testloink2 </a><img class=\"bestebildene\" src=\"www.google.com/hjelp/img_boy.jpg\" alt=\"Girl in an jacket\" width=\"500\" height=\"600\"> <video src=\"www.google.com/hjelp/video_boy.wma\" alt=\"Boy in a jacket\" width=\"500\" height=\"600\"></video> <h1 id=\"header1\">chIld, of CHIld.</h1></body>";
     Scraper sc = new Scraper(siteContent, true);
     SoupNode rootNode = sc.getRoot();
 
-    public Test_LowLevelScraper() throws ParseException {
+    public Test_TreeTraverser() throws ParseException {
     }
 
     @Test
@@ -50,7 +50,7 @@ public class Test_LowLevelScraper {
     }
 
     @Test
-    public void TagContentFromUserRequestedHtmlTagReturnedCorrectly() {
+    public void TagContentFromUserRequestedHtmlTagReturnedCorrectlyAsString() {
         String[] expectedArray = {"yo who", "yo mama"};
         ArrayList<String> actualArray = sc.getContentFromTagAsString("p");
 
@@ -58,7 +58,19 @@ public class Test_LowLevelScraper {
     }
 
     @Test
-    public void IdContentFromUserRequestedHtmlIDReturnedCorrectly() {
+    public void TagContentFromUserRequestedHtmlTagReturnedCorrectlyAsNode() {
+        ArrayList<SoupNode> actualArray = sc.getContentFromTagAsNode("p");
+        String expected = "yo who";
+        String actual = actualArray.get(0).getStringChildren().get(0);
+        assertEquals(expected, actual);
+
+        expected = "yo mama";
+        actual = actualArray.get(1).getStringChildren().get(0);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void IdContentFromUserRequestedHtmlIDReturnedCorrectlyAsString() {
         String[] expectedArray = {"chIld, of CHIld."};
         ArrayList<String> actualArray = sc.getContentFromIdAsString("header1");
 
@@ -66,7 +78,17 @@ public class Test_LowLevelScraper {
     }
 
     @Test
-    public void ClassContentFromUserRequestedHtmlClassReturnedCorrectly() {
+    public void IdContentFromUserRequestedHtmlIDReturnedCorrectlyAsNode() {
+        String[] expectedArray = {"chIld, of CHIld."};
+        ArrayList<SoupNode> actualArray = sc.getContentFromIdAsNode("header1");
+
+        for(int i = 0; i < actualArray.size(); i++) {
+            assertEquals(expectedArray[i], actualArray.get(i).getStringChildren().get(0));
+        }
+    }
+
+    @Test
+    public void ClassContentFromUserRequestedHtmlClassReturnedCorrectlyAsString() {
         String[] expectedArray = {"yo who", "https://www.w3schools.com/"};
         ArrayList<String> actualArray = sc.getContentFromClassAsString("testClass");
 
@@ -74,9 +96,30 @@ public class Test_LowLevelScraper {
     }
 
     @Test
-    public void returnsLinksFromSiteCorrectly() {
+    public void ClassContentFromUserRequestedHtmlClassReturnedCorrectlyAsNode() {
+        String[] expectedArray = {"yo who", "https://www.w3schools.com/"};
+        ArrayList<SoupNode> actualArray = sc.getContentFromClassAsNode("testClass");
+
+        for(int i = 0; i < actualArray.size(); i++)
+            assertEquals(expectedArray[i], actualArray.get(i).getStringChildren().get(0));
+    }
+
+    @Test
+    public void returnsLinksFromSiteCorrectlyAsString() {
         String[] expectedArray = {"https://www.w3schools.com/", "https://www.test.com/"};
         ArrayList<String> actualArray = sc.getLinksInPageAsString();
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
+    }
+
+    @Test
+    public void returnsLinksFromSiteCorrectlyAsNode() {
+        String[] expectedArray = {"https://www.w3schools.com/", "https://www.test.com/"};
+        ArrayList<SoupNode> nodeArray = sc.getLinksInPageAsNode();
+        ArrayList<String> actualArray = new ArrayList<>();
+
+        for (SoupNode soupNode : nodeArray)
+            actualArray.add(soupNode.getAttributes().get("href"));
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -98,7 +141,7 @@ public class Test_LowLevelScraper {
     }
 
     @Test
-    public void returnsTrueIfSiteContainsStringFromUser() {
+    public void returnsTrueIfSiteContainsStringFromUserAsString() {
         boolean expected = true;
 
         //Not a single string is in full caps-lock
@@ -116,7 +159,7 @@ public class Test_LowLevelScraper {
     }
 
     @Test
-    public void getsAllImagineLinksFromSite() {
+    public void getsAllImageLinksFromSiteAsString() {
         String[] expectedArray = {"img_girl.jpg", "www.google.com/hjelp/img_boy.jpg"};
         ArrayList<String> actualArray = sc.getAllImagesFromPageAsString();
 
@@ -124,7 +167,19 @@ public class Test_LowLevelScraper {
     }
 
     @Test
-    public void getsSpecificImageByIdFromSite() {
+    public void getsAllImageLinksFromSiteAsNode() {
+        String[] expectedArray = {"img_girl.jpg", "www.google.com/hjelp/img_boy.jpg"};
+        ArrayList<SoupNode> nodeArray = sc.getAllImagesFromPageAsNode();
+        ArrayList<String> actualArray = new ArrayList<>();
+
+        for (SoupNode soupNode : nodeArray)
+            actualArray.add(soupNode.getAttributes().get("src"));
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
+    }
+
+    @Test
+    public void getsSpecificImageByIdFromSiteAsString() {
         String expected = "img_girl.jpg";
         String actual = sc.getImageByIdAsString("bestebildet");
 
@@ -132,7 +187,15 @@ public class Test_LowLevelScraper {
     }
 
     @Test
-    public void getsSpecificImagesByClassNameFromSite() {
+    public void getSpecificImageByIdFromSiteAsNode() {
+        String expectedImage = "img_girl.jpg";
+        SoupNode actualNode = sc.getImageByIdAsNode("bestebildet");
+
+        assertEquals(expectedImage, actualNode.getAttributes().get("src"));
+    }
+
+    @Test
+    public void getsSpecificImagesByClassNameFromSiteAsString() {
         String[] expectedArray = {"img_girl.jpg", "www.google.com/hjelp/img_boy.jpg"};
         ArrayList<String> actualArray = sc.getImageByClassAsString("bestebildene");
 
@@ -140,7 +203,19 @@ public class Test_LowLevelScraper {
     }
 
     @Test
-    public void getsAllVideosFromSiteCorrectly() {
+    public void getsSpecificImagesByClassNameFromSiteAsNode() {
+        String[] expectedArray = {"img_girl.jpg", "www.google.com/hjelp/img_boy.jpg"};
+        ArrayList<SoupNode> nodeArray = sc.getImageByClassAsNode("bestebildene");
+        ArrayList<String> actualArray = new ArrayList<>();
+
+        for (SoupNode soupNode : nodeArray)
+            actualArray.add(soupNode.getAttributes().get("src"));
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
+    }
+
+    @Test
+    public void getsAllVideosFromSiteCorrectlyAsString() {
         String[] expectedArray = {"video_girl.mp4", "www.google.com/hjelp/video_boy.wma"};
         ArrayList<String> actualArray = sc.getAllVideosFromPageAsString();
 
@@ -148,7 +223,19 @@ public class Test_LowLevelScraper {
     }
 
     @Test
-    public void getsSpecificVideoByIdFromSite() {
+    public void getsAllVideosFromSiteCorrectlyAsNode() {
+        String[] expectedArray = {"video_girl.mp4", "www.google.com/hjelp/video_boy.wma"};
+        ArrayList<SoupNode> nodeArray = sc.getAllVideosFromPageAsNode();
+        ArrayList<String> actualArray = new ArrayList<>();
+
+        for (SoupNode soupNode : nodeArray)
+            actualArray.add(soupNode.getAttributes().get("src"));
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
+    }
+
+    @Test
+    public void getsSpecificVideoByIdFromSiteAsString() {
         String expected = "video_girl.mp4";
         String actual = sc.getVideoByIdAsString("bestevideoen");
 
@@ -156,9 +243,29 @@ public class Test_LowLevelScraper {
     }
 
     @Test
-    public void getsSpecificVideosByClassNameFromSite() {
+    public void getsSpecificVideoByIdFromSiteAsNode() {
+        String expected = "video_girl.mp4";
+        SoupNode actualNode = sc.getVideoByIdAsNode("bestevideoen");
+
+        assertEquals(expected, actualNode.getAttributes().get("src"));
+    }
+
+    @Test
+    public void getsSpecificVideosByClassNameFromSiteAsString() {
         String[] expectedArray = {"video_girl.mp4"};
         ArrayList<String> actualArray = sc.getVideoByClassAsString("bestevideoene");
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
+    }
+
+    @Test
+    public void getsSpecificVideosByClassNameFromSiteAsNode() {
+        String[] expectedArray = {"video_girl.mp4"};
+        ArrayList<SoupNode> nodeArray = sc.getVideoByClassAsNode("bestevideoene");
+        ArrayList<String> actualArray = new ArrayList<>();
+
+        for (SoupNode soupNode : nodeArray)
+            actualArray.add(soupNode.getAttributes().get("src"));
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
@@ -194,4 +301,5 @@ public class Test_LowLevelScraper {
 
         assertArrayEquals(expectedArray, actualArray.toArray());
     }
+
 }
