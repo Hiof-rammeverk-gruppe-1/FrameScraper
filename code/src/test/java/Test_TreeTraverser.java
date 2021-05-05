@@ -287,15 +287,19 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void returnsContentWithTagAndAttributeGivenCorrectlyAsString() {
-        System.out.println(sc.getAttributeContentWithTagAndNameAsString("img", "class"));
-        fail("Se på denne Thomas");
+    public void getsSpecificAttributeByTagAndAttributeNameFromSite() {
+        String[] expectedArray = {"500","500"};
+        ArrayList<String> actualArray = sc.getAttributeContentWithTagAndNameAsString("img","width");
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
     }
 
     @Test
-    public void returnsContentWithTagAndAttributeGivenCorrectlyAsNode() {
-        System.out.println(sc.getAttributeContentWithTagAndNameAsNode("img", "class"));
-        fail("Se på denne Thomas");
+    public void getsSpecificAttributeByIdAndAttributeNameFromSite() {
+        String[] expectedArray = {"Girl in a jacket"};
+        ArrayList<String> actualArray = sc.getAttributeContentWithIdAndNameAsString("bestebildet","alt");
+
+        assertArrayEquals(expectedArray, actualArray.toArray());
     }
 
 }
