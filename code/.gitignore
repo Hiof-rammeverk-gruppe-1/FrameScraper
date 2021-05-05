@@ -10,8 +10,6 @@
 .idea
 .gradle
 build
-code\.gradle
-code\build
 
 
 # Thomas jitpack add in

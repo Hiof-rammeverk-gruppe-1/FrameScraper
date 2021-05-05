@@ -8,9 +8,9 @@ public final class TreeBuilder {
 
     private static int index;
 
-    private static Stack<SoupNode> parentStack;
+    private static Stack<Element> parentStack;
 
-    protected static SoupNode createTree(String html) throws ParseException {
+    protected static Element createTree(String html) throws ParseException {
 
         parentStack = new Stack<>();
 
@@ -18,8 +18,8 @@ public final class TreeBuilder {
         boolean isIgnoreable = false;
         boolean isDoctype = false;
 
-        SoupNode root = null;
-        SoupNode buildingNode;
+        Element root = null;
+        Element buildingNode;
 
         for(index = 0; index < html.length(); index++){
             char ch = html.charAt(index);
@@ -100,7 +100,7 @@ public final class TreeBuilder {
             ch = html.charAt(index);
         }
 
-        SoupNode parent = parentStack.pop();
+        Element parent = parentStack.pop();
         if (!parent.getTag().equals(tag))
             throw new ParseException("tail tag does match the match parent tag=" + tag + " parentnode= " + parent);
     }
@@ -125,12 +125,12 @@ public final class TreeBuilder {
         index--;
     }
 
-    private static SoupNode readHead(String html) throws ParseException {
+    private static Element readHead(String html) throws ParseException {
         char ch = html.charAt(index);
         if (ch != '<')
             throw new ParseException("This is no time to read head! Not <");
 
-        SoupNode buildingNode = new SoupNode();
+        Element buildingNode = new Element();
 
         index++;
         boolean readTag = true;
