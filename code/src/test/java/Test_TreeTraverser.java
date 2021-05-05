@@ -11,28 +11,28 @@ import static org.junit.jupiter.api.Assertions.*;
 public class Test_TreeTraverser {
     String siteContent = "<!DOCTYPE html> <body id=\"hi\" class=\"class1\">Hei jeg hedder dorte <img id=\"bestebildet\" class=\"bestebildene\" src=\"img_girl.jpg\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"> <video id=\"bestevideoen\" class=\"bestevideoene\" src=\"video_girl.mp4\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\"></video><p lang=\"no\" id=\"para\" class=\"testClass\">yo who<a src=\"blabal\" target=\"_blank\" class=\"testClass\" href=\"https://www.w3schools.com/\" >https://www.w3schools.com/</a><p>yo mama</p></p>og min mor er borte <a href=\"https://www.test.com/\"> Testloink2 </a><img class=\"bestebildene\" src=\"www.google.com/hjelp/img_boy.jpg\" alt=\"Girl in an jacket\" width=\"500\" height=\"600\"> <video src=\"www.google.com/hjelp/video_boy.wma\" alt=\"Boy in a jacket\" width=\"500\" height=\"600\"></video> <h1 id=\"header1\">chIld, of CHIld.</h1></body>";
     Scraper sc = new Scraper(siteContent, true);
-    Element rootNode = sc.getRoot();
+    Element rootElement = sc.getRoot();
 
     public Test_TreeTraverser() throws ParseException {
     }
 
     @Test
     public void createsTreeCorrectly() {
-        /*String expectedOutput = "Element{tag='body', attributes=[id, class], stringChildren=[Hei jeg hedder dorte ], nodeChildren= \n\t" +
-                "[Element{tag='img', attributes=[id, class, src, alt, width, height], stringChildren=[ ], nodeChildren= \n\t" +
-                "[Element{tag='video', attributes=[id, class, src, alt, width, height], stringChildren=[og min mor er borte ], nodeChildren= \n\t" +
-                "[Element{tag='p', attributes=[lang, id, class], stringChildren=[yo who], nodeChildren= \n\t" +
-                "[Element{tag='a', attributes=[src, target, class, href], stringChildren=[https://www.w3schools.com/], nodeChildren= \n\t" +
-                "[]}, Element{tag='p', attributes=[], stringChildren=[yo mama], nodeChildren= \n\t" +
-                "[]}]}, Element{tag='a', attributes=[href], stringChildren=[ Testloink2 ], nodeChildren= \n\t" +
-                "[]}, Element{tag='img', attributes=[class, src, alt, width, height], stringChildren=[ ], nodeChildren= \n\t" +
-                "[Element{tag='video', attributes=[src, alt, width, height], stringChildren=[ ], nodeChildren= \n\t" +
-                "[Element{tag='h1', attributes=[id], stringChildren=[chIld, of CHIld.], nodeChildren= \n\t" +
-                "[]}]}, Element{tag='', attributes=[body], stringChildren=[], nodeChildren= \n\t" +
+        /*String expectedOutput = "Element{tag='body', attributes=[id, class], stringChildren=[Hei jeg hedder dorte ], elementChildren= \n\t" +
+                "[Element{tag='img', attributes=[id, class, src, alt, width, height], stringChildren=[ ], elementChildren= \n\t" +
+                "[Element{tag='video', attributes=[id, class, src, alt, width, height], stringChildren=[og min mor er borte ], elementChildren= \n\t" +
+                "[Element{tag='p', attributes=[lang, id, class], stringChildren=[yo who], elementChildren= \n\t" +
+                "[Element{tag='a', attributes=[src, target, class, href], stringChildren=[https://www.w3schools.com/], elementChildren= \n\t" +
+                "[]}, Element{tag='p', attributes=[], stringChildren=[yo mama], elementChildren= \n\t" +
+                "[]}]}, Element{tag='a', attributes=[href], stringChildren=[ Testloink2 ], elementChildren= \n\t" +
+                "[]}, Element{tag='img', attributes=[class, src, alt, width, height], stringChildren=[ ], elementChildren= \n\t" +
+                "[Element{tag='video', attributes=[src, alt, width, height], stringChildren=[ ], elementChildren= \n\t" +
+                "[Element{tag='h1', attributes=[id], stringChildren=[chIld, of CHIld.], elementChildren= \n\t" +
+                "[]}]}, Element{tag='', attributes=[body], stringChildren=[], elementChildren= \n\t" +
                 "[]}]}]}]}]}";
                 */
-        String expectedOutput = "Scraper.Element{tag='body', attributes={class=class1, id=hi}, attributeNames=[id, class], nodeChildren=[Scraper.Element{tag='img', attributes={height=600, width=500, class=bestebildene, alt=Girl in a jacket, src=img_girl.jpg, id=bestebildet}, attributeNames=[id, class, src, alt, width, height], nodeChildren=[], stringChildren=[]}, Scraper.Element{tag='video', attributes={height=600, width=500, class=bestevideoene, alt=Girl in a jacket, src=video_girl.mp4, id=bestevideoen}, attributeNames=[id, class, src, alt, width, height], nodeChildren=[], stringChildren=[]}, Scraper.Element{tag='p', attributes={class=testClass, lang=no, id=para}, attributeNames=[lang, id, class], nodeChildren=[Scraper.Element{tag='a', attributes={href=https://www.w3schools.com/, class=testClass, target=_blank, src=blabal}, attributeNames=[src, target, class, href], nodeChildren=[], stringChildren=[https://www.w3schools.com/]}, Scraper.Element{tag='p', attributes={}, attributeNames=[], nodeChildren=[], stringChildren=[yo mama]}], stringChildren=[yo who]}, Scraper.Element{tag='a', attributes={href=https://www.test.com/}, attributeNames=[href], nodeChildren=[], stringChildren=[Testloink2 ]}, Scraper.Element{tag='img', attributes={height=600, width=500, class=bestebildene, alt=Girl in an jacket, src=www.google.com/hjelp/img_boy.jpg}, attributeNames=[class, src, alt, width, height], nodeChildren=[], stringChildren=[]}, Scraper.Element{tag='video', attributes={height=600, width=500, alt=Boy in a jacket, src=www.google.com/hjelp/video_boy.wma}, attributeNames=[src, alt, width, height], nodeChildren=[], stringChildren=[]}, Scraper.Element{tag='h1', attributes={id=header1}, attributeNames=[id], nodeChildren=[], stringChildren=[chIld, of CHIld.]}], stringChildren=[Hei jeg hedder dorte , og min mor er borte ]}";
-        String actual = rootNode.toString();
+        String expectedOutput = "Scraper.Element{tag='body', attributes={class=class1, id=hi}, attributeNames=[id, class], elementChildren=[Scraper.Element{tag='img', attributes={height=600, width=500, class=bestebildene, alt=Girl in a jacket, src=img_girl.jpg, id=bestebildet}, attributeNames=[id, class, src, alt, width, height], elementChildren=[], stringChildren=[]}, Scraper.Element{tag='video', attributes={height=600, width=500, class=bestevideoene, alt=Girl in a jacket, src=video_girl.mp4, id=bestevideoen}, attributeNames=[id, class, src, alt, width, height], elementChildren=[], stringChildren=[]}, Scraper.Element{tag='p', attributes={class=testClass, lang=no, id=para}, attributeNames=[lang, id, class], elementChildren=[Scraper.Element{tag='a', attributes={href=https://www.w3schools.com/, class=testClass, target=_blank, src=blabal}, attributeNames=[src, target, class, href], elementChildren=[], stringChildren=[https://www.w3schools.com/]}, Scraper.Element{tag='p', attributes={}, attributeNames=[], elementChildren=[], stringChildren=[yo mama]}], stringChildren=[yo who]}, Scraper.Element{tag='a', attributes={href=https://www.test.com/}, attributeNames=[href], elementChildren=[], stringChildren=[Testloink2 ]}, Scraper.Element{tag='img', attributes={height=600, width=500, class=bestebildene, alt=Girl in an jacket, src=www.google.com/hjelp/img_boy.jpg}, attributeNames=[class, src, alt, width, height], elementChildren=[], stringChildren=[]}, Scraper.Element{tag='video', attributes={height=600, width=500, alt=Boy in a jacket, src=www.google.com/hjelp/video_boy.wma}, attributeNames=[src, alt, width, height], elementChildren=[], stringChildren=[]}, Scraper.Element{tag='h1', attributes={id=header1}, attributeNames=[id], elementChildren=[], stringChildren=[chIld, of CHIld.]}], stringChildren=[Hei jeg hedder dorte , og min mor er borte ]}";
+        String actual = rootElement.toString();
         assertEquals(expectedOutput, actual);
     }
 
@@ -58,8 +58,8 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void TagContentFromUserRequestedHtmlTagReturnedCorrectlyAsNode() {
-        ArrayList<Element> actualArray = sc.getContentFromTagAsNode("p");
+    public void TagContentFromUserRequestedHtmlTagReturnedCorrectlyAsElement() {
+        ArrayList<Element> actualArray = sc.getContentFromTagAsElement("p");
         String expected = "yo who";
         String actual = actualArray.get(0).getStringChildren().get(0);
         assertEquals(expected, actual);
@@ -78,9 +78,9 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void IdContentFromUserRequestedHtmlIDReturnedCorrectlyAsNode() {
+    public void IdContentFromUserRequestedHtmlIDReturnedCorrectlyAsElement() {
         String[] expectedArray = {"chIld, of CHIld."};
-        ArrayList<Element> actualArray = sc.getContentFromIdAsNode("header1");
+        ArrayList<Element> actualArray = sc.getContentFromIdAsElement("header1");
 
         for(int i = 0; i < actualArray.size(); i++) {
             assertEquals(expectedArray[i], actualArray.get(i).getStringChildren().get(0));
@@ -96,9 +96,9 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void ClassContentFromUserRequestedHtmlClassReturnedCorrectlyAsNode() {
+    public void ClassContentFromUserRequestedHtmlClassReturnedCorrectlyAsElement() {
         String[] expectedArray = {"yo who", "https://www.w3schools.com/"};
-        ArrayList<Element> actualArray = sc.getContentFromClassAsNode("testClass");
+        ArrayList<Element> actualArray = sc.getContentFromClassAsElement("testClass");
 
         for(int i = 0; i < actualArray.size(); i++)
             assertEquals(expectedArray[i], actualArray.get(i).getStringChildren().get(0));
@@ -113,12 +113,12 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void returnsLinksFromSiteCorrectlyAsNode() {
+    public void returnsLinksFromSiteCorrectlyAsElement() {
         String[] expectedArray = {"https://www.w3schools.com/", "https://www.test.com/"};
-        ArrayList<Element> nodeArray = sc.getLinksInPageAsNode();
+        ArrayList<Element> elementArray = sc.getLinksInPageAsElement();
         ArrayList<String> actualArray = new ArrayList<>();
 
-        for (Element element : nodeArray)
+        for (Element element : elementArray)
             actualArray.add(element.getAttributes().get("href"));
 
         assertArrayEquals(expectedArray, actualArray.toArray());
@@ -167,12 +167,12 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void getsAllImageLinksFromSiteAsNode() {
+    public void getsAllImageLinksFromSiteAsElement() {
         String[] expectedArray = {"img_girl.jpg", "www.google.com/hjelp/img_boy.jpg"};
-        ArrayList<Element> nodeArray = sc.getAllImagesFromPageAsNode();
+        ArrayList<Element> elementArray = sc.getAllImagesFromPageAsElement();
         ArrayList<String> actualArray = new ArrayList<>();
 
-        for (Element element : nodeArray)
+        for (Element element : elementArray)
             actualArray.add(element.getAttributes().get("src"));
 
         assertArrayEquals(expectedArray, actualArray.toArray());
@@ -187,11 +187,11 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void getSpecificImageByIdFromSiteAsNode() {
+    public void getSpecificImageByIdFromSiteAsElement() {
         String expectedImage = "img_girl.jpg";
-        Element actualNode = sc.getImageByIdAsNode("bestebildet");
+        Element actualElement = sc.getImageByIdAsElement("bestebildet");
 
-        assertEquals(expectedImage, actualNode.getAttributes().get("src"));
+        assertEquals(expectedImage, actualElement.getAttributes().get("src"));
     }
 
     @Test
@@ -203,12 +203,12 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void getsSpecificImagesByClassNameFromSiteAsNode() {
+    public void getsSpecificImagesByClassNameFromSiteAsElement() {
         String[] expectedArray = {"img_girl.jpg", "www.google.com/hjelp/img_boy.jpg"};
-        ArrayList<Element> nodeArray = sc.getImageByClassAsNode("bestebildene");
+        ArrayList<Element> elementArray = sc.getImageByClassAsElement("bestebildene");
         ArrayList<String> actualArray = new ArrayList<>();
 
-        for (Element element : nodeArray)
+        for (Element element : elementArray)
             actualArray.add(element.getAttributes().get("src"));
 
         assertArrayEquals(expectedArray, actualArray.toArray());
@@ -223,12 +223,12 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void getsAllVideosFromSiteCorrectlyAsNode() {
+    public void getsAllVideosFromSiteCorrectlyAsElement() {
         String[] expectedArray = {"video_girl.mp4", "www.google.com/hjelp/video_boy.wma"};
-        ArrayList<Element> nodeArray = sc.getAllVideosFromPageAsNode();
+        ArrayList<Element> elementArray = sc.getAllVideosFromPageAsElement();
         ArrayList<String> actualArray = new ArrayList<>();
 
-        for (Element element : nodeArray)
+        for (Element element : elementArray)
             actualArray.add(element.getAttributes().get("src"));
 
         assertArrayEquals(expectedArray, actualArray.toArray());
@@ -243,11 +243,11 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void getsSpecificVideoByIdFromSiteAsNode() {
+    public void getsSpecificVideoByIdFromSiteAsElement() {
         String expected = "video_girl.mp4";
-        Element actualNode = sc.getVideoByIdAsNode("bestevideoen");
+        Element actualElement = sc.getVideoByIdAsElement("bestevideoen");
 
-        assertEquals(expected, actualNode.getAttributes().get("src"));
+        assertEquals(expected, actualElement.getAttributes().get("src"));
     }
 
     @Test
@@ -259,12 +259,12 @@ public class Test_TreeTraverser {
     }
 
     @Test
-    public void getsSpecificVideosByClassNameFromSiteAsNode() {
+    public void getsSpecificVideosByClassNameFromSiteAsElement() {
         String[] expectedArray = {"video_girl.mp4"};
-        ArrayList<Element> nodeArray = sc.getVideoByClassAsNode("bestevideoene");
+        ArrayList<Element> elementArray = sc.getVideoByClassAsElement("bestevideoene");
         ArrayList<String> actualArray = new ArrayList<>();
 
-        for (Element element : nodeArray)
+        for (Element element : elementArray)
             actualArray.add(element.getAttributes().get("src"));
 
         assertArrayEquals(expectedArray, actualArray.toArray());

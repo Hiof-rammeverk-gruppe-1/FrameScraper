@@ -7,7 +7,7 @@ public class ParseException extends Exception {
         super(message);
     }
 
-    public ParseException(String message, Element node){
-        super(message + " building node is " + node);
+    public ParseException(String message, Element element){
+        super(message + " building element is " + element);
     }
 }

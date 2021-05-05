@@ -20,7 +20,7 @@ public final class Element {
 
     private ArrayList<String> attributeNames = new ArrayList<>();
 
-    private ArrayList<Element> nodeChildren = new ArrayList<>();
+    private ArrayList<Element> elementChildren = new ArrayList<>();
     private ArrayList<String> stringChildren = new ArrayList<>();
 
     public Element() {
@@ -30,8 +30,8 @@ public final class Element {
         this.tag = tag;
     }
 
-    public void addNodeChild(Element child){
-        this.nodeChildren.add(child);
+    public void addElementChild(Element child){
+        this.elementChildren.add(child);
     }
 
     public void addStringChild(String text){
@@ -55,12 +55,12 @@ public final class Element {
     }
 
 
-    public ArrayList<Element> getNodeChildren() {
-        return nodeChildren;
+    public ArrayList<Element> getElementChildren() {
+        return elementChildren;
     }
 
-    public void setNodeChildren(ArrayList<Element> nodeChildren) {
-        this.nodeChildren = nodeChildren;
+    public void setElementChildren(ArrayList<Element> elementChildren) {
+        this.elementChildren = elementChildren;
     }
 
     public ArrayList<String> getStringChildren() {
@@ -82,7 +82,7 @@ public final class Element {
                 "tag='" + tag + '\'' +
                 ", attributes=" + attributes +
                 ", attributeNames=" + attributeNames +
-                ", nodeChildren=" + nodeChildren +
+                ", elementChildren=" + elementChildren +
                 ", stringChildren=" + stringChildren +
                 '}';
     }

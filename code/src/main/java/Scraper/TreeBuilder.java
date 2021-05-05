@@ -19,7 +19,7 @@ public final class TreeBuilder {
         boolean isDoctype = false;
 
         Element root = null;
-        Element buildingNode;
+        Element buildingElement;
 
         for(index = 0; index < html.length(); index++){
             char ch = html.charAt(index);
@@ -59,19 +59,19 @@ public final class TreeBuilder {
                     readTail(html);
                 }
                 else{
-                    buildingNode = readHead(html);
+                    buildingElement = readHead(html);
 
                     if (root == null)
-                        root = buildingNode;
+                        root = buildingElement;
 
                     if (!parentStack.isEmpty())
-                        parentStack.peek().addNodeChild(buildingNode);
+                        parentStack.peek().addElementChild(buildingElement);
 
-                    if (!isSingletonTag(buildingNode.getTag())){
-                        parentStack.push(buildingNode);
+                    if (!isSingletonTag(buildingElement.getTag())){
+                        parentStack.push(buildingElement);
                     }
 
-                    if (isIgnoreableContentTag(buildingNode.getTag()))
+                    if (isIgnoreableContentTag(buildingElement.getTag()))
                         isIgnoreable = true;
 
                 }
@@ -102,7 +102,7 @@ public final class TreeBuilder {
 
         Element parent = parentStack.pop();
         if (!parent.getTag().equals(tag))
-            throw new ParseException("tail tag does match the match parent tag=" + tag + " parentnode= " + parent);
+            throw new ParseException("tail tag does match the match parent tag=" + tag + " parentelement= " + parent);
     }
 
     private static void readStringChild(String html){
@@ -130,7 +130,7 @@ public final class TreeBuilder {
         if (ch != '<')
             throw new ParseException("This is no time to read head! Not <");
 
-        Element buildingNode = new Element();
+        Element buildingElement = new Element();
 
         index++;
         boolean readTag = true;
@@ -151,7 +151,7 @@ public final class TreeBuilder {
                     tag += ch;
                 else {
                     if (!tag.isEmpty()){
-                        buildingNode.setTag(tag);
+                        buildingElement.setTag(tag);
 
                         readAttKey = true;
                         readTag = false;
@@ -168,8 +168,8 @@ public final class TreeBuilder {
                 else if (ch == ' '){
                     if (!attKey.isEmpty()){
 
-                        buildingNode.getAttributeNames().add(attKey);
-                        buildingNode.getAttributes().put(attKey, "");
+                        buildingElement.getAttributeNames().add(attKey);
+                        buildingElement.getAttributes().put(attKey, "");
 
                         attKey = "";
                     }
@@ -180,7 +180,7 @@ public final class TreeBuilder {
             else if (readAttValue){
                 if (quotes < 1){
                     if (ch != '\"')
-                        throw new ParseException("Missing quotes after attributtes for key=" + attKey + " breaking char=" + ch, buildingNode);
+                        throw new ParseException("Missing quotes after attributtes for key=" + attKey + " breaking char=" + ch, buildingElement);
                     quotes++;
                 }
                 else if (quotes == 1){
@@ -188,8 +188,8 @@ public final class TreeBuilder {
                         attValue += ch;
                     }
                     else{
-                        buildingNode.getAttributeNames().add(attKey);
-                        buildingNode.getAttributes().put(attKey, attValue);
+                        buildingElement.getAttributeNames().add(attKey);
+                        buildingElement.getAttributes().put(attKey, attValue);
 
                         attKey = "";
                         attValue = "";
@@ -205,23 +205,23 @@ public final class TreeBuilder {
             ch = html.charAt(index);
         }
 
-        if (buildingNode.getTag() == null){
+        if (buildingElement.getTag() == null){
             if (tag.isEmpty())
                 throw new ParseException("Empty tag is detected");
             else
-                buildingNode.setTag(tag);
+                buildingElement.setTag(tag);
         }
 
 
 
         if (!attKey.isEmpty()){
-            buildingNode.getAttributeNames().add(attKey);
-            buildingNode.getAttributes().put(attKey, "");
+            buildingElement.getAttributeNames().add(attKey);
+            buildingElement.getAttributes().put(attKey, "");
         }
 
 
 
-        return buildingNode;
+        return buildingElement;
     }
 
     private static boolean isSingletonTag(String tag){
