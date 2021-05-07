@@ -1,9 +1,5 @@
-package Scraper;
-
-
-import java.util.ArrayList;
-
-public final class TreeTraverser {
+/*
+private final class TreeTraverser {
     private static ArrayList<String> tagStringArray = new ArrayList<String>();
     private static ArrayList<String> idStringArray = new ArrayList<String>();
     private static ArrayList<String> classStringArray = new ArrayList<String>();
@@ -611,4 +607,4 @@ public final class TreeTraverser {
     public static ArrayList<String> getAttributeIdContentStringArray() {
         return AttributeIdContentStringArray;
     }
-}
+}*/

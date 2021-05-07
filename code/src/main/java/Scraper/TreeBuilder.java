@@ -1,10 +1,11 @@
+/*
 package Scraper;
 
 import Scraper.Exceptions.ParseException;
 
 import java.util.Stack;
 
-public final class TreeBuilder {
+private final class TreeBuilder {
 
     private static int index;
 
@@ -243,3 +244,4 @@ public final class TreeBuilder {
         return false;
     }
 }
+*/
