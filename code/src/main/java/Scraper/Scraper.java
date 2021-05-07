@@ -13,7 +13,7 @@ import java.util.Stack;
  * @author Thomas Johannessen
  * @author Joakim Jensen
  * @author Michal Kowalski
- * @version 1.1
+ * @version 1.0
  */
 public class Scraper {
     private final static int FILE = 0;
@@ -1012,7 +1012,6 @@ public class Scraper {
             return false;
         }
     }
-
     private static final class TreeTraverser {
         private static ArrayList<String> tagStringArray = new ArrayList<String>();
         private static ArrayList<String> idStringArray = new ArrayList<String>();
@@ -1622,6 +1621,5 @@ public class Scraper {
             return AttributeIdContentStringArray;
         }
     }
-
 }
 
