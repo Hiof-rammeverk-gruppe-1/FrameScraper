@@ -8,13 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Generic scraper class representing a specific instantiation of a Scraper.ConceptScraper
  * @author Mathias Jarbekk
  * @author Thomas Johannessen
  * @author Joakim Jensen
  * @author Michal Kowalski
  * @version 1.1
- * @see ConceptScraper
  */
 public class Scraper {
     private final static int FILE = 0;
