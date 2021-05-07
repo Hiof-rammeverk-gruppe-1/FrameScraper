@@ -88,7 +88,7 @@ This is a guide for how to start using the webscraper FrameScraper:
      ```
          sc.X();
      ```
-     (X must be replaced by the methode you wish to use)
+     (X must be replaced by the method you wish to use)
 
 
 
@@ -105,7 +105,7 @@ This is a guide for how to start using the webscraper FrameScraper:
      ```
          sc.X();
      ```
-     (X must be replaced by the methode you wish to use)
+     (X must be replaced by the method you wish to use)
 
 
 
@@ -122,7 +122,7 @@ This is a guide for how to start using the webscraper FrameScraper:
      ```
          sc.X();
      ```
-     (X must be replaced by the methode you wish to use)
+     (X must be replaced by the method you wish to use)
 
 
 
