@@ -28,22 +28,6 @@ public class Scraper {
 
     private ArrayList<Element> elements = new ArrayList<>();
 
-    /**
-     * Constructor for a scraper
-     * @param URL Link to target site for scraping
-     * @throws IOException Throws an IO Exception whenever user input is crashing with an expected string value
-     */
-    public Scraper(String URL) throws IOException, ParseException {
-        this.url = URL;
-        websiteContent = HTMLToString.requestHTMLWithUrl(URL);
-        this.root = TreeBuilder.createTree(websiteContent);
-    }
-
-    public Scraper(String siteContent, boolean test) throws ParseException {
-        websiteContent = siteContent;
-        this.root = TreeBuilder.createTree(siteContent);
-    }
-
     // nye Scraper konstruktør
     private Scraper (String source, int sourceType){
 
