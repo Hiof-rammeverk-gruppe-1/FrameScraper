@@ -28,6 +28,9 @@ public class Scraper {
 
     private ArrayList<Element> elements = new ArrayList<>();
 
+    private Scraper() {
+    }
+
     // nye Scraper konstruktør
     private Scraper (String source, int sourceType){
 
